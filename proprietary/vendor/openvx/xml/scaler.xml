@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph id="stage123">
+    <skipstages>
+        <!-- setting for Samsung OpenVX Framework -->
+        <skip_stage_list flags="SVX_STAGE_SKIP_UPDATE_GST" />
+        <skip_stage_list flags="SVX_STAGE_SKIP_ROI_TEST" />
+    </skipstages>
+    <nodes>
+        <still_scl_node_slice0 id="0" />
+        <still_scl_node_slice1 id="1" />
+        <still_scl_node_slice2 id="2" />
+        <still_scl_node_slice3 id="3" />
+        <still_scl_uv_node id="4" />
+    </nodes>
+
+    <buffers>
+        <!-- DDR Buffers: -->
+        <ddr_buffer id="ddr_still_scl_input_slice_0" node="still_scl_node_slice0" param_idx="0"  />
+        <ddr_buffer id="ddr_still_scl_out_slice_0" node="still_scl_node_slice0" param_idx="7"  />
+        <ddr_buffer id="ddr_still_scl_input_slice_1" node="still_scl_node_slice1" param_idx="0"  />
+        <ddr_buffer id="ddr_still_scl_out_slice_1" node="still_scl_node_slice1" param_idx="7"  />
+        <ddr_buffer id="ddr_still_scl_input_slice_2" node="still_scl_node_slice2" param_idx="0"  />
+        <ddr_buffer id="ddr_still_scl_out_slice_2" node="still_scl_node_slice2" param_idx="7"  />
+        <ddr_buffer id="ddr_still_scl_input_slice_3" node="still_scl_node_slice3" param_idx="0"  />
+        <ddr_buffer id="ddr_still_scl_out_slice_3" node="still_scl_node_slice3" param_idx="7"  />
+        <ddr_buffer id="ddr_still_scl_uv_input" node="still_scl_uv_node" param_idx="0"  />
+        <ddr_buffer id="ddr_still_scl_uv_output" node="still_scl_uv_node" param_idx="7"  />
+
+        <!-- VCF buffers for Post SCL Y -->
+        <vcf_buffer id="vcf_post_scl_y_in" addr="0x00000" size="0x10000" />
+        <vcf_buffer id="vcf_post_scl_y_out" addr="0x20000" size="0x10000" />
+
+        <!-- Vcf buffers for Post UV Scl. -->
+        <vcf_buffer id="vcf_post_scl_u_input" addr="0x00000" size="0x10000" />
+        <vcf_buffer id="vcf_post_scl_v_input" addr="0x10000" size="0x10000" />
+        <vcf_buffer id="vcf_post_scl_u_output" addr="0x40000" size="0x10000" />
+        <vcf_buffer id="vcf_post_scl_v_output" addr="0x50000" size="0x10000" />
+    </buffers>
+
+    <iva_table>
+        <iva_entry id="still_scl_loop_start_0" parent="still_scl_node_slice0" proc_id="IVA_LOOP_START" flags="IVA_FLOW_CONTROL" >
+            <tile_config tile_width="48" tile_height="48" />
+            <triggers>
+                still_scl_in_dma_0
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_scl_in_dma_0" parent="still_scl_node_slice0" proc_id="IVA_IP_VDMA_CH4" flags="IVA_FLOW_CONTROL" >
+            <inputs>
+                ddr_still_scl_input_slice_0
+            </inputs>
+            <outputs>
+                vcf_post_scl_y_in
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram" />
+            <depends>
+                still_scl_loop_start_0
+            </depends>
+            <triggers>
+                still_scl_process_0
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_scl_process_0" parent="still_scl_node_slice0" proc_id="IVA_IP_SCL1" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_post_scl_y_in
+            </inputs>
+            <outputs>
+                vcf_post_scl_y_out
+            </outputs>
+            <node_config format="e_data_8b" src_dimensions="ddr_still_scl_input_slice_0" dst_dimensions="ddr_still_scl_out_slice_0" scl_mode ="0"
+                         inter_mode="SCL_INTER_MODE_HIFI_STILL_BICUBIC" h_offset="0" v_offset="0"  h_ratio="61850" v_ratio="64080" />
+            <depends>
+                still_scl_in_dma_0
+            </depends>
+            <triggers>
+                still_scl_out_dma_0
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_scl_out_dma_0" parent="still_scl_node_slice0" proc_id="IVA_IP_VDMA_CH12" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_post_scl_y_out
+            </inputs>
+            <outputs>
+                ddr_still_scl_out_slice_0
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_sram_to_dram" />
+            <depends>
+                still_scl_process_0
+            </depends>
+            <triggers>
+                still_scl_loop_end_0
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_scl_loop_end_0" parent="still_scl_node_slice0" proc_id="IVA_LOOP_END" flags="IVA_FLOW_CONTROL" >
+            <depends>
+                still_scl_out_dma_0
+            </depends>
+            <triggers>
+                still_scl_loop_start_1
+            </triggers>
+        </iva_entry>
+        <!-- Post SCL Luma 0 ends. -->
+
+        <!-- Post SCL Luma 1 starts. -->
+        <iva_entry id="still_scl_loop_start_1" parent="still_scl_node_slice1" proc_id="IVA_LOOP_START" flags="IVA_FLOW_CONTROL" >
+            <tile_config tile_width="48" tile_height="48" />
+            <depends>
+                still_scl_loop_end_0
+            </depends>
+            <triggers>
+                still_scl_in_dma_1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_scl_in_dma_1" parent="still_scl_node_slice1" proc_id="IVA_IP_VDMA_CH4" flags="IVA_FLOW_CONTROL" >
+            <inputs>
+                ddr_still_scl_input_slice_1
+            </inputs>
+            <outputs>
+                vcf_post_scl_y_in
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram" />
+            <depends>
+                still_scl_loop_start_1
+            </depends>
+            <triggers>
+                still_scl_process_1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_scl_process_1" parent="still_scl_node_slice1" proc_id="IVA_IP_SCL1" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_post_scl_y_in
+            </inputs>
+            <outputs>
+                vcf_post_scl_y_out
+            </outputs>
+            <node_config format="e_data_8b" src_dimensions="ddr_still_scl_input_slice_1" dst_dimensions="ddr_still_scl_out_slice_1" scl_mode ="0"
+                         inter_mode="SCL_INTER_MODE_HIFI_STILL_BICUBIC" h_offset="0" v_offset="0"  h_ratio="61850" v_ratio="64080" />
+            <depends>
+                still_scl_in_dma_1
+            </depends>
+            <triggers>
+                still_scl_out_dma_1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_scl_out_dma_1" parent="still_scl_node_slice1" proc_id="IVA_IP_VDMA_CH12" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_post_scl_y_out
+            </inputs>
+            <outputs>
+                ddr_still_scl_out_slice_1
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_sram_to_dram" />
+            <depends>
+                still_scl_process_1
+            </depends>
+            <triggers>
+                still_scl_loop_end_1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_scl_loop_end_1" parent="still_scl_node_slice1" proc_id="IVA_LOOP_END" flags="IVA_FLOW_CONTROL" >
+            <depends>
+                still_scl_out_dma_1
+            </depends>
+            <triggers>
+                still_scl_loop_start_2
+            </triggers>
+        </iva_entry>
+        <!-- Post SCL Luma 1 ends. -->
+
+        <!-- Post SCL Luma 2 starts. -->
+        <iva_entry id="still_scl_loop_start_2" parent="still_scl_node_slice2" proc_id="IVA_LOOP_START" flags="IVA_FLOW_CONTROL" >
+            <tile_config tile_width="48" tile_height="48" />
+            <depends>
+                still_scl_loop_end_1
+            </depends>
+            <triggers>
+                still_scl_in_dma_2
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_scl_in_dma_2" parent="still_scl_node_slice2" proc_id="IVA_IP_VDMA_CH4" flags="IVA_FLOW_CONTROL" >
+            <inputs>
+                ddr_still_scl_input_slice_2
+            </inputs>
+            <outputs>
+                vcf_post_scl_y_in
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram" />
+            <depends>
+                still_scl_loop_start_2
+            </depends>
+            <triggers>
+                still_scl_process_2
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_scl_process_2" parent="still_scl_node_slice2" proc_id="IVA_IP_SCL1" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_post_scl_y_in
+            </inputs>
+            <outputs>
+                vcf_post_scl_y_out
+            </outputs>
+            <node_config format="e_data_8b" src_dimensions="ddr_still_scl_input_slice_2" dst_dimensions="ddr_still_scl_out_slice_2" scl_mode ="0"
+                         inter_mode="SCL_INTER_MODE_HIFI_STILL_BICUBIC" h_offset="0" v_offset="0"  h_ratio="61850" v_ratio="64080" />
+            <depends>
+                still_scl_in_dma_2
+            </depends>
+            <triggers>
+                still_scl_out_dma_2
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_scl_out_dma_2" parent="still_scl_node_slice2" proc_id="IVA_IP_VDMA_CH12" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_post_scl_y_out
+            </inputs>
+            <outputs>
+                ddr_still_scl_out_slice_2
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_sram_to_dram" />
+            <depends>
+                still_scl_process_2
+            </depends>
+            <triggers>
+                still_scl_loop_end_2
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_scl_loop_end_2" parent="still_scl_node_slice2" proc_id="IVA_LOOP_END" flags="IVA_FLOW_CONTROL" >
+            <depends>
+                still_scl_out_dma_2
+            </depends>
+            <triggers>
+                still_scl_loop_start_3
+            </triggers>
+        </iva_entry>
+        <!-- Post SCL Luma 2 ends. -->
+
+        <!-- Post SCL Luma 3 starts. -->
+        <iva_entry id="still_scl_loop_start_3" parent="still_scl_node_slice3" proc_id="IVA_LOOP_START" flags="IVA_FLOW_CONTROL" >
+            <tile_config tile_width="48" tile_height="48" />
+            <depends>
+                still_scl_loop_end_2
+            </depends>
+            <triggers>
+                still_scl_in_dma_3
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_scl_in_dma_3" parent="still_scl_node_slice3" proc_id="IVA_IP_VDMA_CH4" flags="IVA_FLOW_CONTROL" >
+            <inputs>
+                ddr_still_scl_input_slice_3
+            </inputs>
+            <outputs>
+                vcf_post_scl_y_in
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram" />
+            <depends>
+                still_scl_loop_start_3
+            </depends>
+            <triggers>
+                still_scl_process_3
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_scl_process_3" parent="still_scl_node_slice3" proc_id="IVA_IP_SCL1" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_post_scl_y_in
+            </inputs>
+            <outputs>
+                vcf_post_scl_y_out
+            </outputs>
+            <node_config format="e_data_8b" src_dimensions="ddr_still_scl_input_slice_3" dst_dimensions="ddr_still_scl_out_slice_3" scl_mode ="0"
+                         inter_mode="SCL_INTER_MODE_HIFI_STILL_BICUBIC" h_offset="0" v_offset="0" h_ratio="61850" v_ratio="64080" />
+            <depends>
+                still_scl_in_dma_3
+            </depends>
+            <triggers>
+                still_scl_out_dma_3
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_scl_out_dma_3" parent="still_scl_node_slice3" proc_id="IVA_IP_VDMA_CH12" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_post_scl_y_out
+            </inputs>
+            <outputs>
+                ddr_still_scl_out_slice_3
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_sram_to_dram" />
+            <depends>
+                still_scl_process_3
+            </depends>
+            <triggers>
+                still_scl_loop_end_3
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_scl_loop_end_3" parent="still_scl_node_slice3" proc_id="IVA_LOOP_END" flags="IVA_FLOW_CONTROL" >
+            <depends>
+                still_scl_out_dma_3
+            </depends>
+            <triggers>
+                still_scl_uv
+            </triggers>
+        </iva_entry>
+        <!-- Post SCL Luma 3 ends. -->
+
+        <!-- Post Scl UV starts -->
+        <iva_entry id="still_scl_uv" parent="still_scl_uv_node" proc_id="IVA_LOOP_START" flags="IVA_FLOW_CONTROL">
+            <depends>
+		still_scl_loop_end_3
+            </depends>
+            <triggers>
+                iva_scl_dma_in
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="iva_scl_dma_in" parent="still_scl_uv_node" proc_id="IVA_IP_VDMA_CH6" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                ddr_still_scl_uv_input
+            </inputs>
+            <outputs>
+                vcf_post_scl_u_input, vcf_post_scl_v_input
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_deinter_dram_to_sram"/>
+            <depends>
+                still_scl_uv
+            </depends>
+            <triggers>
+                iva_scl_u, iva_scl_v
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="iva_scl_u" parent="still_scl_uv_node" proc_id="IVA_IP_SCL0" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_post_scl_u_input
+            </inputs>
+            <outputs>
+                vcf_post_scl_u_output
+            </outputs>
+            <node_config format="e_data_8b" src_dimensions="ddr_still_scl_uv_input" dst_dimensions="ddr_still_scl_uv_output" scl_mode="0" inter_mode="SCL_INTER_MODE_BILINEAR" h_offset="0" v_offset="0" vdma_port="0" />
+            <depends>
+                iva_scl_dma_in
+            </depends>
+            <triggers>
+                iva_scl_dma_out
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="iva_scl_v" parent="still_scl_uv_node" proc_id="IVA_IP_SCL1" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_post_scl_v_input
+            </inputs>
+            <outputs>
+                vcf_post_scl_v_output
+            </outputs>
+            <node_config format="e_data_8b" src_dimensions="ddr_still_scl_uv_input" dst_dimensions="ddr_still_scl_uv_output" scl_mode="0" inter_mode="SCL_INTER_MODE_BILINEAR" h_offset="0" v_offset="0" vdma_port="17" /> <!-- (1 << 4 | 1) -->
+            <depends>
+                iva_scl_dma_in
+            </depends>
+            <triggers>
+                iva_scl_dma_out
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="iva_scl_dma_out" parent="still_scl_uv_node" proc_id="IVA_IP_VDMA_CH14" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_post_scl_u_output, vcf_post_scl_v_output
+            </inputs>
+            <outputs>
+                ddr_still_scl_uv_output
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_inter_sram_to_dram"/>
+            <depends>
+                iva_scl_u, iva_scl_v
+            </depends>
+            <triggers>
+                iva_uv_scl_loop_end
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="iva_uv_scl_loop_end" parent="still_scl_uv_node" proc_id="IVA_LOOP_END" flags="IVA_FLOW_CONTROL">
+            <depends>
+                iva_scl_dma_out
+            </depends>
+        </iva_entry>
+    </iva_table>
+
+</graph>

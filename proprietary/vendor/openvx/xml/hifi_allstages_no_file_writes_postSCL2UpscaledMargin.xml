@@ -1,0 +1,3605 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph id="stage123">
+    <skipstages>
+	<!-- setting for Samsung OpenVX Framework -->
+	<skip_stage_list flags="SVX_STAGE_SKIP_UPDATE_GST" />
+	<skip_stage_list flags="SVX_STAGE_SKIP_ROI_TEST" />
+	<skip_stage_list flags="SVX_STAGE_SKIP_MULTIPLE_WRITER_CHECK" />
+	<skip_stage_list flags="SVX_STAGE_CYCLE_CHECK" />
+	<skip_stage_list flags="SVX_STAGE_UNVISITED_CHECK" />
+    </skipstages>
+    <nodes>
+        <!-- UVENF Node. -->
+        <enf_uv_node id="0" />
+
+        <!-- PYRAMID Nodes. -->
+        <pyramid_lvl1_node_0 id="1" />
+        <pyramid_lvl1_node_1 id="2" />
+        <pyramid_lvl1_node_2 id="3" />
+        <pyramid_lvl1_node_3 id="4" />
+        <pyramid_lvl2_node id="5" />
+
+        <!-- ORB Nodes. -->
+        <iva_vcm_orb_node_region0 id="6" />
+        <iva_vcm_orb_node_region1 id="7" />
+        <iva_vcm_orb_node_region2 id="8" />
+        <iva_vcm_orb_node_region3 id="9" />
+        <iva_vcm_orb_node_region4 id="10" />
+        <iva_vcm_orb_node_region5 id="11" />
+        <iva_vcm_orb_node_region6 id="12" />
+        <iva_vcm_orb_node_region7 id="13" />
+        <iva_vcm_orb_node_region8 id="14" />
+
+        <!-- MCH nodes. -->
+        <!-- For 8 regions and 4 frames. -->
+        <iva_mch_node_region0 id="15" />
+        <iva_mch_node_region1 id="16" />
+        <iva_mch_node_region2 id="17" />
+        <iva_mch_node_region3 id="18" />
+        <iva_mch_node_region4 id="19" />
+        <iva_mch_node_region5 id="20" />
+        <iva_mch_node_region6 id="21" />
+        <iva_mch_node_region7 id="22" />
+        <iva_mch_node_region8 id="23" />
+
+        <!-- GET Affine Node -->
+        <get_affine_node id="24" />
+
+        <!-- WME Nodes -->
+        <wme_computation_node id="25" />
+        <wme_node_slice0 id="26" />
+        <wme_node_slice1 id="27" />
+        <wme_node_slice2 id="28" />
+        <wme_node_slice3 id="29" />
+        <wme_node_slice4 id="30" />
+        <wme_node_slice5 id="31" />
+        <wme_node_slice6 id="32" />
+        <wme_node_slice7 id="33" />
+        <wme_node_slice8 id="34" />
+        <wme_node_slice9 id="35" />
+        <wme_node_slice10 id="36" />
+        <wme_node_slice11 id="37" />
+        <wme_node_slice12 id="38" />
+
+        <!-- Post Enf Luma node. -->
+        <post_enf_luma_node_slice1 id="39" />
+        <post_enf_luma_node_slice2 id="40" />
+        <post_enf_luma_node_slice3 id="41" />
+        <post_enf_luma_node_slice4 id="42" />
+
+        <!-- Post Scl nodes. -->
+        <post_scl_uv_node_0 id="43" />
+        <post_scl_uv_node_1 id="44" />
+        <post_scl2_luma_node_0 id="45" />
+        <post_scl2_luma_node_1 id="46" />
+        <post_scl2_luma_node_2 id="47" />
+        <post_scl2_luma_node_3 id="48" />
+        <post_scl2_uv_node_0 id="49" />
+        <post_scl2_uv_node_1 id="50" />
+
+        <copy_luma_node id="51" />
+
+        <!-- PostSCL2 Y Out Pre Cache Sync node. -->
+        <post_scl2_yout_pre_cache_sync_node id="52" />
+        <!-- PostSCL2 UV Out Pre Cache Sync node. -->
+        <post_scl2_uvout_pre_cache_sync_node id="53" />
+        <!-- WME Y Out Post Cache Sync node. -->
+        <wme_yout_post_cache_sync_node id="54" />
+        <!-- PostSCL2 Y Out Post Cache Sync node. -->
+        <post_scl2_yout_cache_post_sync_node id="55" />
+        <!-- PostSCL2 UV Out Post Cache Sync node. -->
+        <post_scl2_uvout_post_cache_sync_node id="56" />
+
+        <!-- Dequeue callback node. -->
+        <dequeue_callback_node id="57" />
+    </nodes>
+
+    <buffers>
+        <!-- DDR buffers for ENF. -->
+        <ddr_buffer id="ddr_pyramid_enf_uv_input" node="enf_uv_node" param_idx="0" />
+
+        <!-- CAM0 DDR buffers for ENF Motion Map & Config Params. -->
+        <ddr_buffer id="ddr_enf_uv_mot" node="enf_uv_node" param_idx="1" />
+        <ddr_buffer id="enf_config_params" node="enf_uv_node" param_idx="2" />
+        <ddr_buffer id="ddr_enf_u_out" node="enf_uv_node" param_idx="5" />
+        <ddr_buffer id="ddr_enf_v_out" node="enf_uv_node" param_idx="6" />
+
+        <!-- CAM0 DDR buffers for Pyramid. -->
+        <ddr_buffer id="ddr_pyramid_input_slice_0" node="pyramid_lvl1_node_0" param_idx="0" />
+        <ddr_buffer id="ddr_pyramid_input_slice_1" node="pyramid_lvl1_node_1" param_idx="0" />
+        <ddr_buffer id="ddr_pyramid_input_slice_2" node="pyramid_lvl1_node_2" param_idx="0" />
+        <ddr_buffer id="ddr_pyramid_input_slice_3" node="pyramid_lvl1_node_3" param_idx="0" />
+
+        <ddr_buffer id="ddr_pyramid_lvl1_out_slice_0" node="pyramid_lvl1_node_0" param_idx="7" />
+        <ddr_buffer id="ddr_pyramid_lvl1_out_slice_1" node="pyramid_lvl1_node_1" param_idx="7" />
+        <ddr_buffer id="ddr_pyramid_lvl1_out_slice_2" node="pyramid_lvl1_node_2" param_idx="7" />
+        <ddr_buffer id="ddr_pyramid_lvl1_out_slice_3" node="pyramid_lvl1_node_3" param_idx="7" />
+
+        <!-- CAM0 DDR buffers for Pyramid Output images. -->
+        <ddr_buffer id="ddr_pyramid_input_lvl2_slice" node="pyramid_lvl2_node" param_idx="0" />
+        <ddr_buffer id="ddr_pyramid_lvl2_coeff" node="pyramid_lvl2_node" param_idx="4" />
+        <ddr_buffer id="ddr_pyramid_lvl2_out_slice" node="pyramid_lvl2_node" param_idx="7" />
+
+        <!-- CAM0 DDR buffers for ORB region images. -->
+        <ddr_buffer id="image_region0" node="iva_vcm_orb_node_region0" param_idx="0" />
+        <ddr_buffer id="image_region1" node="iva_vcm_orb_node_region1" param_idx="0" />
+        <ddr_buffer id="image_region2" node="iva_vcm_orb_node_region2" param_idx="0" />
+        <ddr_buffer id="image_region3" node="iva_vcm_orb_node_region3" param_idx="0" />
+        <ddr_buffer id="image_region4" node="iva_vcm_orb_node_region4" param_idx="0" />
+        <ddr_buffer id="image_region5" node="iva_vcm_orb_node_region5" param_idx="0" />
+        <ddr_buffer id="image_region6" node="iva_vcm_orb_node_region6" param_idx="0" />
+        <ddr_buffer id="image_region7" node="iva_vcm_orb_node_region7" param_idx="0" />
+        <ddr_buffer id="image_region8" node="iva_vcm_orb_node_region8" param_idx="0" />
+
+        <!-- CAM0 DDR buffers for ORB kpt arrays. -->
+        <ddr_buffer id="kpt_region0" node="iva_vcm_orb_node_region0" param_idx="8" />
+        <ddr_buffer id="kpt_region1" node="iva_vcm_orb_node_region1" param_idx="8" />
+        <ddr_buffer id="kpt_region2" node="iva_vcm_orb_node_region2" param_idx="8" />
+        <ddr_buffer id="kpt_region3" node="iva_vcm_orb_node_region3" param_idx="8" />
+        <ddr_buffer id="kpt_region4" node="iva_vcm_orb_node_region4" param_idx="8" />
+        <ddr_buffer id="kpt_region5" node="iva_vcm_orb_node_region5" param_idx="8" />
+        <ddr_buffer id="kpt_region6" node="iva_vcm_orb_node_region6" param_idx="8" />
+        <ddr_buffer id="kpt_region7" node="iva_vcm_orb_node_region7" param_idx="8" />
+        <ddr_buffer id="kpt_region8" node="iva_vcm_orb_node_region8" param_idx="8" />
+
+        <!-- CAM0 DDR buffers for ORB dsc arrays. -->
+        <ddr_buffer id="dsc_region0" node="iva_vcm_orb_node_region0" param_idx="9" />
+        <ddr_buffer id="dsc_region1" node="iva_vcm_orb_node_region1" param_idx="9" />
+        <ddr_buffer id="dsc_region2" node="iva_vcm_orb_node_region2" param_idx="9" />
+        <ddr_buffer id="dsc_region3" node="iva_vcm_orb_node_region3" param_idx="9" />
+        <ddr_buffer id="dsc_region4" node="iva_vcm_orb_node_region4" param_idx="9" />
+        <ddr_buffer id="dsc_region5" node="iva_vcm_orb_node_region5" param_idx="9" />
+        <ddr_buffer id="dsc_region6" node="iva_vcm_orb_node_region6" param_idx="9" />
+        <ddr_buffer id="dsc_region7" node="iva_vcm_orb_node_region7" param_idx="9" />
+        <ddr_buffer id="dsc_region8" node="iva_vcm_orb_node_region8" param_idx="9" />
+
+        <!-- CAM0 DDR buffers for MCH -->
+        <!-- mch region 0, db, query buffers. -->
+        <ddr_buffer id="ddr_mch_region0_db" node="iva_mch_node_region0" param_idx="4" transfer="both" />
+        <ddr_buffer id="ddr_mch_region0_frame0_query" node="iva_mch_node_region0" param_idx="0" transfer="both" />
+        <ddr_buffer id="ddr_mch_region0_frame1_query" node="iva_mch_node_region0" param_idx="1" transfer="both" />
+        <ddr_buffer id="ddr_mch_region0_frame2_query" node="iva_mch_node_region0" param_idx="2" transfer="both" />
+        <ddr_buffer id="ddr_mch_region0_frame3_query" node="iva_mch_node_region0" param_idx="3" transfer="both" />
+
+        <!-- Mch region 1, db, query buffers. -->
+        <ddr_buffer id="ddr_mch_region1_db" node="iva_mch_node_region1" param_idx="4" transfer="both" />
+        <ddr_buffer id="ddr_mch_region1_frame0_query" node="iva_mch_node_region1" param_idx="0" transfer="both" />
+        <ddr_buffer id="ddr_mch_region1_frame1_query" node="iva_mch_node_region1" param_idx="1" transfer="both" />
+        <ddr_buffer id="ddr_mch_region1_frame2_query" node="iva_mch_node_region1" param_idx="2" transfer="both" />
+        <ddr_buffer id="ddr_mch_region1_frame3_query" node="iva_mch_node_region1" param_idx="3" transfer="both" />
+
+        <!-- Mch region 2, db, query buffers. -->
+        <ddr_buffer id="ddr_mch_region2_db" node="iva_mch_node_region2" param_idx="4" transfer="both" />
+        <ddr_buffer id="ddr_mch_region2_frame0_query" node="iva_mch_node_region2" param_idx="0" transfer="both" />
+        <ddr_buffer id="ddr_mch_region2_frame1_query" node="iva_mch_node_region2" param_idx="1" transfer="both" />
+        <ddr_buffer id="ddr_mch_region2_frame2_query" node="iva_mch_node_region2" param_idx="2" transfer="both" />
+        <ddr_buffer id="ddr_mch_region2_frame3_query" node="iva_mch_node_region2" param_idx="3" transfer="both" />
+
+        <!-- Mch region 3, db, query buffers. -->
+        <ddr_buffer id="ddr_mch_region3_db" node="iva_mch_node_region3" param_idx="4" transfer="both" />
+        <ddr_buffer id="ddr_mch_region3_frame0_query" node="iva_mch_node_region3" param_idx="0" transfer="both" />
+        <ddr_buffer id="ddr_mch_region3_frame1_query" node="iva_mch_node_region3" param_idx="1" transfer="both" />
+        <ddr_buffer id="ddr_mch_region3_frame2_query" node="iva_mch_node_region3" param_idx="2" transfer="both" />
+        <ddr_buffer id="ddr_mch_region3_frame3_query" node="iva_mch_node_region3" param_idx="3" transfer="both" />
+
+        <!-- Mch region 4, db, query buffers. -->
+        <ddr_buffer id="ddr_mch_region4_db" node="iva_mch_node_region4" param_idx="4" transfer="both" />
+        <ddr_buffer id="ddr_mch_region4_frame0_query" node="iva_mch_node_region4" param_idx="0" transfer="both" />
+        <ddr_buffer id="ddr_mch_region4_frame1_query" node="iva_mch_node_region4" param_idx="1" transfer="both" />
+        <ddr_buffer id="ddr_mch_region4_frame2_query" node="iva_mch_node_region4" param_idx="2" transfer="both" />
+        <ddr_buffer id="ddr_mch_region4_frame3_query" node="iva_mch_node_region4" param_idx="3" transfer="both" />
+
+        <!-- Mch region 5, db, query buffers. -->
+        <ddr_buffer id="ddr_mch_region5_db" node="iva_mch_node_region5" param_idx="4" transfer="both" />
+        <ddr_buffer id="ddr_mch_region5_frame0_query" node="iva_mch_node_region5" param_idx="0" transfer="both" />
+        <ddr_buffer id="ddr_mch_region5_frame1_query" node="iva_mch_node_region5" param_idx="1" transfer="both" />
+        <ddr_buffer id="ddr_mch_region5_frame2_query" node="iva_mch_node_region5" param_idx="2" transfer="both" />
+        <ddr_buffer id="ddr_mch_region5_frame3_query" node="iva_mch_node_region5" param_idx="3" transfer="both" />
+
+        <!-- Mch region 6, db, query buffers. -->
+        <ddr_buffer id="ddr_mch_region6_db" node="iva_mch_node_region6" param_idx="4" transfer="both" />
+        <ddr_buffer id="ddr_mch_region6_frame0_query" node="iva_mch_node_region6" param_idx="0" transfer="both" />
+        <ddr_buffer id="ddr_mch_region6_frame1_query" node="iva_mch_node_region6" param_idx="1" transfer="both" />
+        <ddr_buffer id="ddr_mch_region6_frame2_query" node="iva_mch_node_region6" param_idx="2" transfer="both" />
+        <ddr_buffer id="ddr_mch_region6_frame3_query" node="iva_mch_node_region6" param_idx="3" transfer="both" />
+
+        <!-- Mch region 7, db, query buffers. -->
+        <ddr_buffer id="ddr_mch_region7_db" node="iva_mch_node_region7" param_idx="4" transfer="both" />
+        <ddr_buffer id="ddr_mch_region7_frame0_query" node="iva_mch_node_region7" param_idx="0" transfer="both" />
+        <ddr_buffer id="ddr_mch_region7_frame1_query" node="iva_mch_node_region7" param_idx="1" transfer="both" />
+        <ddr_buffer id="ddr_mch_region7_frame2_query" node="iva_mch_node_region7" param_idx="2" transfer="both" />
+        <ddr_buffer id="ddr_mch_region7_frame3_query" node="iva_mch_node_region7" param_idx="3" transfer="both" />
+
+        <!-- Mch region 8, db, query buffers. -->
+        <ddr_buffer id="ddr_mch_region8_db" node="iva_mch_node_region8" param_idx="4" transfer="both" />
+        <ddr_buffer id="ddr_mch_region8_frame0_query" node="iva_mch_node_region8" param_idx="0" transfer="both" />
+        <ddr_buffer id="ddr_mch_region8_frame1_query" node="iva_mch_node_region8" param_idx="1" transfer="both" />
+        <ddr_buffer id="ddr_mch_region8_frame2_query" node="iva_mch_node_region8" param_idx="2" transfer="both" />
+        <ddr_buffer id="ddr_mch_region8_frame3_query" node="iva_mch_node_region8" param_idx="3" transfer="both" />
+
+        <!-- Mch region 0, output buffers. -->
+        <ddr_buffer id="ddr_mch_region0_frame0_out" node="iva_mch_node_region0" param_idx="5" transfer="both" />
+        <ddr_buffer id="ddr_mch_region0_frame1_out" node="iva_mch_node_region0" param_idx="6" transfer="both" />
+        <ddr_buffer id="ddr_mch_region0_frame2_out" node="iva_mch_node_region0" param_idx="7" transfer="both" />
+        <ddr_buffer id="ddr_mch_region0_frame3_out" node="iva_mch_node_region0" param_idx="8" transfer="both" />
+
+        <!-- Mch region 1, output buffers. -->
+        <ddr_buffer id="ddr_mch_region1_frame0_out" node="iva_mch_node_region1" param_idx="5" transfer="both" />
+        <ddr_buffer id="ddr_mch_region1_frame1_out" node="iva_mch_node_region1" param_idx="6" transfer="both" />
+        <ddr_buffer id="ddr_mch_region1_frame2_out" node="iva_mch_node_region1" param_idx="7" transfer="both" />
+        <ddr_buffer id="ddr_mch_region1_frame3_out" node="iva_mch_node_region1" param_idx="8" transfer="both" />
+
+        <!-- Mch region 2, output buffers. -->
+        <ddr_buffer id="ddr_mch_region2_frame0_out" node="iva_mch_node_region2" param_idx="5" transfer="both" />
+        <ddr_buffer id="ddr_mch_region2_frame1_out" node="iva_mch_node_region2" param_idx="6" transfer="both" />
+        <ddr_buffer id="ddr_mch_region2_frame2_out" node="iva_mch_node_region2" param_idx="7" transfer="both" />
+        <ddr_buffer id="ddr_mch_region2_frame3_out" node="iva_mch_node_region2" param_idx="8" transfer="both" />
+
+        <!-- Mch region 3, output buffers. -->
+        <ddr_buffer id="ddr_mch_region3_frame0_out" node="iva_mch_node_region3" param_idx="5" transfer="both" />
+        <ddr_buffer id="ddr_mch_region3_frame1_out" node="iva_mch_node_region3" param_idx="6" transfer="both" />
+        <ddr_buffer id="ddr_mch_region3_frame2_out" node="iva_mch_node_region3" param_idx="7" transfer="both" />
+        <ddr_buffer id="ddr_mch_region3_frame3_out" node="iva_mch_node_region3" param_idx="8" transfer="both" />
+
+        <!-- Mch region 4, output buffers. -->
+        <ddr_buffer id="ddr_mch_region4_frame0_out" node="iva_mch_node_region4" param_idx="5" transfer="both" />
+        <ddr_buffer id="ddr_mch_region4_frame1_out" node="iva_mch_node_region4" param_idx="6" transfer="both" />
+        <ddr_buffer id="ddr_mch_region4_frame2_out" node="iva_mch_node_region4" param_idx="7" transfer="both" />
+        <ddr_buffer id="ddr_mch_region4_frame3_out" node="iva_mch_node_region4" param_idx="8" transfer="both" />
+
+        <!-- Mch region 5, output buffers. -->
+        <ddr_buffer id="ddr_mch_region5_frame0_out" node="iva_mch_node_region5" param_idx="5" transfer="both" />
+        <ddr_buffer id="ddr_mch_region5_frame1_out" node="iva_mch_node_region5" param_idx="6" transfer="both" />
+        <ddr_buffer id="ddr_mch_region5_frame2_out" node="iva_mch_node_region5" param_idx="7" transfer="both" />
+        <ddr_buffer id="ddr_mch_region5_frame3_out" node="iva_mch_node_region5" param_idx="8" transfer="both" />
+
+        <!-- Mch region 6, output buffers. -->
+        <ddr_buffer id="ddr_mch_region6_frame0_out" node="iva_mch_node_region6" param_idx="5" transfer="both" />
+        <ddr_buffer id="ddr_mch_region6_frame1_out" node="iva_mch_node_region6" param_idx="6" transfer="both" />
+        <ddr_buffer id="ddr_mch_region6_frame2_out" node="iva_mch_node_region6" param_idx="7" transfer="both" />
+        <ddr_buffer id="ddr_mch_region6_frame3_out" node="iva_mch_node_region6" param_idx="8" transfer="both" />
+
+        <!-- Mch region 7, output buffers. -->
+        <ddr_buffer id="ddr_mch_region7_frame0_out" node="iva_mch_node_region7" param_idx="5" transfer="both" />
+        <ddr_buffer id="ddr_mch_region7_frame1_out" node="iva_mch_node_region7" param_idx="6" transfer="both" />
+        <ddr_buffer id="ddr_mch_region7_frame2_out" node="iva_mch_node_region7" param_idx="7" transfer="both" />
+        <ddr_buffer id="ddr_mch_region7_frame3_out" node="iva_mch_node_region7" param_idx="8" transfer="both" />
+
+        <!-- Mch region 8, output buffers. -->
+        <ddr_buffer id="ddr_mch_region8_frame0_out" node="iva_mch_node_region8" param_idx="5" transfer="both" />
+        <ddr_buffer id="ddr_mch_region8_frame1_out" node="iva_mch_node_region8" param_idx="6" transfer="both" />
+        <ddr_buffer id="ddr_mch_region8_frame2_out" node="iva_mch_node_region8" param_idx="7" transfer="both" />
+        <ddr_buffer id="ddr_mch_region8_frame3_out" node="iva_mch_node_region8" param_idx="8" transfer="both" />
+
+        <!-- DDR buffers for ENF Config -->
+        <ddr_buffer id="ddr_post_enf_cfg" node="post_enf_luma_node_slice1" param_idx="2" />
+
+        <!-- Post ENF Luma DDR buffers. -->
+        <ddr_buffer id="ddr_post_enf_luma_in_slice1" node="post_enf_luma_node_slice1" param_idx="0" />
+        <ddr_buffer id="ddr_post_enf_luma_out_slice1" node="post_enf_luma_node_slice1" param_idx="5" />
+
+        <ddr_buffer id="ddr_post_enf_luma_in_slice2" node="post_enf_luma_node_slice2" param_idx="0" />
+        <ddr_buffer id="ddr_post_enf_luma_out_slice2" node="post_enf_luma_node_slice2" param_idx="5" />
+
+        <ddr_buffer id="ddr_post_enf_luma_in_slice3" node="post_enf_luma_node_slice3" param_idx="0" />
+        <ddr_buffer id="ddr_post_enf_luma_out_slice3" node="post_enf_luma_node_slice3" param_idx="5" />
+
+        <ddr_buffer id="ddr_post_enf_luma_in_slice4" node="post_enf_luma_node_slice4" param_idx="0" />
+        <ddr_buffer id="ddr_post_enf_luma_out_slice4" node="post_enf_luma_node_slice4" param_idx="5" />
+
+        <!-- Post Scl UV -->
+        <ddr_buffer id="ddr_post_scl_u_in_0" node="post_scl_uv_node_0" param_idx="0" />
+        <ddr_buffer id="ddr_post_scl_v_in_0" node="post_scl_uv_node_0" param_idx="1" />
+        <ddr_buffer id="ddr_post_scl_uv_out_0" node="post_scl_uv_node_0" param_idx="8" />
+        <ddr_buffer id="ddr_post_scl_u_in_1" node="post_scl_uv_node_1" param_idx="0" />
+        <ddr_buffer id="ddr_post_scl_v_in_1" node="post_scl_uv_node_1" param_idx="1" />
+        <ddr_buffer id="ddr_post_scl_uv_out_1" node="post_scl_uv_node_1" param_idx="8" />
+
+        <!-- Post SCL 2 Luma -->
+        <ddr_buffer id="ddr_post_scl2_luma_in_0" node="post_scl2_luma_node_0" param_idx="0" />
+        <ddr_buffer id="ddr_post_scl2_luma_out_0" node="post_scl2_luma_node_0" param_idx="7" />
+        <ddr_buffer id="ddr_post_scl2_luma_in_1" node="post_scl2_luma_node_1" param_idx="0" />
+        <ddr_buffer id="ddr_post_scl2_luma_out_1" node="post_scl2_luma_node_1" param_idx="7" />
+        <ddr_buffer id="ddr_post_scl2_luma_in_2" node="post_scl2_luma_node_2" param_idx="0" />
+        <ddr_buffer id="ddr_post_scl2_luma_out_2" node="post_scl2_luma_node_2" param_idx="7" />
+        <ddr_buffer id="ddr_post_scl2_luma_in_3" node="post_scl2_luma_node_3" param_idx="0" />
+        <ddr_buffer id="ddr_post_scl2_luma_out_3" node="post_scl2_luma_node_3" param_idx="7" />
+
+        <!-- Post Scl 2 UV -->
+        <ddr_buffer id="ddr_post_scl2_u_in_0" node="post_scl2_uv_node_0" param_idx="0" />
+        <ddr_buffer id="ddr_post_scl2_v_in_0" node="post_scl2_uv_node_0" param_idx="1" />
+        <ddr_buffer id="ddr_post_scl2_uv_out_0" node="post_scl2_uv_node_0" param_idx="8" />
+        <ddr_buffer id="ddr_post_scl2_u_in_1" node="post_scl2_uv_node_1" param_idx="0" />
+        <ddr_buffer id="ddr_post_scl2_v_in_1" node="post_scl2_uv_node_1" param_idx="1" />
+        <ddr_buffer id="ddr_post_scl2_uv_out_1" node="post_scl2_uv_node_1" param_idx="8" />
+
+        <!-- WME slice0 -->
+        <ddr_buffer id="ddr_wme_in_y0_slice0" node="wme_node_slice0" param_idx="0" />
+        <ddr_buffer id="ddr_wme_in_u0_slice0" node="wme_node_slice0" param_idx="1" />
+        <ddr_buffer id="ddr_wme_in_v0_slice0" node="wme_node_slice0" param_idx="2" />
+        <ddr_buffer id="ddr_wme_in_y1_slice0" node="wme_node_slice0" param_idx="3" />
+        <ddr_buffer id="ddr_wme_in_u1_slice0" node="wme_node_slice0" param_idx="4" />
+        <ddr_buffer id="ddr_wme_in_v1_slice0" node="wme_node_slice0" param_idx="5" />
+        <ddr_buffer id="ddr_wme_in_y2_slice0" node="wme_node_slice0" param_idx="6" />
+        <ddr_buffer id="ddr_wme_in_u2_slice0" node="wme_node_slice0" param_idx="7" />
+        <ddr_buffer id="ddr_wme_in_v2_slice0" node="wme_node_slice0" param_idx="8" />
+        <ddr_buffer id="ddr_wme_in_y3_slice0" node="wme_node_slice0" param_idx="9" />
+        <ddr_buffer id="ddr_wme_in_u3_slice0" node="wme_node_slice0" param_idx="10" />
+        <ddr_buffer id="ddr_wme_in_v3_slice0" node="wme_node_slice0" param_idx="11" />
+        <ddr_buffer id="ddr_wme_in_y4_slice0" node="wme_node_slice0" param_idx="12" />
+        <ddr_buffer id="ddr_wme_in_u4_slice0" node="wme_node_slice0" param_idx="13" />
+        <ddr_buffer id="ddr_wme_in_v4_slice0" node="wme_node_slice0" param_idx="14" />
+        <ddr_buffer id="ddr_wme_delta_config_slice0" node="wme_node_slice0" param_idx="17" />
+        <ddr_buffer id="ddr_wme_affine_mat0_slice0" node="wme_node_slice0" param_idx="25" />
+        <ddr_buffer id="ddr_wme_affine_mat1_slice0" node="wme_node_slice0" param_idx="26" />
+        <ddr_buffer id="ddr_wme_affine_mat2_slice0" node="wme_node_slice0" param_idx="27" />
+        <ddr_buffer id="ddr_wme_affine_mat3_slice0" node="wme_node_slice0" param_idx="28" />
+        <ddr_buffer id="ddr_wme_affine_mat4_slice0" node="wme_node_slice0" param_idx="29" />
+        <ddr_buffer id="ddr_wme_out_mfb_mot_mult_slice0" node="wme_node_slice0" param_idx="32" />
+        <ddr_buffer id="ddr_wme_mfb_motion_image_slice0" node="wme_node_slice0" param_idx="33" />
+        <ddr_buffer id="ddr_wme_mfb_blend_weights_slice0" node="wme_node_slice0" param_idx="35" />
+        <ddr_buffer id="ddr_wme_mfb_reference_weights_slice0" node="wme_node_slice0" param_idx="36" />
+        <ddr_buffer id="ddr_wme_mfb_photometric_gains_slice0" node="wme_node_slice0" param_idx="38" />
+        <ddr_buffer id="ddr_wme_mfb_photometric_offsets_slice0" node="wme_node_slice0" param_idx="39" />
+        <ddr_buffer id="ddr_wme_enf_params_slice0" node="wme_node_slice0" param_idx="44" />
+        <ddr_buffer id="ddr_wme_out_y_slice0" node="wme_node_slice0" param_idx="46" />
+        <ddr_buffer id="ddr_wme_out_u_slice0" node="wme_node_slice0" param_idx="47" />
+        <ddr_buffer id="ddr_wme_out_v_slice0" node="wme_node_slice0" param_idx="48" />
+
+        <!-- WME slice1 -->
+        <ddr_buffer id="ddr_wme_in_y0_slice1" node="wme_node_slice1" param_idx="0" />
+        <ddr_buffer id="ddr_wme_in_u0_slice1" node="wme_node_slice1" param_idx="1" />
+        <ddr_buffer id="ddr_wme_in_v0_slice1" node="wme_node_slice1" param_idx="2" />
+        <ddr_buffer id="ddr_wme_in_y1_slice1" node="wme_node_slice1" param_idx="3" />
+        <ddr_buffer id="ddr_wme_in_u1_slice1" node="wme_node_slice1" param_idx="4" />
+        <ddr_buffer id="ddr_wme_in_v1_slice1" node="wme_node_slice1" param_idx="5" />
+        <ddr_buffer id="ddr_wme_in_y2_slice1" node="wme_node_slice1" param_idx="6" />
+        <ddr_buffer id="ddr_wme_in_u2_slice1" node="wme_node_slice1" param_idx="7" />
+        <ddr_buffer id="ddr_wme_in_v2_slice1" node="wme_node_slice1" param_idx="8" />
+        <ddr_buffer id="ddr_wme_in_y3_slice1" node="wme_node_slice1" param_idx="9" />
+        <ddr_buffer id="ddr_wme_in_u3_slice1" node="wme_node_slice1" param_idx="10" />
+        <ddr_buffer id="ddr_wme_in_v3_slice1" node="wme_node_slice1" param_idx="11" />
+        <ddr_buffer id="ddr_wme_in_y4_slice1" node="wme_node_slice1" param_idx="12" />
+        <ddr_buffer id="ddr_wme_in_u4_slice1" node="wme_node_slice1" param_idx="13" />
+        <ddr_buffer id="ddr_wme_in_v4_slice1" node="wme_node_slice1" param_idx="14" />
+        <ddr_buffer id="ddr_wme_delta_config_slice1" node="wme_node_slice1" param_idx="17" />
+        <ddr_buffer id="ddr_wme_affine_mat0_slice1" node="wme_node_slice1" param_idx="25" />
+        <ddr_buffer id="ddr_wme_affine_mat1_slice1" node="wme_node_slice1" param_idx="26" />
+        <ddr_buffer id="ddr_wme_affine_mat2_slice1" node="wme_node_slice1" param_idx="27" />
+        <ddr_buffer id="ddr_wme_affine_mat3_slice1" node="wme_node_slice1" param_idx="28" />
+        <ddr_buffer id="ddr_wme_affine_mat4_slice1" node="wme_node_slice1" param_idx="29" />
+        <ddr_buffer id="ddr_wme_out_mfb_mot_mult_slice1" node="wme_node_slice1" param_idx="32" />
+        <ddr_buffer id="ddr_wme_mfb_motion_image_slice1" node="wme_node_slice1" param_idx="33" />
+        <ddr_buffer id="ddr_wme_mfb_blend_weights_slice1" node="wme_node_slice1" param_idx="35" />
+        <ddr_buffer id="ddr_wme_mfb_reference_weights_slice1" node="wme_node_slice1" param_idx="36" />
+        <ddr_buffer id="ddr_wme_mfb_photometric_gains_slice1" node="wme_node_slice1" param_idx="38" />
+        <ddr_buffer id="ddr_wme_mfb_photometric_offsets_slice1" node="wme_node_slice1" param_idx="39" />
+        <ddr_buffer id="ddr_wme_enf_params_slice1" node="wme_node_slice1" param_idx="44" />
+        <ddr_buffer id="ddr_wme_out_y_slice1" node="wme_node_slice1" param_idx="46" />
+        <ddr_buffer id="ddr_wme_out_u_slice1" node="wme_node_slice1" param_idx="47" />
+        <ddr_buffer id="ddr_wme_out_v_slice1" node="wme_node_slice1" param_idx="48" />
+
+        <!-- WME slice2 -->
+        <ddr_buffer id="ddr_wme_in_y0_slice2" node="wme_node_slice2" param_idx="0" />
+        <ddr_buffer id="ddr_wme_in_u0_slice2" node="wme_node_slice2" param_idx="1" />
+        <ddr_buffer id="ddr_wme_in_v0_slice2" node="wme_node_slice2" param_idx="2" />
+        <ddr_buffer id="ddr_wme_in_y1_slice2" node="wme_node_slice2" param_idx="3" />
+        <ddr_buffer id="ddr_wme_in_u1_slice2" node="wme_node_slice2" param_idx="4" />
+        <ddr_buffer id="ddr_wme_in_v1_slice2" node="wme_node_slice2" param_idx="5" />
+        <ddr_buffer id="ddr_wme_in_y2_slice2" node="wme_node_slice2" param_idx="6" />
+        <ddr_buffer id="ddr_wme_in_u2_slice2" node="wme_node_slice2" param_idx="7" />
+        <ddr_buffer id="ddr_wme_in_v2_slice2" node="wme_node_slice2" param_idx="8" />
+        <ddr_buffer id="ddr_wme_in_y3_slice2" node="wme_node_slice2" param_idx="9" />
+        <ddr_buffer id="ddr_wme_in_u3_slice2" node="wme_node_slice2" param_idx="10" />
+        <ddr_buffer id="ddr_wme_in_v3_slice2" node="wme_node_slice2" param_idx="11" />
+        <ddr_buffer id="ddr_wme_in_y4_slice2" node="wme_node_slice2" param_idx="12" />
+        <ddr_buffer id="ddr_wme_in_u4_slice2" node="wme_node_slice2" param_idx="13" />
+        <ddr_buffer id="ddr_wme_in_v4_slice2" node="wme_node_slice2" param_idx="14" />
+        <ddr_buffer id="ddr_wme_delta_config_slice2" node="wme_node_slice2" param_idx="17" />
+        <ddr_buffer id="ddr_wme_affine_mat0_slice2" node="wme_node_slice2" param_idx="25" />
+        <ddr_buffer id="ddr_wme_affine_mat1_slice2" node="wme_node_slice2" param_idx="26" />
+        <ddr_buffer id="ddr_wme_affine_mat2_slice2" node="wme_node_slice2" param_idx="27" />
+        <ddr_buffer id="ddr_wme_affine_mat3_slice2" node="wme_node_slice2" param_idx="28" />
+        <ddr_buffer id="ddr_wme_affine_mat4_slice2" node="wme_node_slice2" param_idx="29" />
+        <ddr_buffer id="ddr_wme_out_mfb_mot_mult_slice2" node="wme_node_slice2" param_idx="32" />
+        <ddr_buffer id="ddr_wme_mfb_motion_image_slice2" node="wme_node_slice2" param_idx="33" />
+        <ddr_buffer id="ddr_wme_mfb_blend_weights_slice2" node="wme_node_slice2" param_idx="35" />
+        <ddr_buffer id="ddr_wme_mfb_reference_weights_slice2" node="wme_node_slice2" param_idx="36" />
+        <ddr_buffer id="ddr_wme_mfb_photometric_gains_slice2" node="wme_node_slice2" param_idx="38" />
+        <ddr_buffer id="ddr_wme_mfb_photometric_offsets_slice2" node="wme_node_slice2" param_idx="39" />
+        <ddr_buffer id="ddr_wme_enf_params_slice2" node="wme_node_slice2" param_idx="44" />
+        <ddr_buffer id="ddr_wme_out_y_slice2" node="wme_node_slice2" param_idx="46" />
+        <ddr_buffer id="ddr_wme_out_u_slice2" node="wme_node_slice2" param_idx="47" />
+        <ddr_buffer id="ddr_wme_out_v_slice2" node="wme_node_slice2" param_idx="48" />
+
+        <!-- WME slice3 -->
+        <ddr_buffer id="ddr_wme_in_y0_slice3" node="wme_node_slice3" param_idx="0" />
+        <ddr_buffer id="ddr_wme_in_u0_slice3" node="wme_node_slice3" param_idx="1" />
+        <ddr_buffer id="ddr_wme_in_v0_slice3" node="wme_node_slice3" param_idx="2" />
+        <ddr_buffer id="ddr_wme_in_y1_slice3" node="wme_node_slice3" param_idx="3" />
+        <ddr_buffer id="ddr_wme_in_u1_slice3" node="wme_node_slice3" param_idx="4" />
+        <ddr_buffer id="ddr_wme_in_v1_slice3" node="wme_node_slice3" param_idx="5" />
+        <ddr_buffer id="ddr_wme_in_y2_slice3" node="wme_node_slice3" param_idx="6" />
+        <ddr_buffer id="ddr_wme_in_u2_slice3" node="wme_node_slice3" param_idx="7" />
+        <ddr_buffer id="ddr_wme_in_v2_slice3" node="wme_node_slice3" param_idx="8" />
+        <ddr_buffer id="ddr_wme_in_y3_slice3" node="wme_node_slice3" param_idx="9" />
+        <ddr_buffer id="ddr_wme_in_u3_slice3" node="wme_node_slice3" param_idx="10" />
+        <ddr_buffer id="ddr_wme_in_v3_slice3" node="wme_node_slice3" param_idx="11" />
+        <ddr_buffer id="ddr_wme_in_y4_slice3" node="wme_node_slice3" param_idx="12" />
+        <ddr_buffer id="ddr_wme_in_u4_slice3" node="wme_node_slice3" param_idx="13" />
+        <ddr_buffer id="ddr_wme_in_v4_slice3" node="wme_node_slice3" param_idx="14" />
+        <ddr_buffer id="ddr_wme_delta_config_slice3" node="wme_node_slice3" param_idx="17" />
+        <ddr_buffer id="ddr_wme_affine_mat0_slice3" node="wme_node_slice3" param_idx="25" />
+        <ddr_buffer id="ddr_wme_affine_mat1_slice3" node="wme_node_slice3" param_idx="26" />
+        <ddr_buffer id="ddr_wme_affine_mat2_slice3" node="wme_node_slice3" param_idx="27" />
+        <ddr_buffer id="ddr_wme_affine_mat3_slice3" node="wme_node_slice3" param_idx="28" />
+        <ddr_buffer id="ddr_wme_affine_mat4_slice3" node="wme_node_slice3" param_idx="29" />
+        <ddr_buffer id="ddr_wme_out_mfb_mot_mult_slice3" node="wme_node_slice3" param_idx="32" />
+        <ddr_buffer id="ddr_wme_mfb_motion_image_slice3" node="wme_node_slice3" param_idx="33" />
+        <ddr_buffer id="ddr_wme_mfb_blend_weights_slice3" node="wme_node_slice3" param_idx="35" />
+        <ddr_buffer id="ddr_wme_mfb_reference_weights_slice3" node="wme_node_slice3" param_idx="36" />
+        <ddr_buffer id="ddr_wme_mfb_photometric_gains_slice3" node="wme_node_slice3" param_idx="38" />
+        <ddr_buffer id="ddr_wme_mfb_photometric_offsets_slice3" node="wme_node_slice3" param_idx="39" />
+        <ddr_buffer id="ddr_wme_enf_params_slice3" node="wme_node_slice3" param_idx="44" />
+        <ddr_buffer id="ddr_wme_out_y_slice3" node="wme_node_slice3" param_idx="46" />
+        <ddr_buffer id="ddr_wme_out_u_slice3" node="wme_node_slice3" param_idx="47" />
+        <ddr_buffer id="ddr_wme_out_v_slice3" node="wme_node_slice3" param_idx="48" />
+
+        <!-- WME slice4 -->
+        <ddr_buffer id="ddr_wme_in_y0_slice4" node="wme_node_slice4" param_idx="0" />
+        <ddr_buffer id="ddr_wme_in_u0_slice4" node="wme_node_slice4" param_idx="1" />
+        <ddr_buffer id="ddr_wme_in_v0_slice4" node="wme_node_slice4" param_idx="2" />
+        <ddr_buffer id="ddr_wme_in_y1_slice4" node="wme_node_slice4" param_idx="3" />
+        <ddr_buffer id="ddr_wme_in_u1_slice4" node="wme_node_slice4" param_idx="4" />
+        <ddr_buffer id="ddr_wme_in_v1_slice4" node="wme_node_slice4" param_idx="5" />
+        <ddr_buffer id="ddr_wme_in_y2_slice4" node="wme_node_slice4" param_idx="6" />
+        <ddr_buffer id="ddr_wme_in_u2_slice4" node="wme_node_slice4" param_idx="7" />
+        <ddr_buffer id="ddr_wme_in_v2_slice4" node="wme_node_slice4" param_idx="8" />
+        <ddr_buffer id="ddr_wme_in_y3_slice4" node="wme_node_slice4" param_idx="9" />
+        <ddr_buffer id="ddr_wme_in_u3_slice4" node="wme_node_slice4" param_idx="10" />
+        <ddr_buffer id="ddr_wme_in_v3_slice4" node="wme_node_slice4" param_idx="11" />
+        <ddr_buffer id="ddr_wme_in_y4_slice4" node="wme_node_slice4" param_idx="12" />
+        <ddr_buffer id="ddr_wme_in_u4_slice4" node="wme_node_slice4" param_idx="13" />
+        <ddr_buffer id="ddr_wme_in_v4_slice4" node="wme_node_slice4" param_idx="14" />
+        <ddr_buffer id="ddr_wme_delta_config_slice4" node="wme_node_slice4" param_idx="17" />
+        <ddr_buffer id="ddr_wme_affine_mat0_slice4" node="wme_node_slice4" param_idx="25" />
+        <ddr_buffer id="ddr_wme_affine_mat1_slice4" node="wme_node_slice4" param_idx="26" />
+        <ddr_buffer id="ddr_wme_affine_mat2_slice4" node="wme_node_slice4" param_idx="27" />
+        <ddr_buffer id="ddr_wme_affine_mat3_slice4" node="wme_node_slice4" param_idx="28" />
+        <ddr_buffer id="ddr_wme_affine_mat4_slice4" node="wme_node_slice4" param_idx="29" />
+        <ddr_buffer id="ddr_wme_out_mfb_mot_mult_slice4" node="wme_node_slice4" param_idx="32" />
+        <ddr_buffer id="ddr_wme_mfb_motion_image_slice4" node="wme_node_slice4" param_idx="33" />
+        <ddr_buffer id="ddr_wme_mfb_blend_weights_slice4" node="wme_node_slice4" param_idx="35" />
+        <ddr_buffer id="ddr_wme_mfb_reference_weights_slice4" node="wme_node_slice4" param_idx="36" />
+        <ddr_buffer id="ddr_wme_mfb_photometric_gains_slice4" node="wme_node_slice4" param_idx="38" />
+        <ddr_buffer id="ddr_wme_mfb_photometric_offsets_slice4" node="wme_node_slice4" param_idx="39" />
+        <ddr_buffer id="ddr_wme_enf_params_slice4" node="wme_node_slice4" param_idx="44" />
+        <ddr_buffer id="ddr_wme_out_y_slice4" node="wme_node_slice4" param_idx="46" />
+        <ddr_buffer id="ddr_wme_out_u_slice4" node="wme_node_slice4" param_idx="47" />
+        <ddr_buffer id="ddr_wme_out_v_slice4" node="wme_node_slice4" param_idx="48" />
+
+        <!-- WME slice5 -->
+        <ddr_buffer id="ddr_wme_in_y0_slice5" node="wme_node_slice5" param_idx="0" />
+        <ddr_buffer id="ddr_wme_in_u0_slice5" node="wme_node_slice5" param_idx="1" />
+        <ddr_buffer id="ddr_wme_in_v0_slice5" node="wme_node_slice5" param_idx="2" />
+        <ddr_buffer id="ddr_wme_in_y1_slice5" node="wme_node_slice5" param_idx="3" />
+        <ddr_buffer id="ddr_wme_in_u1_slice5" node="wme_node_slice5" param_idx="4" />
+        <ddr_buffer id="ddr_wme_in_v1_slice5" node="wme_node_slice5" param_idx="5" />
+        <ddr_buffer id="ddr_wme_in_y2_slice5" node="wme_node_slice5" param_idx="6" />
+        <ddr_buffer id="ddr_wme_in_u2_slice5" node="wme_node_slice5" param_idx="7" />
+        <ddr_buffer id="ddr_wme_in_v2_slice5" node="wme_node_slice5" param_idx="8" />
+        <ddr_buffer id="ddr_wme_in_y3_slice5" node="wme_node_slice5" param_idx="9" />
+        <ddr_buffer id="ddr_wme_in_u3_slice5" node="wme_node_slice5" param_idx="10" />
+        <ddr_buffer id="ddr_wme_in_v3_slice5" node="wme_node_slice5" param_idx="11" />
+        <ddr_buffer id="ddr_wme_in_y4_slice5" node="wme_node_slice5" param_idx="12" />
+        <ddr_buffer id="ddr_wme_in_u4_slice5" node="wme_node_slice5" param_idx="13" />
+        <ddr_buffer id="ddr_wme_in_v4_slice5" node="wme_node_slice5" param_idx="14" />
+        <ddr_buffer id="ddr_wme_delta_config_slice5" node="wme_node_slice5" param_idx="17" />
+        <ddr_buffer id="ddr_wme_affine_mat0_slice5" node="wme_node_slice5" param_idx="25" />
+        <ddr_buffer id="ddr_wme_affine_mat1_slice5" node="wme_node_slice5" param_idx="26" />
+        <ddr_buffer id="ddr_wme_affine_mat2_slice5" node="wme_node_slice5" param_idx="27" />
+        <ddr_buffer id="ddr_wme_affine_mat3_slice5" node="wme_node_slice5" param_idx="28" />
+        <ddr_buffer id="ddr_wme_affine_mat4_slice5" node="wme_node_slice5" param_idx="29" />
+        <ddr_buffer id="ddr_wme_out_mfb_mot_mult_slice5" node="wme_node_slice5" param_idx="32" />
+        <ddr_buffer id="ddr_wme_mfb_motion_image_slice5" node="wme_node_slice5" param_idx="33" />
+        <ddr_buffer id="ddr_wme_mfb_blend_weights_slice5" node="wme_node_slice5" param_idx="35" />
+        <ddr_buffer id="ddr_wme_mfb_reference_weights_slice5" node="wme_node_slice5" param_idx="36" />
+        <ddr_buffer id="ddr_wme_mfb_photometric_gains_slice5" node="wme_node_slice5" param_idx="38" />
+        <ddr_buffer id="ddr_wme_mfb_photometric_offsets_slice5" node="wme_node_slice5" param_idx="39" />
+        <ddr_buffer id="ddr_wme_enf_params_slice5" node="wme_node_slice5" param_idx="44" />
+        <ddr_buffer id="ddr_wme_out_y_slice5" node="wme_node_slice5" param_idx="46" />
+        <ddr_buffer id="ddr_wme_out_u_slice5" node="wme_node_slice5" param_idx="47" />
+        <ddr_buffer id="ddr_wme_out_v_slice5" node="wme_node_slice5" param_idx="48" />
+
+        <!-- WME slice6 -->
+        <ddr_buffer id="ddr_wme_in_y0_slice6" node="wme_node_slice6" param_idx="0" />
+        <ddr_buffer id="ddr_wme_in_u0_slice6" node="wme_node_slice6" param_idx="1" />
+        <ddr_buffer id="ddr_wme_in_v0_slice6" node="wme_node_slice6" param_idx="2" />
+        <ddr_buffer id="ddr_wme_in_y1_slice6" node="wme_node_slice6" param_idx="3" />
+        <ddr_buffer id="ddr_wme_in_u1_slice6" node="wme_node_slice6" param_idx="4" />
+        <ddr_buffer id="ddr_wme_in_v1_slice6" node="wme_node_slice6" param_idx="5" />
+        <ddr_buffer id="ddr_wme_in_y2_slice6" node="wme_node_slice6" param_idx="6" />
+        <ddr_buffer id="ddr_wme_in_u2_slice6" node="wme_node_slice6" param_idx="7" />
+        <ddr_buffer id="ddr_wme_in_v2_slice6" node="wme_node_slice6" param_idx="8" />
+        <ddr_buffer id="ddr_wme_in_y3_slice6" node="wme_node_slice6" param_idx="9" />
+        <ddr_buffer id="ddr_wme_in_u3_slice6" node="wme_node_slice6" param_idx="10" />
+        <ddr_buffer id="ddr_wme_in_v3_slice6" node="wme_node_slice6" param_idx="11" />
+        <ddr_buffer id="ddr_wme_in_y4_slice6" node="wme_node_slice6" param_idx="12" />
+        <ddr_buffer id="ddr_wme_in_u4_slice6" node="wme_node_slice6" param_idx="13" />
+        <ddr_buffer id="ddr_wme_in_v4_slice6" node="wme_node_slice6" param_idx="14" />
+        <ddr_buffer id="ddr_wme_delta_config_slice6" node="wme_node_slice6" param_idx="17" />
+        <ddr_buffer id="ddr_wme_affine_mat0_slice6" node="wme_node_slice6" param_idx="25" />
+        <ddr_buffer id="ddr_wme_affine_mat1_slice6" node="wme_node_slice6" param_idx="26" />
+        <ddr_buffer id="ddr_wme_affine_mat2_slice6" node="wme_node_slice6" param_idx="27" />
+        <ddr_buffer id="ddr_wme_affine_mat3_slice6" node="wme_node_slice6" param_idx="28" />
+        <ddr_buffer id="ddr_wme_affine_mat4_slice6" node="wme_node_slice6" param_idx="29" />
+        <ddr_buffer id="ddr_wme_out_mfb_mot_mult_slice6" node="wme_node_slice6" param_idx="32" />
+        <ddr_buffer id="ddr_wme_mfb_motion_image_slice6" node="wme_node_slice6" param_idx="33" />
+        <ddr_buffer id="ddr_wme_mfb_blend_weights_slice6" node="wme_node_slice6" param_idx="35" />
+        <ddr_buffer id="ddr_wme_mfb_reference_weights_slice6" node="wme_node_slice6" param_idx="36" />
+        <ddr_buffer id="ddr_wme_mfb_photometric_gains_slice6" node="wme_node_slice6" param_idx="38" />
+        <ddr_buffer id="ddr_wme_mfb_photometric_offsets_slice6" node="wme_node_slice6" param_idx="39" />
+        <ddr_buffer id="ddr_wme_enf_params_slice6" node="wme_node_slice6" param_idx="44" />
+        <ddr_buffer id="ddr_wme_out_y_slice6" node="wme_node_slice6" param_idx="46" />
+        <ddr_buffer id="ddr_wme_out_u_slice6" node="wme_node_slice6" param_idx="47" />
+        <ddr_buffer id="ddr_wme_out_v_slice6" node="wme_node_slice6" param_idx="48" />
+
+        <!-- WME slice7 -->
+        <ddr_buffer id="ddr_wme_in_y0_slice7" node="wme_node_slice7" param_idx="0" />
+        <ddr_buffer id="ddr_wme_in_u0_slice7" node="wme_node_slice7" param_idx="1" />
+        <ddr_buffer id="ddr_wme_in_v0_slice7" node="wme_node_slice7" param_idx="2" />
+        <ddr_buffer id="ddr_wme_in_y1_slice7" node="wme_node_slice7" param_idx="3" />
+        <ddr_buffer id="ddr_wme_in_u1_slice7" node="wme_node_slice7" param_idx="4" />
+        <ddr_buffer id="ddr_wme_in_v1_slice7" node="wme_node_slice7" param_idx="5" />
+        <ddr_buffer id="ddr_wme_in_y2_slice7" node="wme_node_slice7" param_idx="6" />
+        <ddr_buffer id="ddr_wme_in_u2_slice7" node="wme_node_slice7" param_idx="7" />
+        <ddr_buffer id="ddr_wme_in_v2_slice7" node="wme_node_slice7" param_idx="8" />
+        <ddr_buffer id="ddr_wme_in_y3_slice7" node="wme_node_slice7" param_idx="9" />
+        <ddr_buffer id="ddr_wme_in_u3_slice7" node="wme_node_slice7" param_idx="10" />
+        <ddr_buffer id="ddr_wme_in_v3_slice7" node="wme_node_slice7" param_idx="11" />
+        <ddr_buffer id="ddr_wme_in_y4_slice7" node="wme_node_slice7" param_idx="12" />
+        <ddr_buffer id="ddr_wme_in_u4_slice7" node="wme_node_slice7" param_idx="13" />
+        <ddr_buffer id="ddr_wme_in_v4_slice7" node="wme_node_slice7" param_idx="14" />
+        <ddr_buffer id="ddr_wme_delta_config_slice7" node="wme_node_slice7" param_idx="17" />
+        <ddr_buffer id="ddr_wme_affine_mat0_slice7" node="wme_node_slice7" param_idx="25" />
+        <ddr_buffer id="ddr_wme_affine_mat1_slice7" node="wme_node_slice7" param_idx="26" />
+        <ddr_buffer id="ddr_wme_affine_mat2_slice7" node="wme_node_slice7" param_idx="27" />
+        <ddr_buffer id="ddr_wme_affine_mat3_slice7" node="wme_node_slice7" param_idx="28" />
+        <ddr_buffer id="ddr_wme_affine_mat4_slice7" node="wme_node_slice7" param_idx="29" />
+        <ddr_buffer id="ddr_wme_out_mfb_mot_mult_slice7" node="wme_node_slice7" param_idx="32" />
+        <ddr_buffer id="ddr_wme_mfb_motion_image_slice7" node="wme_node_slice7" param_idx="33" />
+        <ddr_buffer id="ddr_wme_mfb_blend_weights_slice7" node="wme_node_slice7" param_idx="35" />
+        <ddr_buffer id="ddr_wme_mfb_reference_weights_slice7" node="wme_node_slice7" param_idx="36" />
+        <ddr_buffer id="ddr_wme_mfb_photometric_gains_slice7" node="wme_node_slice7" param_idx="38" />
+        <ddr_buffer id="ddr_wme_mfb_photometric_offsets_slice7" node="wme_node_slice7" param_idx="39" />
+        <ddr_buffer id="ddr_wme_enf_params_slice7" node="wme_node_slice7" param_idx="44" />
+        <ddr_buffer id="ddr_wme_out_y_slice7" node="wme_node_slice7" param_idx="46" />
+        <ddr_buffer id="ddr_wme_out_u_slice7" node="wme_node_slice7" param_idx="47" />
+        <ddr_buffer id="ddr_wme_out_v_slice7" node="wme_node_slice7" param_idx="48" />
+
+        <!-- WME slice8 -->
+        <ddr_buffer id="ddr_wme_in_y0_slice8" node="wme_node_slice8" param_idx="0" />
+        <ddr_buffer id="ddr_wme_in_u0_slice8" node="wme_node_slice8" param_idx="1" />
+        <ddr_buffer id="ddr_wme_in_v0_slice8" node="wme_node_slice8" param_idx="2" />
+        <ddr_buffer id="ddr_wme_in_y1_slice8" node="wme_node_slice8" param_idx="3" />
+        <ddr_buffer id="ddr_wme_in_u1_slice8" node="wme_node_slice8" param_idx="4" />
+        <ddr_buffer id="ddr_wme_in_v1_slice8" node="wme_node_slice8" param_idx="5" />
+        <ddr_buffer id="ddr_wme_in_y2_slice8" node="wme_node_slice8" param_idx="6" />
+        <ddr_buffer id="ddr_wme_in_u2_slice8" node="wme_node_slice8" param_idx="7" />
+        <ddr_buffer id="ddr_wme_in_v2_slice8" node="wme_node_slice8" param_idx="8" />
+        <ddr_buffer id="ddr_wme_in_y3_slice8" node="wme_node_slice8" param_idx="9" />
+        <ddr_buffer id="ddr_wme_in_u3_slice8" node="wme_node_slice8" param_idx="10" />
+        <ddr_buffer id="ddr_wme_in_v3_slice8" node="wme_node_slice8" param_idx="11" />
+        <ddr_buffer id="ddr_wme_in_y4_slice8" node="wme_node_slice8" param_idx="12" />
+        <ddr_buffer id="ddr_wme_in_u4_slice8" node="wme_node_slice8" param_idx="13" />
+        <ddr_buffer id="ddr_wme_in_v4_slice8" node="wme_node_slice8" param_idx="14" />
+        <ddr_buffer id="ddr_wme_delta_config_slice8" node="wme_node_slice8" param_idx="17" />
+        <ddr_buffer id="ddr_wme_affine_mat0_slice8" node="wme_node_slice8" param_idx="25" />
+        <ddr_buffer id="ddr_wme_affine_mat1_slice8" node="wme_node_slice8" param_idx="26" />
+        <ddr_buffer id="ddr_wme_affine_mat2_slice8" node="wme_node_slice8" param_idx="27" />
+        <ddr_buffer id="ddr_wme_affine_mat3_slice8" node="wme_node_slice8" param_idx="28" />
+        <ddr_buffer id="ddr_wme_affine_mat4_slice8" node="wme_node_slice8" param_idx="29" />
+        <ddr_buffer id="ddr_wme_out_mfb_mot_mult_slice8" node="wme_node_slice8" param_idx="32" />
+        <ddr_buffer id="ddr_wme_mfb_motion_image_slice8" node="wme_node_slice8" param_idx="33" />
+        <ddr_buffer id="ddr_wme_mfb_blend_weights_slice8" node="wme_node_slice8" param_idx="35" />
+        <ddr_buffer id="ddr_wme_mfb_reference_weights_slice8" node="wme_node_slice8" param_idx="36" />
+        <ddr_buffer id="ddr_wme_mfb_photometric_gains_slice8" node="wme_node_slice8" param_idx="38" />
+        <ddr_buffer id="ddr_wme_mfb_photometric_offsets_slice8" node="wme_node_slice8" param_idx="39" />
+        <ddr_buffer id="ddr_wme_enf_params_slice8" node="wme_node_slice8" param_idx="44" />
+        <ddr_buffer id="ddr_wme_out_y_slice8" node="wme_node_slice8" param_idx="46" />
+        <ddr_buffer id="ddr_wme_out_u_slice8" node="wme_node_slice8" param_idx="47" />
+        <ddr_buffer id="ddr_wme_out_v_slice8" node="wme_node_slice8" param_idx="48" />
+
+        <!-- WME slice9 -->
+        <ddr_buffer id="ddr_wme_in_y0_slice9" node="wme_node_slice9" param_idx="0" />
+        <ddr_buffer id="ddr_wme_in_u0_slice9" node="wme_node_slice9" param_idx="1" />
+        <ddr_buffer id="ddr_wme_in_v0_slice9" node="wme_node_slice9" param_idx="2" />
+        <ddr_buffer id="ddr_wme_in_y1_slice9" node="wme_node_slice9" param_idx="3" />
+        <ddr_buffer id="ddr_wme_in_u1_slice9" node="wme_node_slice9" param_idx="4" />
+        <ddr_buffer id="ddr_wme_in_v1_slice9" node="wme_node_slice9" param_idx="5" />
+        <ddr_buffer id="ddr_wme_in_y2_slice9" node="wme_node_slice9" param_idx="6" />
+        <ddr_buffer id="ddr_wme_in_u2_slice9" node="wme_node_slice9" param_idx="7" />
+        <ddr_buffer id="ddr_wme_in_v2_slice9" node="wme_node_slice9" param_idx="8" />
+        <ddr_buffer id="ddr_wme_in_y3_slice9" node="wme_node_slice9" param_idx="9" />
+        <ddr_buffer id="ddr_wme_in_u3_slice9" node="wme_node_slice9" param_idx="10" />
+        <ddr_buffer id="ddr_wme_in_v3_slice9" node="wme_node_slice9" param_idx="11" />
+        <ddr_buffer id="ddr_wme_in_y4_slice9" node="wme_node_slice9" param_idx="12" />
+        <ddr_buffer id="ddr_wme_in_u4_slice9" node="wme_node_slice9" param_idx="13" />
+        <ddr_buffer id="ddr_wme_in_v4_slice9" node="wme_node_slice9" param_idx="14" />
+        <ddr_buffer id="ddr_wme_delta_config_slice9" node="wme_node_slice9" param_idx="17" />
+        <ddr_buffer id="ddr_wme_affine_mat0_slice9" node="wme_node_slice9" param_idx="25" />
+        <ddr_buffer id="ddr_wme_affine_mat1_slice9" node="wme_node_slice9" param_idx="26" />
+        <ddr_buffer id="ddr_wme_affine_mat2_slice9" node="wme_node_slice9" param_idx="27" />
+        <ddr_buffer id="ddr_wme_affine_mat3_slice9" node="wme_node_slice9" param_idx="28" />
+        <ddr_buffer id="ddr_wme_affine_mat4_slice9" node="wme_node_slice9" param_idx="29" />
+        <ddr_buffer id="ddr_wme_out_mfb_mot_mult_slice9" node="wme_node_slice9" param_idx="32" />
+        <ddr_buffer id="ddr_wme_mfb_motion_image_slice9" node="wme_node_slice9" param_idx="33" />
+        <ddr_buffer id="ddr_wme_mfb_blend_weights_slice9" node="wme_node_slice9" param_idx="35" />
+        <ddr_buffer id="ddr_wme_mfb_reference_weights_slice9" node="wme_node_slice9" param_idx="36" />
+        <ddr_buffer id="ddr_wme_mfb_photometric_gains_slice9" node="wme_node_slice9" param_idx="38" />
+        <ddr_buffer id="ddr_wme_mfb_photometric_offsets_slice9" node="wme_node_slice9" param_idx="39" />
+        <ddr_buffer id="ddr_wme_enf_params_slice9" node="wme_node_slice9" param_idx="44" />
+        <ddr_buffer id="ddr_wme_out_y_slice9" node="wme_node_slice9" param_idx="46" />
+        <ddr_buffer id="ddr_wme_out_u_slice9" node="wme_node_slice9" param_idx="47" />
+        <ddr_buffer id="ddr_wme_out_v_slice9" node="wme_node_slice9" param_idx="48" />
+
+        <!-- WME slice10 -->
+        <ddr_buffer id="ddr_wme_in_y0_slice10" node="wme_node_slice10" param_idx="0" />
+        <ddr_buffer id="ddr_wme_in_u0_slice10" node="wme_node_slice10" param_idx="1" />
+        <ddr_buffer id="ddr_wme_in_v0_slice10" node="wme_node_slice10" param_idx="2" />
+        <ddr_buffer id="ddr_wme_in_y1_slice10" node="wme_node_slice10" param_idx="3" />
+        <ddr_buffer id="ddr_wme_in_u1_slice10" node="wme_node_slice10" param_idx="4" />
+        <ddr_buffer id="ddr_wme_in_v1_slice10" node="wme_node_slice10" param_idx="5" />
+        <ddr_buffer id="ddr_wme_in_y2_slice10" node="wme_node_slice10" param_idx="6" />
+        <ddr_buffer id="ddr_wme_in_u2_slice10" node="wme_node_slice10" param_idx="7" />
+        <ddr_buffer id="ddr_wme_in_v2_slice10" node="wme_node_slice10" param_idx="8" />
+        <ddr_buffer id="ddr_wme_in_y3_slice10" node="wme_node_slice10" param_idx="9" />
+        <ddr_buffer id="ddr_wme_in_u3_slice10" node="wme_node_slice10" param_idx="10" />
+        <ddr_buffer id="ddr_wme_in_v3_slice10" node="wme_node_slice10" param_idx="11" />
+        <ddr_buffer id="ddr_wme_in_y4_slice10" node="wme_node_slice10" param_idx="12" />
+        <ddr_buffer id="ddr_wme_in_u4_slice10" node="wme_node_slice10" param_idx="13" />
+        <ddr_buffer id="ddr_wme_in_v4_slice10" node="wme_node_slice10" param_idx="14" />
+        <ddr_buffer id="ddr_wme_delta_config_slice10" node="wme_node_slice10" param_idx="17" />
+        <ddr_buffer id="ddr_wme_affine_mat0_slice10" node="wme_node_slice10" param_idx="25" />
+        <ddr_buffer id="ddr_wme_affine_mat1_slice10" node="wme_node_slice10" param_idx="26" />
+        <ddr_buffer id="ddr_wme_affine_mat2_slice10" node="wme_node_slice10" param_idx="27" />
+        <ddr_buffer id="ddr_wme_affine_mat3_slice10" node="wme_node_slice10" param_idx="28" />
+        <ddr_buffer id="ddr_wme_affine_mat4_slice10" node="wme_node_slice10" param_idx="29" />
+        <ddr_buffer id="ddr_wme_out_mfb_mot_mult_slice10" node="wme_node_slice10" param_idx="32" />
+        <ddr_buffer id="ddr_wme_mfb_motion_image_slice10" node="wme_node_slice10" param_idx="33" />
+        <ddr_buffer id="ddr_wme_mfb_blend_weights_slice10" node="wme_node_slice10" param_idx="35" />
+        <ddr_buffer id="ddr_wme_mfb_reference_weights_slice10" node="wme_node_slice10" param_idx="36" />
+        <ddr_buffer id="ddr_wme_mfb_photometric_gains_slice10" node="wme_node_slice10" param_idx="38" />
+        <ddr_buffer id="ddr_wme_mfb_photometric_offsets_slice10" node="wme_node_slice10" param_idx="39" />
+        <ddr_buffer id="ddr_wme_enf_params_slice10" node="wme_node_slice10" param_idx="44" />
+        <ddr_buffer id="ddr_wme_out_y_slice10" node="wme_node_slice10" param_idx="46" />
+        <ddr_buffer id="ddr_wme_out_u_slice10" node="wme_node_slice10" param_idx="47" />
+        <ddr_buffer id="ddr_wme_out_v_slice10" node="wme_node_slice10" param_idx="48" />
+
+        <!-- WME slice11 -->
+        <ddr_buffer id="ddr_wme_in_y0_slice11" node="wme_node_slice11" param_idx="0" />
+        <ddr_buffer id="ddr_wme_in_u0_slice11" node="wme_node_slice11" param_idx="1" />
+        <ddr_buffer id="ddr_wme_in_v0_slice11" node="wme_node_slice11" param_idx="2" />
+        <ddr_buffer id="ddr_wme_in_y1_slice11" node="wme_node_slice11" param_idx="3" />
+        <ddr_buffer id="ddr_wme_in_u1_slice11" node="wme_node_slice11" param_idx="4" />
+        <ddr_buffer id="ddr_wme_in_v1_slice11" node="wme_node_slice11" param_idx="5" />
+        <ddr_buffer id="ddr_wme_in_y2_slice11" node="wme_node_slice11" param_idx="6" />
+        <ddr_buffer id="ddr_wme_in_u2_slice11" node="wme_node_slice11" param_idx="7" />
+        <ddr_buffer id="ddr_wme_in_v2_slice11" node="wme_node_slice11" param_idx="8" />
+        <ddr_buffer id="ddr_wme_in_y3_slice11" node="wme_node_slice11" param_idx="9" />
+        <ddr_buffer id="ddr_wme_in_u3_slice11" node="wme_node_slice11" param_idx="10" />
+        <ddr_buffer id="ddr_wme_in_v3_slice11" node="wme_node_slice11" param_idx="11" />
+        <ddr_buffer id="ddr_wme_in_y4_slice11" node="wme_node_slice11" param_idx="12" />
+        <ddr_buffer id="ddr_wme_in_u4_slice11" node="wme_node_slice11" param_idx="13" />
+        <ddr_buffer id="ddr_wme_in_v4_slice11" node="wme_node_slice11" param_idx="14" />
+        <ddr_buffer id="ddr_wme_delta_config_slice11" node="wme_node_slice11" param_idx="17" />
+        <ddr_buffer id="ddr_wme_affine_mat0_slice11" node="wme_node_slice11" param_idx="25" />
+        <ddr_buffer id="ddr_wme_affine_mat1_slice11" node="wme_node_slice11" param_idx="26" />
+        <ddr_buffer id="ddr_wme_affine_mat2_slice11" node="wme_node_slice11" param_idx="27" />
+        <ddr_buffer id="ddr_wme_affine_mat3_slice11" node="wme_node_slice11" param_idx="28" />
+        <ddr_buffer id="ddr_wme_affine_mat4_slice11" node="wme_node_slice11" param_idx="29" />
+        <ddr_buffer id="ddr_wme_out_mfb_mot_mult_slice11" node="wme_node_slice11" param_idx="32" />
+        <ddr_buffer id="ddr_wme_mfb_motion_image_slice11" node="wme_node_slice11" param_idx="33" />
+        <ddr_buffer id="ddr_wme_mfb_blend_weights_slice11" node="wme_node_slice11" param_idx="35" />
+        <ddr_buffer id="ddr_wme_mfb_reference_weights_slice11" node="wme_node_slice11" param_idx="36" />
+        <ddr_buffer id="ddr_wme_mfb_photometric_gains_slice11" node="wme_node_slice11" param_idx="38" />
+        <ddr_buffer id="ddr_wme_mfb_photometric_offsets_slice11" node="wme_node_slice11" param_idx="39" />
+        <ddr_buffer id="ddr_wme_enf_params_slice11" node="wme_node_slice11" param_idx="44" />
+        <ddr_buffer id="ddr_wme_out_y_slice11" node="wme_node_slice11" param_idx="46" />
+        <ddr_buffer id="ddr_wme_out_u_slice11" node="wme_node_slice11" param_idx="47" />
+        <ddr_buffer id="ddr_wme_out_v_slice11" node="wme_node_slice11" param_idx="48" />
+
+        <!-- WME slice12 -->
+        <ddr_buffer id="ddr_wme_in_y0_slice12" node="wme_node_slice12" param_idx="0" />
+        <ddr_buffer id="ddr_wme_in_u0_slice12" node="wme_node_slice12" param_idx="1" />
+        <ddr_buffer id="ddr_wme_in_v0_slice12" node="wme_node_slice12" param_idx="2" />
+        <ddr_buffer id="ddr_wme_in_y1_slice12" node="wme_node_slice12" param_idx="3" />
+        <ddr_buffer id="ddr_wme_in_u1_slice12" node="wme_node_slice12" param_idx="4" />
+        <ddr_buffer id="ddr_wme_in_v1_slice12" node="wme_node_slice12" param_idx="5" />
+        <ddr_buffer id="ddr_wme_in_y2_slice12" node="wme_node_slice12" param_idx="6" />
+        <ddr_buffer id="ddr_wme_in_u2_slice12" node="wme_node_slice12" param_idx="7" />
+        <ddr_buffer id="ddr_wme_in_v2_slice12" node="wme_node_slice12" param_idx="8" />
+        <ddr_buffer id="ddr_wme_in_y3_slice12" node="wme_node_slice12" param_idx="9" />
+        <ddr_buffer id="ddr_wme_in_u3_slice12" node="wme_node_slice12" param_idx="10" />
+        <ddr_buffer id="ddr_wme_in_v3_slice12" node="wme_node_slice12" param_idx="11" />
+        <ddr_buffer id="ddr_wme_in_y4_slice12" node="wme_node_slice12" param_idx="12" />
+        <ddr_buffer id="ddr_wme_in_u4_slice12" node="wme_node_slice12" param_idx="13" />
+        <ddr_buffer id="ddr_wme_in_v4_slice12" node="wme_node_slice12" param_idx="14" />
+        <ddr_buffer id="ddr_wme_delta_config_slice12" node="wme_node_slice12" param_idx="17" />
+        <ddr_buffer id="ddr_wme_affine_mat0_slice12" node="wme_node_slice12" param_idx="25" />
+        <ddr_buffer id="ddr_wme_affine_mat1_slice12" node="wme_node_slice12" param_idx="26" />
+        <ddr_buffer id="ddr_wme_affine_mat2_slice12" node="wme_node_slice12" param_idx="27" />
+        <ddr_buffer id="ddr_wme_affine_mat3_slice12" node="wme_node_slice12" param_idx="28" />
+        <ddr_buffer id="ddr_wme_affine_mat4_slice12" node="wme_node_slice12" param_idx="29" />
+        <ddr_buffer id="ddr_wme_out_mfb_mot_mult_slice12" node="wme_node_slice12" param_idx="32" />
+        <ddr_buffer id="ddr_wme_mfb_motion_image_slice12" node="wme_node_slice12" param_idx="33" />
+        <ddr_buffer id="ddr_wme_mfb_blend_weights_slice12" node="wme_node_slice12" param_idx="35" />
+        <ddr_buffer id="ddr_wme_mfb_reference_weights_slice12" node="wme_node_slice12" param_idx="36" />
+        <ddr_buffer id="ddr_wme_mfb_photometric_gains_slice12" node="wme_node_slice12" param_idx="38" />
+        <ddr_buffer id="ddr_wme_mfb_photometric_offsets_slice12" node="wme_node_slice12" param_idx="39" />
+        <ddr_buffer id="ddr_wme_enf_params_slice12" node="wme_node_slice12" param_idx="44" />
+        <ddr_buffer id="ddr_wme_out_y_slice12" node="wme_node_slice12" param_idx="46" />
+        <ddr_buffer id="ddr_wme_out_u_slice12" node="wme_node_slice12" param_idx="47" />
+        <ddr_buffer id="ddr_wme_out_v_slice12" node="wme_node_slice12" param_idx="48" />
+
+        <!-- Copy Node -->
+        <ddr_buffer id="ddr_copy_luma_input_img" node="copy_luma_node" param_idx="0" />
+        <ddr_buffer id="ddr_copy_luma_output_img" node="copy_luma_node" param_idx="1" />
+
+        <!-- VCF buffers for Pyramid Node -->
+        <vcf_buffer id="vcf_pyr_in"    addr="0x20000" size="0x1800" />
+        <vcf_buffer id="vcf_pyr_out"   addr="0x00000" size="0x480" />
+        <vcf_buffer id="vcf_pyr_in1"   addr="0x30000" size="0x1800" />
+        <vcf_buffer id="vcf_pyr_out1"  addr="0x10000" size="0x480" />
+        <vcf_buffer id="vcf_pyr_coeff" addr="0x0fc00" size="0x200" />
+
+        <!-- VCF buffers for Pre- and Post-ENF Y Node. -->
+        <vcf_buffer id="vcf_enf_in"  addr="0x06440" size="0x4d30" />
+        <vcf_buffer id="vcf_enf_out" addr="0x23fa0" size="0x1040" />
+        <vcf_buffer id="vcf_enf_cfg" addr="0x60cc0" size="0x0070" />
+
+        <!-- VCF buffers for Pre-ENF UV Node. -->
+        <vcf_buffer id="uv_enf_vcm_vcf_input0"  addr="0x40000" size="0xff00" />
+        <vcf_buffer id="uv_enf_vcm_vcf_input1"  addr="0x50000" size="0xff00" />
+        <vcf_buffer id="uv_enf_vcm_vcf_input2"  addr="0x60000" size="0xff00" />
+        <vcf_buffer id="uv_enf_vcm_vcf_input3"  addr="0x70000" size="0xff00" />
+        <vcf_buffer id="uv_enf_vcm_vcf_mmap"    addr="0x00000" size="0x0" />
+        <vcf_buffer id="uv_enf_vcm_vcf_buffer"  addr="0x1f200" size="0xe00" />
+        <vcf_buffer id="uv_enf_vcm_vcf_output0" addr="0x01200" size="0xe000" />
+        <vcf_buffer id="uv_enf_vcm_vcf_output1" addr="0x21e80" size="0xe000" />
+        <vcf_buffer id="uv_enf_vcm_vcf_output2" addr="0x11200" size="0xe000" />
+        <vcf_buffer id="uv_enf_vcm_vcf_output3" addr="0x31e80" size="0xe000" />
+
+        <!-- VCF buffers for ORB Node -->
+        <vcf_buffer id="orb_vcm_vcf_input0"  addr="0x40000" size="0x7f80" />
+        <vcf_buffer id="orb_vcm_vcf_input1"  addr="0x50000" size="0x7f80" />
+        <vcf_buffer id="orb_vcm_vcf_output0" addr="0x60000" size="0x50" />
+        <vcf_buffer id="orb_vcm_vcf_output1" addr="0x70000" size="0xa0" />
+        <vcf_buffer id="orb_vcm_vcf_buffer"  addr="0x60b90" size="0x130" />
+
+        <!-- Vcf buffers for MCH Node -->
+        <vcf_buffer id="vcf_mch_db"     addr="0x21e80" size="0x1490" />
+        <vcf_buffer id="vcf_mch_query0" addr="0x01200" size="0x1490" />
+        <vcf_buffer id="vcf_mch_query1" addr="0x02690" size="0x1490" />
+        <vcf_buffer id="vcf_mch_query2" addr="0x03b20" size="0x1490" />
+        <vcf_buffer id="vcf_mch_query3" addr="0x04fb0" size="0x1490" />
+        <vcf_buffer id="vcf_mch_out0"   addr="0x700a0" size="0x3c0" />
+        <vcf_buffer id="vcf_mch_out1"   addr="0x60050" size="0x3c0" />
+        <vcf_buffer id="vcf_mch_out2"   addr="0x60410" size="0x3c0" />
+        <vcf_buffer id="vcf_mch_out3"   addr="0x607d0" size="0x3c0" />
+
+        <!-- VCF buffers for Post SCL Node -->
+        <vcf_buffer id="vcf_post_scl_in_scl0"  addr="0x20000" size="0x16e0" />
+        <vcf_buffer id="vcf_post_scl_in_scl1"  addr="0x30000" size="0x16e0" />
+        <vcf_buffer id="vcf_post_scl_out_scl0" addr="0x00000" size="0x1200" />
+        <vcf_buffer id="vcf_post_scl_out_scl1" addr="0x10000" size="0x1200" />
+
+        <!-- VCF buffers for WME Node -->
+        <vcf_buffer id="vcf_wme_input_tile_info_buf" addr="0x3fcb0" size="0x200" />
+        <vcf_buffer id="vcf_wme_warp_vcm_buf"        addr="0x5f700" size="0x280" />
+        <!-- WME:WARP INPUT BUFFERS -->
+        <vcf_buffer id="vcf_wme_warpin_ping_y0"  addr="0x47f80" size="0x3c60" />
+        <vcf_buffer id="vcf_wme_warpin_pong_y0"  addr="0x57f80" size="0x3c60" />
+        <vcf_buffer id="vcf_wme_warpin_ping_u0"  addr="0x4bbe0" size="0xfd0" />
+        <vcf_buffer id="vcf_wme_warpin_pong_u0"  addr="0x5bbe0" size="0xfd0" />
+        <vcf_buffer id="vcf_wme_warpin_ping_v0"  addr="0x4cbb0" size="0xfd0" />
+        <vcf_buffer id="vcf_wme_warpin_pong_v0"  addr="0x5cbb0" size="0xfd0" />
+        <vcf_buffer id="vcf_wme_warpin_ping_y1"  addr="0x60cc0" size="0x3c60" />
+        <vcf_buffer id="vcf_wme_warpin_pong_y1"  addr="0x70460" size="0x3c60" />
+        <vcf_buffer id="vcf_wme_warpin_ping_u1"  addr="0x740c0" size="0xfd0" />
+        <vcf_buffer id="vcf_wme_warpin_pong_u1"  addr="0x75090" size="0xfd0" />
+        <vcf_buffer id="vcf_wme_warpin_ping_v1"  addr="0x64920" size="0xfd0" />
+        <vcf_buffer id="vcf_wme_warpin_pong_v1"  addr="0x76060" size="0xfd0" />
+        <vcf_buffer id="vcf_wme_warpin_ping_y2"  addr="0x11200" size="0x3c60" />
+        <vcf_buffer id="vcf_wme_warpin_pong_y2"  addr="0x14e60" size="0x3c60" />
+        <vcf_buffer id="vcf_wme_warpin_ping_u2"  addr="0x18ac0" size="0xfd0" />
+        <vcf_buffer id="vcf_wme_warpin_pong_u2"  addr="0x19a90" size="0xfd0" />
+        <vcf_buffer id="vcf_wme_warpin_ping_v2"  addr="0x3ade0" size="0xfd0" />
+        <vcf_buffer id="vcf_wme_warpin_pong_v2"  addr="0x1aa60" size="0xfd0" />
+        <vcf_buffer id="vcf_wme_warpin_ping_y3"  addr="0x00000" size="0x0" />
+        <vcf_buffer id="vcf_wme_warpin_pong_y3"  addr="0x00000" size="0x0" />
+        <vcf_buffer id="vcf_wme_warpin_ping_u3"  addr="0x00000" size="0x0" />
+        <vcf_buffer id="vcf_wme_warpin_pong_u3"  addr="0x00000" size="0x0" />
+        <vcf_buffer id="vcf_wme_warpin_ping_v3"  addr="0x00000" size="0x0" />
+        <vcf_buffer id="vcf_wme_warpin_pong_v3"  addr="0x00000" size="0x0" />
+        <!-- WME:WARP OUTPUT BUFFERS (SAME AS BLD INPUT BUFFERS) -->
+        <vcf_buffer id="vcf_wme_warpout_y0"  addr="0x27a60" size="0x5e80" />
+        <vcf_buffer id="vcf_wme_warpout_u0"  addr="0x4db80" size="0x1b80" />
+        <vcf_buffer id="vcf_wme_warpout_v0"  addr="0x5db80" size="0x1b80" />
+        <vcf_buffer id="vcf_wme_warpout_y1"  addr="0x1ba30" size="0x3f00" />
+        <vcf_buffer id="vcf_wme_warpout_u1"  addr="0x697f0" size="0x1080" />
+        <vcf_buffer id="vcf_wme_warpout_v1"  addr="0x6d470" size="0x1080" />
+        <vcf_buffer id="vcf_wme_warpout_y2"  addr="0x06440" size="0x5e80" />
+        <vcf_buffer id="vcf_wme_warpout_u2"  addr="0x6a870" size="0x2c00" />
+        <vcf_buffer id="vcf_wme_warpout_v2"  addr="0x79130" size="0x2c00" />
+        <vcf_buffer id="vcf_wme_warpout_y3"  addr="0x3bdb0" size="0x3f00" />
+        <vcf_buffer id="vcf_wme_warpout_u3"  addr="0x77030" size="0x1080" />
+        <vcf_buffer id="vcf_wme_warpout_v3"  addr="0x7bd30" size="0x1080" />
+        <vcf_buffer id="vcf_wme_warpout_y4"  addr="0x658f0" size="0x3f00" />
+        <vcf_buffer id="vcf_wme_warpout_u4"  addr="0x780b0" size="0x1080" />
+        <vcf_buffer id="vcf_wme_warpout_v4"  addr="0x7cdb0" size="0x1080" />
+        <!-- WME:BLD OUTPUT BUFFERS (SAME AS ENF INPUT BUFFERS) -->
+        <vcf_buffer id="vcf_wme_bldout_y"  addr="0x0c2c0" size="0x2a00" />
+        <vcf_buffer id="vcf_wme_bldout_u"  addr="0x4f700" size="0x2c0" />
+        <vcf_buffer id="vcf_wme_bldout_v"  addr="0x2dda0" size="0x2c0" />
+        <vcf_buffer id="vcf_wme_bldout_mm" addr="0x7e430" size="0xa20" />
+        <vcf_buffer id="vcf_wme_bldin_mmm" addr="0x7de30" size="0x600" />
+        <!-- WME:ENF OUTPUT BUFFERS -->
+        <vcf_buffer id="vcf_wme_enfout_y"  addr="0x2d8e0" size="0x4c0" />
+        <vcf_buffer id="vcf_vcm_init_buf"  addr="0x00000" size="0x0" />
+
+        <!-- VCF buffers for Copy Node -->
+		<vcf_buffer id="vcf_copy_buf"    addr="0x31e80" size="0x5e80" />
+    </buffers>
+
+    <iva_table>
+        <!-- WME slice0 -->
+        <iva_entry id="vcm_wme_start_slice0" proc_id="VCM_START" parent="wme_node_slice0" vcm_type="VCM_WME" full_config="true" >
+            <inputs>
+                ddr_wme_in_y0_slice0, ddr_wme_in_y1_slice0, ddr_wme_in_y2_slice0, ddr_wme_in_y3_slice0,
+                ddr_wme_in_y4_slice0, ddr_wme_in_u0_slice0, ddr_wme_in_u1_slice0, ddr_wme_in_u2_slice0,
+                ddr_wme_in_u3_slice0, ddr_wme_in_u4_slice0, ddr_wme_in_v0_slice0, ddr_wme_in_v1_slice0,
+                ddr_wme_in_v2_slice0, ddr_wme_in_v3_slice0, ddr_wme_in_v4_slice0, ddr_wme_delta_config_slice0,
+                ddr_wme_affine_mat0_slice0, ddr_wme_affine_mat1_slice0, ddr_wme_affine_mat2_slice0,
+                ddr_wme_affine_mat3_slice0, ddr_wme_affine_mat4_slice0, ddr_wme_mfb_motion_image_slice0,
+                ddr_wme_mfb_blend_weights_slice0, ddr_wme_mfb_reference_weights_slice0,
+                ddr_wme_mfb_photometric_gains_slice0, ddr_wme_mfb_photometric_offsets_slice0,
+                ddr_wme_enf_params_slice0
+            </inputs>
+            <outputs>
+                ddr_wme_out_y_slice0, ddr_wme_out_u_slice0, ddr_wme_out_v_slice0,
+                ddr_wme_out_mfb_mot_mult_slice0
+            </outputs>
+            <triggers>
+                vcm_wme_start_slice1
+            </triggers>
+            <tile_config tile_width="336"  tile_height="16" />
+            <node_config wig_interpolation_y="1" wig_interpolation_uv="1" mfb_sigma_estimate="16" mfb_uv_multiplication_factor="2" mfb_motion_blend_slope="10" mfb_histogram_threshold="24" mfb_histogram_bin_width_log="3" mfb_mot_mult="64" wme_slice_width="304">
+                <sched_id>
+                    2, 3, 4
+                </sched_id>
+                <vdma_id>
+                    4, 4, 7, 2, 12, 11, 14
+                </vdma_id>
+                <vcm_vcf_buffers>
+                    vcf_wme_warpin_ping_y0, vcf_wme_warpin_pong_y0, vcf_wme_warpin_ping_u0,
+                    vcf_wme_warpin_pong_u0, vcf_wme_warpin_ping_v0, vcf_wme_warpin_pong_v0,
+                    vcf_wme_warpin_ping_y1, vcf_wme_warpin_pong_y1, vcf_wme_warpin_ping_u1,
+                    vcf_wme_warpin_pong_u1, vcf_wme_warpin_ping_v1, vcf_wme_warpin_pong_v1,
+                    vcf_wme_warpin_ping_y2, vcf_wme_warpin_pong_y2, vcf_wme_warpin_ping_u2,
+                    vcf_wme_warpin_pong_u2, vcf_wme_warpin_ping_v2, vcf_wme_warpin_pong_v2,
+                    vcf_wme_warpin_ping_y3, vcf_wme_warpin_pong_y3, vcf_wme_warpin_ping_u3,
+                    vcf_wme_warpin_pong_u3, vcf_wme_warpin_ping_v3, vcf_wme_warpin_pong_v3,
+                    vcf_wme_warpout_y0, vcf_wme_warpout_u0, vcf_wme_warpout_v0, vcf_wme_warpout_y1,
+                    vcf_wme_warpout_u1, vcf_wme_warpout_v1, vcf_wme_warpout_y2, vcf_wme_warpout_u2,
+                    vcf_wme_warpout_v2, vcf_wme_warpout_y3, vcf_wme_warpout_u3, vcf_wme_warpout_v3,
+                    vcf_wme_warpout_y4, vcf_wme_warpout_u4, vcf_wme_warpout_v4, vcf_wme_input_tile_info_buf,
+                    vcf_wme_warp_vcm_buf, vcf_vcm_init_buf, vcf_wme_bldout_y, vcf_wme_bldout_u, vcf_wme_bldout_v,
+                    vcf_wme_bldout_mm, vcf_wme_bldin_mmm, vcf_wme_enfout_y
+                </vcm_vcf_buffers>
+            </node_config>
+        </iva_entry>
+
+        <!-- WME slice1 -->
+        <iva_entry id="vcm_wme_start_slice1" proc_id="VCM_START" parent="wme_node_slice1" vcm_type="VCM_WME" full_config="false" >
+            <inputs>
+                ddr_wme_in_y0_slice1, ddr_wme_in_y1_slice1, ddr_wme_in_y2_slice1, ddr_wme_in_y3_slice1,
+                ddr_wme_in_y4_slice1, ddr_wme_in_u0_slice1, ddr_wme_in_u1_slice1, ddr_wme_in_u2_slice1,
+                ddr_wme_in_u3_slice1, ddr_wme_in_u4_slice1, ddr_wme_in_v0_slice1, ddr_wme_in_v1_slice1,
+                ddr_wme_in_v2_slice1, ddr_wme_in_v3_slice1, ddr_wme_in_v4_slice1, ddr_wme_delta_config_slice1,
+                ddr_wme_affine_mat0_slice1, ddr_wme_affine_mat1_slice1, ddr_wme_affine_mat2_slice1,
+                ddr_wme_affine_mat3_slice1, ddr_wme_affine_mat4_slice1, ddr_wme_mfb_motion_image_slice1,
+                ddr_wme_mfb_blend_weights_slice1, ddr_wme_mfb_reference_weights_slice1,
+                ddr_wme_mfb_photometric_gains_slice1, ddr_wme_mfb_photometric_offsets_slice1,
+                ddr_wme_enf_params_slice1
+            </inputs>
+            <outputs>
+                ddr_wme_out_y_slice1, ddr_wme_out_u_slice1, ddr_wme_out_v_slice1,
+                ddr_wme_out_mfb_mot_mult_slice1
+            </outputs>
+            <depends>
+                vcm_wme_start_slice0
+            </depends>
+            <triggers>
+                vcm_wme_start_slice2
+            </triggers>
+            <tile_config tile_width="336"  tile_height="16" />
+            <node_config wig_interpolation_y="1" wig_interpolation_uv="1" mfb_sigma_estimate="16" mfb_uv_multiplication_factor="2" mfb_motion_blend_slope="10" mfb_histogram_threshold="24" mfb_histogram_bin_width_log="3" mfb_mot_mult="64" wme_slice_width="304">
+                <sched_id>
+                    2, 3, 4
+                </sched_id>
+                <vdma_id>
+                    4, 4, 7, 2, 12, 11, 14
+                </vdma_id>
+                <vcm_vcf_buffers>
+                    vcf_wme_warpin_ping_y0, vcf_wme_warpin_pong_y0, vcf_wme_warpin_ping_u0,
+                    vcf_wme_warpin_pong_u0, vcf_wme_warpin_ping_v0, vcf_wme_warpin_pong_v0,
+                    vcf_wme_warpin_ping_y1, vcf_wme_warpin_pong_y1, vcf_wme_warpin_ping_u1,
+                    vcf_wme_warpin_pong_u1, vcf_wme_warpin_ping_v1, vcf_wme_warpin_pong_v1,
+                    vcf_wme_warpin_ping_y2, vcf_wme_warpin_pong_y2, vcf_wme_warpin_ping_u2,
+                    vcf_wme_warpin_pong_u2, vcf_wme_warpin_ping_v2, vcf_wme_warpin_pong_v2,
+                    vcf_wme_warpin_ping_y3, vcf_wme_warpin_pong_y3, vcf_wme_warpin_ping_u3,
+                    vcf_wme_warpin_pong_u3, vcf_wme_warpin_ping_v3, vcf_wme_warpin_pong_v3,
+                    vcf_wme_warpout_y0, vcf_wme_warpout_u0, vcf_wme_warpout_v0, vcf_wme_warpout_y1,
+                    vcf_wme_warpout_u1, vcf_wme_warpout_v1, vcf_wme_warpout_y2, vcf_wme_warpout_u2,
+                    vcf_wme_warpout_v2, vcf_wme_warpout_y3, vcf_wme_warpout_u3, vcf_wme_warpout_v3,
+                    vcf_wme_warpout_y4, vcf_wme_warpout_u4, vcf_wme_warpout_v4, vcf_wme_input_tile_info_buf,
+                    vcf_wme_warp_vcm_buf, vcf_vcm_init_buf, vcf_wme_bldout_y, vcf_wme_bldout_u, vcf_wme_bldout_v,
+                    vcf_wme_bldout_mm, vcf_wme_bldin_mmm, vcf_wme_enfout_y
+                </vcm_vcf_buffers>
+            </node_config>
+        </iva_entry>
+
+        <!-- WME slice2 -->
+        <iva_entry id="vcm_wme_start_slice2" proc_id="VCM_START" parent="wme_node_slice2" vcm_type="VCM_WME" full_config="false" >
+            <inputs>
+                ddr_wme_in_y0_slice2, ddr_wme_in_y1_slice2, ddr_wme_in_y2_slice2, ddr_wme_in_y3_slice2,
+                ddr_wme_in_y4_slice2, ddr_wme_in_u0_slice2, ddr_wme_in_u1_slice2, ddr_wme_in_u2_slice2,
+                ddr_wme_in_u3_slice2, ddr_wme_in_u4_slice2, ddr_wme_in_v0_slice2, ddr_wme_in_v1_slice2,
+                ddr_wme_in_v2_slice2, ddr_wme_in_v3_slice2, ddr_wme_in_v4_slice2, ddr_wme_delta_config_slice2,
+                ddr_wme_affine_mat0_slice2, ddr_wme_affine_mat1_slice2, ddr_wme_affine_mat2_slice2,
+                ddr_wme_affine_mat3_slice2, ddr_wme_affine_mat4_slice2, ddr_wme_mfb_motion_image_slice2,
+                ddr_wme_mfb_blend_weights_slice2, ddr_wme_mfb_reference_weights_slice2,
+                ddr_wme_mfb_photometric_gains_slice2, ddr_wme_mfb_photometric_offsets_slice2,
+                ddr_wme_enf_params_slice2
+            </inputs>
+            <outputs>
+                ddr_wme_out_y_slice2, ddr_wme_out_u_slice2, ddr_wme_out_v_slice2,
+                ddr_wme_out_mfb_mot_mult_slice2
+            </outputs>
+            <depends>
+                vcm_wme_start_slice1
+            </depends>
+            <triggers>
+                vcm_wme_start_slice3
+            </triggers>
+            <tile_config tile_width="336"  tile_height="16" />
+            <node_config wig_interpolation_y="1" wig_interpolation_uv="1" mfb_sigma_estimate="16" mfb_uv_multiplication_factor="2" mfb_motion_blend_slope="10" mfb_histogram_threshold="24" mfb_histogram_bin_width_log="3" mfb_mot_mult="64" wme_slice_width="304">
+                <sched_id>
+                    2, 3, 4
+                </sched_id>
+                <vdma_id>
+                    4, 4, 7, 2, 12, 11, 14
+                </vdma_id>
+                <vcm_vcf_buffers>
+                    vcf_wme_warpin_ping_y0, vcf_wme_warpin_pong_y0, vcf_wme_warpin_ping_u0,
+                    vcf_wme_warpin_pong_u0, vcf_wme_warpin_ping_v0, vcf_wme_warpin_pong_v0,
+                    vcf_wme_warpin_ping_y1, vcf_wme_warpin_pong_y1, vcf_wme_warpin_ping_u1,
+                    vcf_wme_warpin_pong_u1, vcf_wme_warpin_ping_v1, vcf_wme_warpin_pong_v1,
+                    vcf_wme_warpin_ping_y2, vcf_wme_warpin_pong_y2, vcf_wme_warpin_ping_u2,
+                    vcf_wme_warpin_pong_u2, vcf_wme_warpin_ping_v2, vcf_wme_warpin_pong_v2,
+                    vcf_wme_warpin_ping_y3, vcf_wme_warpin_pong_y3, vcf_wme_warpin_ping_u3,
+                    vcf_wme_warpin_pong_u3, vcf_wme_warpin_ping_v3, vcf_wme_warpin_pong_v3,
+                    vcf_wme_warpout_y0, vcf_wme_warpout_u0, vcf_wme_warpout_v0, vcf_wme_warpout_y1,
+                    vcf_wme_warpout_u1, vcf_wme_warpout_v1, vcf_wme_warpout_y2, vcf_wme_warpout_u2,
+                    vcf_wme_warpout_v2, vcf_wme_warpout_y3, vcf_wme_warpout_u3, vcf_wme_warpout_v3,
+                    vcf_wme_warpout_y4, vcf_wme_warpout_u4, vcf_wme_warpout_v4, vcf_wme_input_tile_info_buf,
+                    vcf_wme_warp_vcm_buf, vcf_vcm_init_buf, vcf_wme_bldout_y, vcf_wme_bldout_u, vcf_wme_bldout_v,
+                    vcf_wme_bldout_mm, vcf_wme_bldin_mmm, vcf_wme_enfout_y
+                </vcm_vcf_buffers>
+            </node_config>
+        </iva_entry>
+
+        <!-- WME slice3 -->
+        <iva_entry id="vcm_wme_start_slice3" proc_id="VCM_START" parent="wme_node_slice3" vcm_type="VCM_WME" full_config="false" >
+            <inputs>
+                ddr_wme_in_y0_slice3, ddr_wme_in_y1_slice3, ddr_wme_in_y2_slice3, ddr_wme_in_y3_slice3,
+                ddr_wme_in_y4_slice3, ddr_wme_in_u0_slice3, ddr_wme_in_u1_slice3, ddr_wme_in_u2_slice3,
+                ddr_wme_in_u3_slice3, ddr_wme_in_u4_slice3, ddr_wme_in_v0_slice3, ddr_wme_in_v1_slice3,
+                ddr_wme_in_v2_slice3, ddr_wme_in_v3_slice3, ddr_wme_in_v4_slice3, ddr_wme_delta_config_slice3,
+                ddr_wme_affine_mat0_slice3, ddr_wme_affine_mat1_slice3, ddr_wme_affine_mat2_slice3,
+                ddr_wme_affine_mat3_slice3, ddr_wme_affine_mat4_slice3, ddr_wme_mfb_motion_image_slice3,
+                ddr_wme_mfb_blend_weights_slice3, ddr_wme_mfb_reference_weights_slice3,
+                ddr_wme_mfb_photometric_gains_slice3, ddr_wme_mfb_photometric_offsets_slice3,
+                ddr_wme_enf_params_slice3
+            </inputs>
+            <outputs>
+                ddr_wme_out_y_slice3, ddr_wme_out_u_slice3, ddr_wme_out_v_slice3,
+                ddr_wme_out_mfb_mot_mult_slice3
+            </outputs>
+            <depends>
+                vcm_wme_start_slice2
+            </depends>
+            <triggers>
+                vcm_wme_start_slice4
+            </triggers>
+            <tile_config tile_width="336"  tile_height="16" />
+            <node_config wig_interpolation_y="1" wig_interpolation_uv="1" mfb_sigma_estimate="16" mfb_uv_multiplication_factor="2" mfb_motion_blend_slope="10" mfb_histogram_threshold="24" mfb_histogram_bin_width_log="3" mfb_mot_mult="64" wme_slice_width="304">
+                <sched_id>
+                    2, 3, 4
+                </sched_id>
+                <vdma_id>
+                    4, 4, 7, 2, 12, 11, 14
+                </vdma_id>
+                <vcm_vcf_buffers>
+                    vcf_wme_warpin_ping_y0, vcf_wme_warpin_pong_y0, vcf_wme_warpin_ping_u0,
+                    vcf_wme_warpin_pong_u0, vcf_wme_warpin_ping_v0, vcf_wme_warpin_pong_v0,
+                    vcf_wme_warpin_ping_y1, vcf_wme_warpin_pong_y1, vcf_wme_warpin_ping_u1,
+                    vcf_wme_warpin_pong_u1, vcf_wme_warpin_ping_v1, vcf_wme_warpin_pong_v1,
+                    vcf_wme_warpin_ping_y2, vcf_wme_warpin_pong_y2, vcf_wme_warpin_ping_u2,
+                    vcf_wme_warpin_pong_u2, vcf_wme_warpin_ping_v2, vcf_wme_warpin_pong_v2,
+                    vcf_wme_warpin_ping_y3, vcf_wme_warpin_pong_y3, vcf_wme_warpin_ping_u3,
+                    vcf_wme_warpin_pong_u3, vcf_wme_warpin_ping_v3, vcf_wme_warpin_pong_v3,
+                    vcf_wme_warpout_y0, vcf_wme_warpout_u0, vcf_wme_warpout_v0, vcf_wme_warpout_y1,
+                    vcf_wme_warpout_u1, vcf_wme_warpout_v1, vcf_wme_warpout_y2, vcf_wme_warpout_u2,
+                    vcf_wme_warpout_v2, vcf_wme_warpout_y3, vcf_wme_warpout_u3, vcf_wme_warpout_v3,
+                    vcf_wme_warpout_y4, vcf_wme_warpout_u4, vcf_wme_warpout_v4, vcf_wme_input_tile_info_buf,
+                    vcf_wme_warp_vcm_buf, vcf_vcm_init_buf, vcf_wme_bldout_y, vcf_wme_bldout_u, vcf_wme_bldout_v,
+                    vcf_wme_bldout_mm, vcf_wme_bldin_mmm, vcf_wme_enfout_y
+                </vcm_vcf_buffers>
+            </node_config>
+        </iva_entry>
+
+        <!-- WME slice4 -->
+        <iva_entry id="vcm_wme_start_slice4" proc_id="VCM_START" parent="wme_node_slice4" vcm_type="VCM_WME" full_config="false" >
+            <inputs>
+                ddr_wme_in_y0_slice4, ddr_wme_in_y1_slice4, ddr_wme_in_y2_slice4, ddr_wme_in_y3_slice4,
+                ddr_wme_in_y4_slice4, ddr_wme_in_u0_slice4, ddr_wme_in_u1_slice4, ddr_wme_in_u2_slice4,
+                ddr_wme_in_u3_slice4, ddr_wme_in_u4_slice4, ddr_wme_in_v0_slice4, ddr_wme_in_v1_slice4,
+                ddr_wme_in_v2_slice4, ddr_wme_in_v3_slice4, ddr_wme_in_v4_slice4, ddr_wme_delta_config_slice4,
+                ddr_wme_affine_mat0_slice4, ddr_wme_affine_mat1_slice4, ddr_wme_affine_mat2_slice4,
+                ddr_wme_affine_mat3_slice4, ddr_wme_affine_mat4_slice4, ddr_wme_mfb_motion_image_slice4,
+                ddr_wme_mfb_blend_weights_slice4, ddr_wme_mfb_reference_weights_slice4,
+                ddr_wme_mfb_photometric_gains_slice4, ddr_wme_mfb_photometric_offsets_slice4,
+                ddr_wme_enf_params_slice4
+            </inputs>
+            <outputs>
+                ddr_wme_out_y_slice4, ddr_wme_out_u_slice4, ddr_wme_out_v_slice4,
+                ddr_wme_out_mfb_mot_mult_slice4
+            </outputs>
+            <depends>
+                vcm_wme_start_slice3
+            </depends>
+            <triggers>
+                vcm_wme_start_slice5
+            </triggers>
+            <tile_config tile_width="336"  tile_height="16" />
+            <node_config wig_interpolation_y="1" wig_interpolation_uv="1" mfb_sigma_estimate="16" mfb_uv_multiplication_factor="2" mfb_motion_blend_slope="10" mfb_histogram_threshold="24" mfb_histogram_bin_width_log="3" mfb_mot_mult="64" wme_slice_width="304">
+                <sched_id>
+                    2, 3, 4
+                </sched_id>
+                <vdma_id>
+                    4, 4, 7, 2, 12, 11, 14
+                </vdma_id>
+                <vcm_vcf_buffers>
+                    vcf_wme_warpin_ping_y0, vcf_wme_warpin_pong_y0, vcf_wme_warpin_ping_u0,
+                    vcf_wme_warpin_pong_u0, vcf_wme_warpin_ping_v0, vcf_wme_warpin_pong_v0,
+                    vcf_wme_warpin_ping_y1, vcf_wme_warpin_pong_y1, vcf_wme_warpin_ping_u1,
+                    vcf_wme_warpin_pong_u1, vcf_wme_warpin_ping_v1, vcf_wme_warpin_pong_v1,
+                    vcf_wme_warpin_ping_y2, vcf_wme_warpin_pong_y2, vcf_wme_warpin_ping_u2,
+                    vcf_wme_warpin_pong_u2, vcf_wme_warpin_ping_v2, vcf_wme_warpin_pong_v2,
+                    vcf_wme_warpin_ping_y3, vcf_wme_warpin_pong_y3, vcf_wme_warpin_ping_u3,
+                    vcf_wme_warpin_pong_u3, vcf_wme_warpin_ping_v3, vcf_wme_warpin_pong_v3,
+                    vcf_wme_warpout_y0, vcf_wme_warpout_u0, vcf_wme_warpout_v0, vcf_wme_warpout_y1,
+                    vcf_wme_warpout_u1, vcf_wme_warpout_v1, vcf_wme_warpout_y2, vcf_wme_warpout_u2,
+                    vcf_wme_warpout_v2, vcf_wme_warpout_y3, vcf_wme_warpout_u3, vcf_wme_warpout_v3,
+                    vcf_wme_warpout_y4, vcf_wme_warpout_u4, vcf_wme_warpout_v4, vcf_wme_input_tile_info_buf,
+                    vcf_wme_warp_vcm_buf, vcf_vcm_init_buf, vcf_wme_bldout_y, vcf_wme_bldout_u, vcf_wme_bldout_v,
+                    vcf_wme_bldout_mm, vcf_wme_bldin_mmm, vcf_wme_enfout_y
+                </vcm_vcf_buffers>
+            </node_config>
+        </iva_entry>
+
+        <!-- WME slice5 -->
+        <iva_entry id="vcm_wme_start_slice5" proc_id="VCM_START" parent="wme_node_slice5" vcm_type="VCM_WME" full_config="false" >
+            <inputs>
+                ddr_wme_in_y0_slice5, ddr_wme_in_y1_slice5, ddr_wme_in_y2_slice5, ddr_wme_in_y3_slice5,
+                ddr_wme_in_y4_slice5, ddr_wme_in_u0_slice5, ddr_wme_in_u1_slice5, ddr_wme_in_u2_slice5,
+                ddr_wme_in_u3_slice5, ddr_wme_in_u4_slice5, ddr_wme_in_v0_slice5, ddr_wme_in_v1_slice5,
+                ddr_wme_in_v2_slice5, ddr_wme_in_v3_slice5, ddr_wme_in_v4_slice5, ddr_wme_delta_config_slice5,
+                ddr_wme_affine_mat0_slice5, ddr_wme_affine_mat1_slice5, ddr_wme_affine_mat2_slice5,
+                ddr_wme_affine_mat3_slice5, ddr_wme_affine_mat4_slice5, ddr_wme_mfb_motion_image_slice5,
+                ddr_wme_mfb_blend_weights_slice5, ddr_wme_mfb_reference_weights_slice5,
+                ddr_wme_mfb_photometric_gains_slice5, ddr_wme_mfb_photometric_offsets_slice5,
+                ddr_wme_enf_params_slice5
+            </inputs>
+            <outputs>
+                ddr_wme_out_y_slice5, ddr_wme_out_u_slice5, ddr_wme_out_v_slice5,
+                ddr_wme_out_mfb_mot_mult_slice5
+            </outputs>
+            <depends>
+                vcm_wme_start_slice4
+            </depends>
+            <triggers>
+                vcm_wme_start_slice6
+            </triggers>
+            <tile_config tile_width="336"  tile_height="16" />
+            <node_config wig_interpolation_y="1" wig_interpolation_uv="1" mfb_sigma_estimate="16" mfb_uv_multiplication_factor="2" mfb_motion_blend_slope="10" mfb_histogram_threshold="24" mfb_histogram_bin_width_log="3" mfb_mot_mult="64" wme_slice_width="304">
+                <sched_id>
+                    2, 3, 4
+                </sched_id>
+                <vdma_id>
+                    4, 4, 7, 2, 12, 11, 14
+                </vdma_id>
+                <vcm_vcf_buffers>
+                    vcf_wme_warpin_ping_y0, vcf_wme_warpin_pong_y0, vcf_wme_warpin_ping_u0,
+                    vcf_wme_warpin_pong_u0, vcf_wme_warpin_ping_v0, vcf_wme_warpin_pong_v0,
+                    vcf_wme_warpin_ping_y1, vcf_wme_warpin_pong_y1, vcf_wme_warpin_ping_u1,
+                    vcf_wme_warpin_pong_u1, vcf_wme_warpin_ping_v1, vcf_wme_warpin_pong_v1,
+                    vcf_wme_warpin_ping_y2, vcf_wme_warpin_pong_y2, vcf_wme_warpin_ping_u2,
+                    vcf_wme_warpin_pong_u2, vcf_wme_warpin_ping_v2, vcf_wme_warpin_pong_v2,
+                    vcf_wme_warpin_ping_y3, vcf_wme_warpin_pong_y3, vcf_wme_warpin_ping_u3,
+                    vcf_wme_warpin_pong_u3, vcf_wme_warpin_ping_v3, vcf_wme_warpin_pong_v3,
+                    vcf_wme_warpout_y0, vcf_wme_warpout_u0, vcf_wme_warpout_v0, vcf_wme_warpout_y1,
+                    vcf_wme_warpout_u1, vcf_wme_warpout_v1, vcf_wme_warpout_y2, vcf_wme_warpout_u2,
+                    vcf_wme_warpout_v2, vcf_wme_warpout_y3, vcf_wme_warpout_u3, vcf_wme_warpout_v3,
+                    vcf_wme_warpout_y4, vcf_wme_warpout_u4, vcf_wme_warpout_v4, vcf_wme_input_tile_info_buf,
+                    vcf_wme_warp_vcm_buf, vcf_vcm_init_buf, vcf_wme_bldout_y, vcf_wme_bldout_u, vcf_wme_bldout_v,
+                    vcf_wme_bldout_mm, vcf_wme_bldin_mmm, vcf_wme_enfout_y
+                </vcm_vcf_buffers>
+            </node_config>
+        </iva_entry>
+
+        <!-- WME slice6 -->
+        <iva_entry id="vcm_wme_start_slice6" proc_id="VCM_START" parent="wme_node_slice6" vcm_type="VCM_WME" full_config="false" >
+            <inputs>
+                ddr_wme_in_y0_slice6, ddr_wme_in_y1_slice6, ddr_wme_in_y2_slice6, ddr_wme_in_y3_slice6,
+                ddr_wme_in_y4_slice6, ddr_wme_in_u0_slice6, ddr_wme_in_u1_slice6, ddr_wme_in_u2_slice6,
+                ddr_wme_in_u3_slice6, ddr_wme_in_u4_slice6, ddr_wme_in_v0_slice6, ddr_wme_in_v1_slice6,
+                ddr_wme_in_v2_slice6, ddr_wme_in_v3_slice6, ddr_wme_in_v4_slice6, ddr_wme_delta_config_slice6,
+                ddr_wme_affine_mat0_slice6, ddr_wme_affine_mat1_slice6, ddr_wme_affine_mat2_slice6,
+                ddr_wme_affine_mat3_slice6, ddr_wme_affine_mat4_slice6, ddr_wme_mfb_motion_image_slice6,
+                ddr_wme_mfb_blend_weights_slice6, ddr_wme_mfb_reference_weights_slice6,
+                ddr_wme_mfb_photometric_gains_slice6, ddr_wme_mfb_photometric_offsets_slice6,
+                ddr_wme_enf_params_slice6
+            </inputs>
+            <outputs>
+                ddr_wme_out_y_slice6, ddr_wme_out_u_slice6, ddr_wme_out_v_slice6,
+                ddr_wme_out_mfb_mot_mult_slice6
+            </outputs>
+            <depends>
+                vcm_wme_start_slice5
+            </depends>
+            <triggers>
+                vcm_wme_start_slice7
+            </triggers>
+            <tile_config tile_width="336"  tile_height="16" />
+            <node_config wig_interpolation_y="1" wig_interpolation_uv="1" mfb_sigma_estimate="16" mfb_uv_multiplication_factor="2" mfb_motion_blend_slope="10" mfb_histogram_threshold="24" mfb_histogram_bin_width_log="3" mfb_mot_mult="64" wme_slice_width="304">
+                <sched_id>
+                    2, 3, 4
+                </sched_id>
+                <vdma_id>
+                    4, 4, 7, 2, 12, 11, 14
+                </vdma_id>
+                <vcm_vcf_buffers>
+                    vcf_wme_warpin_ping_y0, vcf_wme_warpin_pong_y0, vcf_wme_warpin_ping_u0,
+                    vcf_wme_warpin_pong_u0, vcf_wme_warpin_ping_v0, vcf_wme_warpin_pong_v0,
+                    vcf_wme_warpin_ping_y1, vcf_wme_warpin_pong_y1, vcf_wme_warpin_ping_u1,
+                    vcf_wme_warpin_pong_u1, vcf_wme_warpin_ping_v1, vcf_wme_warpin_pong_v1,
+                    vcf_wme_warpin_ping_y2, vcf_wme_warpin_pong_y2, vcf_wme_warpin_ping_u2,
+                    vcf_wme_warpin_pong_u2, vcf_wme_warpin_ping_v2, vcf_wme_warpin_pong_v2,
+                    vcf_wme_warpin_ping_y3, vcf_wme_warpin_pong_y3, vcf_wme_warpin_ping_u3,
+                    vcf_wme_warpin_pong_u3, vcf_wme_warpin_ping_v3, vcf_wme_warpin_pong_v3,
+                    vcf_wme_warpout_y0, vcf_wme_warpout_u0, vcf_wme_warpout_v0, vcf_wme_warpout_y1,
+                    vcf_wme_warpout_u1, vcf_wme_warpout_v1, vcf_wme_warpout_y2, vcf_wme_warpout_u2,
+                    vcf_wme_warpout_v2, vcf_wme_warpout_y3, vcf_wme_warpout_u3, vcf_wme_warpout_v3,
+                    vcf_wme_warpout_y4, vcf_wme_warpout_u4, vcf_wme_warpout_v4, vcf_wme_input_tile_info_buf,
+                    vcf_wme_warp_vcm_buf, vcf_vcm_init_buf, vcf_wme_bldout_y, vcf_wme_bldout_u, vcf_wme_bldout_v,
+                    vcf_wme_bldout_mm, vcf_wme_bldin_mmm, vcf_wme_enfout_y
+                </vcm_vcf_buffers>
+            </node_config>
+        </iva_entry>
+
+        <!-- WME slice7 -->
+        <iva_entry id="vcm_wme_start_slice7" proc_id="VCM_START" parent="wme_node_slice7" vcm_type="VCM_WME" full_config="false" >
+            <inputs>
+                ddr_wme_in_y0_slice7, ddr_wme_in_y1_slice7, ddr_wme_in_y2_slice7, ddr_wme_in_y3_slice7,
+                ddr_wme_in_y4_slice7, ddr_wme_in_u0_slice7, ddr_wme_in_u1_slice7, ddr_wme_in_u2_slice7,
+                ddr_wme_in_u3_slice7, ddr_wme_in_u4_slice7, ddr_wme_in_v0_slice7, ddr_wme_in_v1_slice7,
+                ddr_wme_in_v2_slice7, ddr_wme_in_v3_slice7, ddr_wme_in_v4_slice7, ddr_wme_delta_config_slice7,
+                ddr_wme_affine_mat0_slice7, ddr_wme_affine_mat1_slice7, ddr_wme_affine_mat2_slice7,
+                ddr_wme_affine_mat3_slice7, ddr_wme_affine_mat4_slice7, ddr_wme_mfb_motion_image_slice7,
+                ddr_wme_mfb_blend_weights_slice7, ddr_wme_mfb_reference_weights_slice7,
+                ddr_wme_mfb_photometric_gains_slice7, ddr_wme_mfb_photometric_offsets_slice7,
+                ddr_wme_enf_params_slice7
+            </inputs>
+            <outputs>
+                ddr_wme_out_y_slice7, ddr_wme_out_u_slice7, ddr_wme_out_v_slice7,
+                ddr_wme_out_mfb_mot_mult_slice7
+            </outputs>
+            <depends>
+                vcm_wme_start_slice6
+            </depends>
+            <triggers>
+                vcm_wme_start_slice8
+            </triggers>
+            <tile_config tile_width="336"  tile_height="16" />
+            <node_config wig_interpolation_y="1" wig_interpolation_uv="1" mfb_sigma_estimate="16" mfb_uv_multiplication_factor="2" mfb_motion_blend_slope="10" mfb_histogram_threshold="24" mfb_histogram_bin_width_log="3" mfb_mot_mult="64" wme_slice_width="304">
+                <sched_id>
+                    2, 3, 4
+                </sched_id>
+                <vdma_id>
+                    4, 4, 7, 2, 12, 11, 14
+                </vdma_id>
+                <vcm_vcf_buffers>
+                    vcf_wme_warpin_ping_y0, vcf_wme_warpin_pong_y0, vcf_wme_warpin_ping_u0,
+                    vcf_wme_warpin_pong_u0, vcf_wme_warpin_ping_v0, vcf_wme_warpin_pong_v0,
+                    vcf_wme_warpin_ping_y1, vcf_wme_warpin_pong_y1, vcf_wme_warpin_ping_u1,
+                    vcf_wme_warpin_pong_u1, vcf_wme_warpin_ping_v1, vcf_wme_warpin_pong_v1,
+                    vcf_wme_warpin_ping_y2, vcf_wme_warpin_pong_y2, vcf_wme_warpin_ping_u2,
+                    vcf_wme_warpin_pong_u2, vcf_wme_warpin_ping_v2, vcf_wme_warpin_pong_v2,
+                    vcf_wme_warpin_ping_y3, vcf_wme_warpin_pong_y3, vcf_wme_warpin_ping_u3,
+                    vcf_wme_warpin_pong_u3, vcf_wme_warpin_ping_v3, vcf_wme_warpin_pong_v3,
+                    vcf_wme_warpout_y0, vcf_wme_warpout_u0, vcf_wme_warpout_v0, vcf_wme_warpout_y1,
+                    vcf_wme_warpout_u1, vcf_wme_warpout_v1, vcf_wme_warpout_y2, vcf_wme_warpout_u2,
+                    vcf_wme_warpout_v2, vcf_wme_warpout_y3, vcf_wme_warpout_u3, vcf_wme_warpout_v3,
+                    vcf_wme_warpout_y4, vcf_wme_warpout_u4, vcf_wme_warpout_v4, vcf_wme_input_tile_info_buf,
+                    vcf_wme_warp_vcm_buf, vcf_vcm_init_buf, vcf_wme_bldout_y, vcf_wme_bldout_u, vcf_wme_bldout_v,
+                    vcf_wme_bldout_mm, vcf_wme_bldin_mmm, vcf_wme_enfout_y
+                </vcm_vcf_buffers>
+            </node_config>
+        </iva_entry>
+
+        <!-- WME slice8 -->
+        <iva_entry id="vcm_wme_start_slice8" proc_id="VCM_START" parent="wme_node_slice8" vcm_type="VCM_WME" full_config="false" >
+            <inputs>
+                ddr_wme_in_y0_slice8, ddr_wme_in_y1_slice8, ddr_wme_in_y2_slice8, ddr_wme_in_y3_slice8,
+                ddr_wme_in_y4_slice8, ddr_wme_in_u0_slice8, ddr_wme_in_u1_slice8, ddr_wme_in_u2_slice8,
+                ddr_wme_in_u3_slice8, ddr_wme_in_u4_slice8, ddr_wme_in_v0_slice8, ddr_wme_in_v1_slice8,
+                ddr_wme_in_v2_slice8, ddr_wme_in_v3_slice8, ddr_wme_in_v4_slice8, ddr_wme_delta_config_slice8,
+                ddr_wme_affine_mat0_slice8, ddr_wme_affine_mat1_slice8, ddr_wme_affine_mat2_slice8,
+                ddr_wme_affine_mat3_slice8, ddr_wme_affine_mat4_slice8, ddr_wme_mfb_motion_image_slice8,
+                ddr_wme_mfb_blend_weights_slice8, ddr_wme_mfb_reference_weights_slice8,
+                ddr_wme_mfb_photometric_gains_slice8, ddr_wme_mfb_photometric_offsets_slice8,
+                ddr_wme_enf_params_slice8
+            </inputs>
+            <outputs>
+                ddr_wme_out_y_slice8, ddr_wme_out_u_slice8, ddr_wme_out_v_slice8,
+                ddr_wme_out_mfb_mot_mult_slice8
+            </outputs>
+            <depends>
+                vcm_wme_start_slice7
+            </depends>
+            <triggers>
+                vcm_wme_start_slice9
+            </triggers>
+            <tile_config tile_width="336"  tile_height="16" />
+            <node_config wig_interpolation_y="1" wig_interpolation_uv="1" mfb_sigma_estimate="16" mfb_uv_multiplication_factor="2" mfb_motion_blend_slope="10" mfb_histogram_threshold="24" mfb_histogram_bin_width_log="3" mfb_mot_mult="64" wme_slice_width="304">
+                <sched_id>
+                    2, 3, 4
+                </sched_id>
+                <vdma_id>
+                    4, 4, 7, 2, 12, 11, 14
+                </vdma_id>
+                <vcm_vcf_buffers>
+                    vcf_wme_warpin_ping_y0, vcf_wme_warpin_pong_y0, vcf_wme_warpin_ping_u0,
+                    vcf_wme_warpin_pong_u0, vcf_wme_warpin_ping_v0, vcf_wme_warpin_pong_v0,
+                    vcf_wme_warpin_ping_y1, vcf_wme_warpin_pong_y1, vcf_wme_warpin_ping_u1,
+                    vcf_wme_warpin_pong_u1, vcf_wme_warpin_ping_v1, vcf_wme_warpin_pong_v1,
+                    vcf_wme_warpin_ping_y2, vcf_wme_warpin_pong_y2, vcf_wme_warpin_ping_u2,
+                    vcf_wme_warpin_pong_u2, vcf_wme_warpin_ping_v2, vcf_wme_warpin_pong_v2,
+                    vcf_wme_warpin_ping_y3, vcf_wme_warpin_pong_y3, vcf_wme_warpin_ping_u3,
+                    vcf_wme_warpin_pong_u3, vcf_wme_warpin_ping_v3, vcf_wme_warpin_pong_v3,
+                    vcf_wme_warpout_y0, vcf_wme_warpout_u0, vcf_wme_warpout_v0, vcf_wme_warpout_y1,
+                    vcf_wme_warpout_u1, vcf_wme_warpout_v1, vcf_wme_warpout_y2, vcf_wme_warpout_u2,
+                    vcf_wme_warpout_v2, vcf_wme_warpout_y3, vcf_wme_warpout_u3, vcf_wme_warpout_v3,
+                    vcf_wme_warpout_y4, vcf_wme_warpout_u4, vcf_wme_warpout_v4, vcf_wme_input_tile_info_buf,
+                    vcf_wme_warp_vcm_buf, vcf_vcm_init_buf, vcf_wme_bldout_y, vcf_wme_bldout_u, vcf_wme_bldout_v,
+                    vcf_wme_bldout_mm, vcf_wme_bldin_mmm, vcf_wme_enfout_y
+                </vcm_vcf_buffers>
+            </node_config>
+        </iva_entry>
+
+        <!-- WME slice9 -->
+        <iva_entry id="vcm_wme_start_slice9" proc_id="VCM_START" parent="wme_node_slice9" vcm_type="VCM_WME" full_config="false" >
+            <inputs>
+                ddr_wme_in_y0_slice9, ddr_wme_in_y1_slice9, ddr_wme_in_y2_slice9, ddr_wme_in_y3_slice9,
+                ddr_wme_in_y4_slice9, ddr_wme_in_u0_slice9, ddr_wme_in_u1_slice9, ddr_wme_in_u2_slice9,
+                ddr_wme_in_u3_slice9, ddr_wme_in_u4_slice9, ddr_wme_in_v0_slice9, ddr_wme_in_v1_slice9,
+                ddr_wme_in_v2_slice9, ddr_wme_in_v3_slice9, ddr_wme_in_v4_slice9, ddr_wme_delta_config_slice9,
+                ddr_wme_affine_mat0_slice9, ddr_wme_affine_mat1_slice9, ddr_wme_affine_mat2_slice9,
+                ddr_wme_affine_mat3_slice9, ddr_wme_affine_mat4_slice9, ddr_wme_mfb_motion_image_slice9,
+                ddr_wme_mfb_blend_weights_slice9, ddr_wme_mfb_reference_weights_slice9,
+                ddr_wme_mfb_photometric_gains_slice9, ddr_wme_mfb_photometric_offsets_slice9,
+                ddr_wme_enf_params_slice9
+            </inputs>
+            <outputs>
+                ddr_wme_out_y_slice9, ddr_wme_out_u_slice9, ddr_wme_out_v_slice9,
+                ddr_wme_out_mfb_mot_mult_slice9
+            </outputs>
+            <depends>
+                vcm_wme_start_slice8
+            </depends>
+            <triggers>
+                vcm_wme_start_slice10
+            </triggers>
+            <tile_config tile_width="336"  tile_height="16" />
+            <node_config wig_interpolation_y="1" wig_interpolation_uv="1" mfb_sigma_estimate="16" mfb_uv_multiplication_factor="2" mfb_motion_blend_slope="10" mfb_histogram_threshold="24" mfb_histogram_bin_width_log="3" mfb_mot_mult="64" wme_slice_width="304">
+                <sched_id>
+                    2, 3, 4
+                </sched_id>
+                <vdma_id>
+                    4, 4, 7, 2, 12, 11, 14
+                </vdma_id>
+                <vcm_vcf_buffers>
+                    vcf_wme_warpin_ping_y0, vcf_wme_warpin_pong_y0, vcf_wme_warpin_ping_u0,
+                    vcf_wme_warpin_pong_u0, vcf_wme_warpin_ping_v0, vcf_wme_warpin_pong_v0,
+                    vcf_wme_warpin_ping_y1, vcf_wme_warpin_pong_y1, vcf_wme_warpin_ping_u1,
+                    vcf_wme_warpin_pong_u1, vcf_wme_warpin_ping_v1, vcf_wme_warpin_pong_v1,
+                    vcf_wme_warpin_ping_y2, vcf_wme_warpin_pong_y2, vcf_wme_warpin_ping_u2,
+                    vcf_wme_warpin_pong_u2, vcf_wme_warpin_ping_v2, vcf_wme_warpin_pong_v2,
+                    vcf_wme_warpin_ping_y3, vcf_wme_warpin_pong_y3, vcf_wme_warpin_ping_u3,
+                    vcf_wme_warpin_pong_u3, vcf_wme_warpin_ping_v3, vcf_wme_warpin_pong_v3,
+                    vcf_wme_warpout_y0, vcf_wme_warpout_u0, vcf_wme_warpout_v0, vcf_wme_warpout_y1,
+                    vcf_wme_warpout_u1, vcf_wme_warpout_v1, vcf_wme_warpout_y2, vcf_wme_warpout_u2,
+                    vcf_wme_warpout_v2, vcf_wme_warpout_y3, vcf_wme_warpout_u3, vcf_wme_warpout_v3,
+                    vcf_wme_warpout_y4, vcf_wme_warpout_u4, vcf_wme_warpout_v4, vcf_wme_input_tile_info_buf,
+                    vcf_wme_warp_vcm_buf, vcf_vcm_init_buf, vcf_wme_bldout_y, vcf_wme_bldout_u, vcf_wme_bldout_v,
+                    vcf_wme_bldout_mm, vcf_wme_bldin_mmm, vcf_wme_enfout_y
+                </vcm_vcf_buffers>
+            </node_config>
+        </iva_entry>
+
+        <!-- WME slice10 -->
+        <iva_entry id="vcm_wme_start_slice10" proc_id="VCM_START" parent="wme_node_slice10" vcm_type="VCM_WME" full_config="false" >
+            <inputs>
+                ddr_wme_in_y0_slice10, ddr_wme_in_y1_slice10, ddr_wme_in_y2_slice10, ddr_wme_in_y3_slice10,
+                ddr_wme_in_y4_slice10, ddr_wme_in_u0_slice10, ddr_wme_in_u1_slice10, ddr_wme_in_u2_slice10,
+                ddr_wme_in_u3_slice10, ddr_wme_in_u4_slice10, ddr_wme_in_v0_slice10, ddr_wme_in_v1_slice10,
+                ddr_wme_in_v2_slice10, ddr_wme_in_v3_slice10, ddr_wme_in_v4_slice10, ddr_wme_delta_config_slice10,
+                ddr_wme_affine_mat0_slice10, ddr_wme_affine_mat1_slice10, ddr_wme_affine_mat2_slice10,
+                ddr_wme_affine_mat3_slice10, ddr_wme_affine_mat4_slice10, ddr_wme_mfb_motion_image_slice10,
+                ddr_wme_mfb_blend_weights_slice10, ddr_wme_mfb_reference_weights_slice10,
+                ddr_wme_mfb_photometric_gains_slice10, ddr_wme_mfb_photometric_offsets_slice10,
+                ddr_wme_enf_params_slice10
+            </inputs>
+            <outputs>
+                ddr_wme_out_y_slice10, ddr_wme_out_u_slice10, ddr_wme_out_v_slice10,
+                ddr_wme_out_mfb_mot_mult_slice10
+            </outputs>
+            <depends>
+                vcm_wme_start_slice9
+            </depends>
+            <triggers>
+                vcm_wme_start_slice11
+            </triggers>
+            <tile_config tile_width="336"  tile_height="16" />
+            <node_config wig_interpolation_y="1" wig_interpolation_uv="1" mfb_sigma_estimate="16" mfb_uv_multiplication_factor="2" mfb_motion_blend_slope="10" mfb_histogram_threshold="24" mfb_histogram_bin_width_log="3" mfb_mot_mult="64" wme_slice_width="304">
+                <sched_id>
+                    2, 3, 4
+                </sched_id>
+                <vdma_id>
+                    4, 4, 7, 2, 12, 11, 14
+                </vdma_id>
+                <vcm_vcf_buffers>
+                    vcf_wme_warpin_ping_y0, vcf_wme_warpin_pong_y0, vcf_wme_warpin_ping_u0,
+                    vcf_wme_warpin_pong_u0, vcf_wme_warpin_ping_v0, vcf_wme_warpin_pong_v0,
+                    vcf_wme_warpin_ping_y1, vcf_wme_warpin_pong_y1, vcf_wme_warpin_ping_u1,
+                    vcf_wme_warpin_pong_u1, vcf_wme_warpin_ping_v1, vcf_wme_warpin_pong_v1,
+                    vcf_wme_warpin_ping_y2, vcf_wme_warpin_pong_y2, vcf_wme_warpin_ping_u2,
+                    vcf_wme_warpin_pong_u2, vcf_wme_warpin_ping_v2, vcf_wme_warpin_pong_v2,
+                    vcf_wme_warpin_ping_y3, vcf_wme_warpin_pong_y3, vcf_wme_warpin_ping_u3,
+                    vcf_wme_warpin_pong_u3, vcf_wme_warpin_ping_v3, vcf_wme_warpin_pong_v3,
+                    vcf_wme_warpout_y0, vcf_wme_warpout_u0, vcf_wme_warpout_v0, vcf_wme_warpout_y1,
+                    vcf_wme_warpout_u1, vcf_wme_warpout_v1, vcf_wme_warpout_y2, vcf_wme_warpout_u2,
+                    vcf_wme_warpout_v2, vcf_wme_warpout_y3, vcf_wme_warpout_u3, vcf_wme_warpout_v3,
+                    vcf_wme_warpout_y4, vcf_wme_warpout_u4, vcf_wme_warpout_v4, vcf_wme_input_tile_info_buf,
+                    vcf_wme_warp_vcm_buf, vcf_vcm_init_buf, vcf_wme_bldout_y, vcf_wme_bldout_u, vcf_wme_bldout_v,
+                    vcf_wme_bldout_mm, vcf_wme_bldin_mmm, vcf_wme_enfout_y
+                </vcm_vcf_buffers>
+            </node_config>
+        </iva_entry>
+
+        <!-- WME slice11 -->
+        <iva_entry id="vcm_wme_start_slice11" proc_id="VCM_START" parent="wme_node_slice11" vcm_type="VCM_WME" full_config="false" >
+            <inputs>
+                ddr_wme_in_y0_slice11, ddr_wme_in_y1_slice11, ddr_wme_in_y2_slice11, ddr_wme_in_y3_slice11,
+                ddr_wme_in_y4_slice11, ddr_wme_in_u0_slice11, ddr_wme_in_u1_slice11, ddr_wme_in_u2_slice11,
+                ddr_wme_in_u3_slice11, ddr_wme_in_u4_slice11, ddr_wme_in_v0_slice11, ddr_wme_in_v1_slice11,
+                ddr_wme_in_v2_slice11, ddr_wme_in_v3_slice11, ddr_wme_in_v4_slice11, ddr_wme_delta_config_slice11,
+                ddr_wme_affine_mat0_slice11, ddr_wme_affine_mat1_slice11, ddr_wme_affine_mat2_slice11,
+                ddr_wme_affine_mat3_slice11, ddr_wme_affine_mat4_slice11, ddr_wme_mfb_motion_image_slice11,
+                ddr_wme_mfb_blend_weights_slice11, ddr_wme_mfb_reference_weights_slice11,
+                ddr_wme_mfb_photometric_gains_slice11, ddr_wme_mfb_photometric_offsets_slice11,
+                ddr_wme_enf_params_slice11
+            </inputs>
+            <outputs>
+                ddr_wme_out_y_slice11, ddr_wme_out_u_slice11, ddr_wme_out_v_slice11,
+                ddr_wme_out_mfb_mot_mult_slice11
+            </outputs>
+            <depends>
+                vcm_wme_start_slice10
+            </depends>
+            <triggers>
+                vcm_wme_start_slice12
+            </triggers>
+            <tile_config tile_width="336"  tile_height="16" />
+            <node_config wig_interpolation_y="1" wig_interpolation_uv="1" mfb_sigma_estimate="16" mfb_uv_multiplication_factor="2" mfb_motion_blend_slope="10" mfb_histogram_threshold="24" mfb_histogram_bin_width_log="3" mfb_mot_mult="64" wme_slice_width="304">
+                <sched_id>
+                    2, 3, 4
+                </sched_id>
+                <vdma_id>
+                    4, 4, 7, 2, 12, 11, 14
+                </vdma_id>
+                <vcm_vcf_buffers>
+                    vcf_wme_warpin_ping_y0, vcf_wme_warpin_pong_y0, vcf_wme_warpin_ping_u0,
+                    vcf_wme_warpin_pong_u0, vcf_wme_warpin_ping_v0, vcf_wme_warpin_pong_v0,
+                    vcf_wme_warpin_ping_y1, vcf_wme_warpin_pong_y1, vcf_wme_warpin_ping_u1,
+                    vcf_wme_warpin_pong_u1, vcf_wme_warpin_ping_v1, vcf_wme_warpin_pong_v1,
+                    vcf_wme_warpin_ping_y2, vcf_wme_warpin_pong_y2, vcf_wme_warpin_ping_u2,
+                    vcf_wme_warpin_pong_u2, vcf_wme_warpin_ping_v2, vcf_wme_warpin_pong_v2,
+                    vcf_wme_warpin_ping_y3, vcf_wme_warpin_pong_y3, vcf_wme_warpin_ping_u3,
+                    vcf_wme_warpin_pong_u3, vcf_wme_warpin_ping_v3, vcf_wme_warpin_pong_v3,
+                    vcf_wme_warpout_y0, vcf_wme_warpout_u0, vcf_wme_warpout_v0, vcf_wme_warpout_y1,
+                    vcf_wme_warpout_u1, vcf_wme_warpout_v1, vcf_wme_warpout_y2, vcf_wme_warpout_u2,
+                    vcf_wme_warpout_v2, vcf_wme_warpout_y3, vcf_wme_warpout_u3, vcf_wme_warpout_v3,
+                    vcf_wme_warpout_y4, vcf_wme_warpout_u4, vcf_wme_warpout_v4, vcf_wme_input_tile_info_buf,
+                    vcf_wme_warp_vcm_buf, vcf_vcm_init_buf, vcf_wme_bldout_y, vcf_wme_bldout_u, vcf_wme_bldout_v,
+                    vcf_wme_bldout_mm, vcf_wme_bldin_mmm, vcf_wme_enfout_y
+                </vcm_vcf_buffers>
+            </node_config>
+        </iva_entry>
+
+        <!-- WME slice12 -->
+        <iva_entry id="vcm_wme_start_slice12" proc_id="VCM_START" parent="wme_node_slice12" vcm_type="VCM_WME" full_config="false" >
+            <inputs>
+                ddr_wme_in_y0_slice12, ddr_wme_in_y1_slice12, ddr_wme_in_y2_slice12, ddr_wme_in_y3_slice12,
+                ddr_wme_in_y4_slice12, ddr_wme_in_u0_slice12, ddr_wme_in_u1_slice12, ddr_wme_in_u2_slice12,
+                ddr_wme_in_u3_slice12, ddr_wme_in_u4_slice12, ddr_wme_in_v0_slice12, ddr_wme_in_v1_slice12,
+                ddr_wme_in_v2_slice12, ddr_wme_in_v3_slice12, ddr_wme_in_v4_slice12, ddr_wme_delta_config_slice12,
+                ddr_wme_affine_mat0_slice12, ddr_wme_affine_mat1_slice12, ddr_wme_affine_mat2_slice12,
+                ddr_wme_affine_mat3_slice12, ddr_wme_affine_mat4_slice12, ddr_wme_mfb_motion_image_slice12,
+                ddr_wme_mfb_blend_weights_slice12, ddr_wme_mfb_reference_weights_slice12,
+                ddr_wme_mfb_photometric_gains_slice12, ddr_wme_mfb_photometric_offsets_slice12,
+                ddr_wme_enf_params_slice12
+            </inputs>
+            <outputs>
+                ddr_wme_out_y_slice12, ddr_wme_out_u_slice12, ddr_wme_out_v_slice12,
+                ddr_wme_out_mfb_mot_mult_slice12
+            </outputs>
+            <depends>
+                vcm_wme_start_slice11
+            </depends>
+            <triggers>
+                vcm_start_enf, wme_yout_post_cache_sync_node
+            </triggers>
+            <tile_config tile_width="336"  tile_height="16" />
+            <node_config wig_interpolation_y="1" wig_interpolation_uv="1" mfb_sigma_estimate="16" mfb_uv_multiplication_factor="2" mfb_motion_blend_slope="10" mfb_histogram_threshold="24" mfb_histogram_bin_width_log="3" mfb_mot_mult="64" wme_slice_width="304">
+                <sched_id>
+                    2, 3, 4
+                </sched_id>
+                <vdma_id>
+                    4, 4, 7, 2, 12, 11, 14
+                </vdma_id>
+                <vcm_vcf_buffers>
+                    vcf_wme_warpin_ping_y0, vcf_wme_warpin_pong_y0, vcf_wme_warpin_ping_u0,
+                    vcf_wme_warpin_pong_u0, vcf_wme_warpin_ping_v0, vcf_wme_warpin_pong_v0,
+                    vcf_wme_warpin_ping_y1, vcf_wme_warpin_pong_y1, vcf_wme_warpin_ping_u1,
+                    vcf_wme_warpin_pong_u1, vcf_wme_warpin_ping_v1, vcf_wme_warpin_pong_v1,
+                    vcf_wme_warpin_ping_y2, vcf_wme_warpin_pong_y2, vcf_wme_warpin_ping_u2,
+                    vcf_wme_warpin_pong_u2, vcf_wme_warpin_ping_v2, vcf_wme_warpin_pong_v2,
+                    vcf_wme_warpin_ping_y3, vcf_wme_warpin_pong_y3, vcf_wme_warpin_ping_u3,
+                    vcf_wme_warpin_pong_u3, vcf_wme_warpin_ping_v3, vcf_wme_warpin_pong_v3,
+                    vcf_wme_warpout_y0, vcf_wme_warpout_u0, vcf_wme_warpout_v0, vcf_wme_warpout_y1,
+                    vcf_wme_warpout_u1, vcf_wme_warpout_v1, vcf_wme_warpout_y2, vcf_wme_warpout_u2,
+                    vcf_wme_warpout_v2, vcf_wme_warpout_y3, vcf_wme_warpout_u3, vcf_wme_warpout_v3,
+                    vcf_wme_warpout_y4, vcf_wme_warpout_u4, vcf_wme_warpout_v4, vcf_wme_input_tile_info_buf,
+                    vcf_wme_warp_vcm_buf, vcf_vcm_init_buf, vcf_wme_bldout_y, vcf_wme_bldout_u, vcf_wme_bldout_v,
+                    vcf_wme_bldout_mm, vcf_wme_bldin_mmm, vcf_wme_enfout_y
+                </vcm_vcf_buffers>
+            </node_config>
+        </iva_entry>
+
+        <!-- Pyramid LVL 1 Slice 0 START -->
+        <iva_entry id="loop_start_lvl1_slice_0" parent="pyramid_lvl1_node_0" proc_id="IVA_LOOP_START" flags="IVA_FLOW_CONTROL" >
+            <tile_config tile_width="32" tile_height="32" />
+            <triggers>
+                pyr_lvl1_in_dma_slice_0
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="pyr_lvl1_in_dma_slice_0" parent="pyramid_lvl1_node_0" proc_id="IVA_IP_VDMA_CH0" flags="IVA_FLOW_CONTROL" >
+            <inputs>
+                ddr_pyramid_input_slice_0
+            </inputs>
+            <outputs>
+                vcf_pyr_in
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram" />
+            <depends>
+                loop_start_lvl1_slice_0
+            </depends>
+            <triggers>
+                pyr_lvl1_scl_slice_0
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="pyr_lvl1_scl_slice_0" parent="pyramid_lvl1_node_0" proc_id="IVA_IP_SCL0" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_pyr_in
+            </inputs>
+            <outputs>
+                vcf_pyr_out
+            </outputs>
+            <node_config format="e_data_8b" src_dimensions="ddr_pyramid_input_slice_0" dst_dimensions="ddr_pyramid_lvl1_out_slice_0" scl_mode ="0"
+                         inter_mode="SCL_INTER_MODE_BILINEAR" h_offset="0" v_offset="0" />
+            <depends>
+                pyr_lvl1_in_dma_slice_0
+            </depends>
+            <triggers>
+                pyr_lvl1_out_dma_0
+            </triggers>
+        </iva_entry>
+
+        <iva_entry  id="pyr_lvl1_out_dma_0" parent="pyramid_lvl1_node_0" proc_id="IVA_IP_VDMA_CH13" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_pyr_out
+            </inputs>
+            <outputs>
+                ddr_pyramid_lvl1_out_slice_0
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_sram_to_dram" />
+            <depends>
+                pyr_lvl1_scl_slice_0
+            </depends>
+            <triggers>
+                loop_end_lvl1_0
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="loop_end_lvl1_0" parent="pyramid_lvl1_node_0" proc_id="IVA_LOOP_END" flags="IVA_FLOW_CONTROL" >
+            <depends>
+                pyr_lvl1_out_dma_0
+            </depends>
+            <triggers>
+                loop_start_lvl1_slice_2, vcm_start_orb_region0
+            </triggers>
+        </iva_entry>
+        <!-- Pyramid LVL 1 Slice 0 END -->
+
+        <!-- Pyramid LVL 1 Slice 1 START -->
+        <iva_entry id="loop_start_lvl1_slice_1" parent="pyramid_lvl1_node_1" proc_id="IVA_LOOP_START" flags="IVA_FLOW_CONTROL" >
+            <tile_config tile_width="32" tile_height="32" />
+            <triggers>
+                pyr_lvl1_in_dma_slice_1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="pyr_lvl1_in_dma_slice_1" parent="pyramid_lvl1_node_1" proc_id="IVA_IP_VDMA_CH1" flags="IVA_FLOW_CONTROL" >
+            <inputs>
+                ddr_pyramid_input_slice_1
+            </inputs>
+            <outputs>
+                vcf_pyr_in1
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram" />
+            <depends>
+                loop_start_lvl1_slice_1
+            </depends>
+            <triggers>
+                pyr_lvl1_scl_slice_1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="pyr_lvl1_scl_slice_1" parent="pyramid_lvl1_node_1" proc_id="IVA_IP_SCL1" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_pyr_in1
+            </inputs>
+            <outputs>
+                vcf_pyr_out1
+            </outputs>
+            <node_config format="e_data_8b" src_dimensions="ddr_pyramid_input_slice_1" dst_dimensions="ddr_pyramid_lvl1_out_slice_1" scl_mode ="0"
+                         inter_mode="SCL_INTER_MODE_BILINEAR" h_offset="0" v_offset="0" />
+            <depends>
+                pyr_lvl1_in_dma_slice_1
+            </depends>
+            <triggers>
+                pyr_lvl1_out_dma_1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry  id="pyr_lvl1_out_dma_1" parent="pyramid_lvl1_node_1" proc_id="IVA_IP_VDMA_CH15" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_pyr_out1
+            </inputs>
+            <outputs>
+                ddr_pyramid_lvl1_out_slice_1
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_sram_to_dram" />
+            <depends>
+                pyr_lvl1_scl_slice_1
+            </depends>
+            <triggers>
+                loop_end_lvl1_1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="loop_end_lvl1_1" parent="pyramid_lvl1_node_1" proc_id="IVA_LOOP_END" flags="IVA_FLOW_CONTROL" >
+            <depends>
+                pyr_lvl1_out_dma_1
+            </depends>
+            <triggers>
+                loop_start_lvl1_slice_3, vcm_start_orb_region0
+            </triggers>
+        </iva_entry>
+        <!-- Pyramid LVL 1 Slice 1 END -->
+
+        <!-- Pyramid LVL 1 Slice 2 START -->
+        <iva_entry id="loop_start_lvl1_slice_2" parent="pyramid_lvl1_node_2" proc_id="IVA_LOOP_START" flags="IVA_FLOW_CONTROL" >
+            <tile_config tile_width="32" tile_height="32" />
+            <depends>
+                loop_end_lvl1_0
+            </depends>
+            <triggers>
+                pyr_lvl1_in_dma_slice_2
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="pyr_lvl1_in_dma_slice_2" parent="pyramid_lvl1_node_2" proc_id="IVA_IP_VDMA_CH0" flags="IVA_FLOW_CONTROL" >
+            <inputs>
+                ddr_pyramid_input_slice_2
+            </inputs>
+            <outputs>
+                vcf_pyr_in
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram" />
+            <depends>
+                loop_start_lvl1_slice_2
+            </depends>
+            <triggers>
+                pyr_lvl1_scl_slice_2
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="pyr_lvl1_scl_slice_2" parent="pyramid_lvl1_node_2" proc_id="IVA_IP_SCL0" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_pyr_in
+            </inputs>
+            <outputs>
+                vcf_pyr_out
+            </outputs>
+            <node_config format="e_data_8b" src_dimensions="ddr_pyramid_input_slice_2" dst_dimensions="ddr_pyramid_lvl1_out_slice_2" scl_mode ="0"
+                         inter_mode="SCL_INTER_MODE_BILINEAR" h_offset="0" v_offset="0" />
+            <depends>
+                pyr_lvl1_in_dma_slice_2
+            </depends>
+            <triggers>
+                pyr_lvl1_out_dma_2
+            </triggers>
+        </iva_entry>
+
+        <iva_entry  id="pyr_lvl1_out_dma_2" parent="pyramid_lvl1_node_2" proc_id="IVA_IP_VDMA_CH13" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_pyr_out
+            </inputs>
+            <outputs>
+                ddr_pyramid_lvl1_out_slice_2
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_sram_to_dram" />
+            <depends>
+                pyr_lvl1_scl_slice_2
+            </depends>
+            <triggers>
+                loop_end_lvl1_2
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="loop_end_lvl1_2" parent="pyramid_lvl1_node_2" proc_id="IVA_LOOP_END" flags="IVA_FLOW_CONTROL" >
+            <depends>
+                pyr_lvl1_out_dma_2
+            </depends>
+            <triggers>
+                pyr_lvl2_coeff, vcm_start_orb_region2
+            </triggers>
+        </iva_entry>
+        <!-- Pyramid LVL 1 Slice 2 END -->
+
+
+        <!-- Pyramid LVL 1 Slice 3 START -->
+        <iva_entry id="loop_start_lvl1_slice_3" parent="pyramid_lvl1_node_3" proc_id="IVA_LOOP_START" flags="IVA_FLOW_CONTROL" >
+            <tile_config tile_width="32" tile_height="32" />
+            <depends>
+                loop_end_lvl1_1
+            </depends>
+            <triggers>
+                pyr_lvl1_in_dma_slice_3
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="pyr_lvl1_in_dma_slice_3" parent="pyramid_lvl1_node_3" proc_id="IVA_IP_VDMA_CH1" flags="IVA_FLOW_CONTROL" >
+            <inputs>
+                ddr_pyramid_input_slice_3
+            </inputs>
+            <outputs>
+                vcf_pyr_in1
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram" />
+            <depends>
+                loop_start_lvl1_slice_3
+            </depends>
+            <triggers>
+                pyr_lvl1_scl_slice_3
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="pyr_lvl1_scl_slice_3" parent="pyramid_lvl1_node_3" proc_id="IVA_IP_SCL1" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_pyr_in1
+            </inputs>
+            <outputs>
+                vcf_pyr_out1
+            </outputs>
+            <node_config format="e_data_8b" src_dimensions="ddr_pyramid_input_slice_3" dst_dimensions="ddr_pyramid_lvl1_out_slice_3" scl_mode ="0"
+                         inter_mode="SCL_INTER_MODE_BILINEAR" h_offset="0" v_offset="0" />
+            <depends>
+                pyr_lvl1_in_dma_slice_3
+            </depends>
+            <triggers>
+                pyr_lvl1_out_dma_3
+            </triggers>
+        </iva_entry>
+
+        <iva_entry  id="pyr_lvl1_out_dma_3" parent="pyramid_lvl1_node_3" proc_id="IVA_IP_VDMA_CH15" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_pyr_out1
+            </inputs>
+            <outputs>
+                ddr_pyramid_lvl1_out_slice_3
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_sram_to_dram" />
+            <depends>
+                pyr_lvl1_scl_slice_3
+            </depends>
+            <triggers>
+                loop_end_lvl1_3
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="loop_end_lvl1_3" parent="pyramid_lvl1_node_3" proc_id="IVA_LOOP_END" flags="IVA_FLOW_CONTROL" >
+            <depends>
+                pyr_lvl1_out_dma_3
+            </depends>
+            <triggers>
+                pyr_lvl2_coeff, vcm_start_orb_region4
+            </triggers>
+        </iva_entry>
+        <!-- Pyramid LVL 1 Slice 3 END -->
+
+       <!-- DMA for Pyramid LVL 2 filter coefficients -->
+        <iva_entry id="pyr_lvl2_coeff" parent="pyramid_lvl2_node" proc_id="IVA_IP_VDMA_CH1" flags="IVA_FLAG_NONE" >
+            <inputs>
+                ddr_pyramid_lvl2_coeff
+            </inputs>
+            <outputs>
+                vcf_pyr_coeff
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_1d_dram_to_sram" />
+            <depends>
+                loop_end_lvl1_2, loop_end_lvl1_3
+            </depends>
+            <triggers>
+                loop_start_lvl2
+             </triggers>
+         </iva_entry>
+
+        <!-- Pyramid LVL 2 START -->
+        <iva_entry id="loop_start_lvl2" parent="pyramid_lvl2_node" proc_id="IVA_LOOP_START" flags="IVA_FLOW_CONTROL" >
+            <tile_config tile_width="32" tile_height="32" />
+            <depends>
+                pyr_lvl2_coeff
+            </depends>
+            <triggers>
+                pyr_lvl2_in_dma
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="pyr_lvl2_in_dma" parent="pyramid_lvl2_node" proc_id="IVA_IP_VDMA_CH0" flags="IVA_FLOW_CONTROL" >
+            <inputs>
+                ddr_pyramid_input_lvl2_slice
+            </inputs>
+            <outputs>
+                vcf_pyr_in
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram" />
+            <depends>
+                loop_start_lvl2
+            </depends>
+            <triggers>
+                pyr_lvl2_scl
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="pyr_lvl2_scl" parent="pyramid_lvl2_node" proc_id="IVA_IP_SCL0" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_pyr_in
+            </inputs>
+            <outputs>
+                vcf_pyr_out
+            </outputs>
+            <node_config format="e_data_8b" src_dimensions="ddr_pyramid_input_lvl2_slice" dst_dimensions="ddr_pyramid_lvl2_out_slice" scl_mode ="0"
+                         inter_mode="SCL_INTER_MODE_BILINEAR" h_offset="0" v_offset="0" />
+            <depends>
+                pyr_lvl2_in_dma
+            </depends>
+            <triggers>
+                pyr_lvl2_out_dma
+            </triggers>
+        </iva_entry>
+
+        <iva_entry  id="pyr_lvl2_out_dma" parent="pyramid_lvl2_node" proc_id="IVA_IP_VDMA_CH13" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_pyr_out
+            </inputs>
+            <outputs>
+                ddr_pyramid_lvl2_out_slice
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_sram_to_dram" />
+            <depends>
+                pyr_lvl2_scl
+            </depends>
+            <triggers>
+                loop_end_lvl2
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="loop_end_lvl2" parent="pyramid_lvl2_node" proc_id="IVA_LOOP_END" flags="IVA_FLOW_CONTROL" >
+            <depends>
+                pyr_lvl2_out_dma
+            </depends>
+            <triggers>
+                vcm_start_orb_region8, copy_luma_loop_start, post_scl2_luma_loop_start_0, post_scl2_luma_loop_start_1
+            </triggers>
+        </iva_entry>
+        <!-- Pyramid LVL 2 END -->
+
+        <iva_entry id="vcm_start_orb_region0" proc_id="VCM_START" parent="iva_vcm_orb_node_region0" vcm_type="VCM_ORB" full_config="true" >
+            <inputs>
+                image_region0
+            </inputs>
+            <outputs>
+                kpt_region0, dsc_region0
+            </outputs>
+            <depends>
+                loop_end_lvl1_0, loop_end_lvl1_1
+            </depends>
+            <triggers>
+                vcm_start_orb_region1, dma_mch_region0_in
+            </triggers>
+            <tile_config tile_width="192" tile_height="170" />
+            <node_config sched_id="0" >
+                <vdma_id>
+                    5, 5, 8, 9
+                </vdma_id>
+                <vcm_vcf_buffers>
+                    orb_vcm_vcf_input0, orb_vcm_vcf_input1,
+                    orb_vcm_vcf_output0, orb_vcm_vcf_output1,
+                    orb_vcm_vcf_buffer
+                </vcm_vcf_buffers>
+                <orb_config nms_size="5" max_kpt="156" metadata="0x0A" diameter="21" fast_th="24" har_th="0" har_on="0" x_scale="0x80000" y_scale="0x80000" x_offset="0" y_offset="0" />
+            </node_config>
+        </iva_entry>
+
+        <iva_entry id="vcm_start_orb_region1" proc_id="VCM_START" parent="iva_vcm_orb_node_region1" vcm_type="VCM_ORB" full_config="false" >
+            <inputs>
+                image_region1
+            </inputs>
+            <outputs>
+                kpt_region1, dsc_region1
+            </outputs>
+            <depends>
+                vcm_start_orb_region0
+            </depends>
+            <triggers>
+                vcm_start_orb_region2, dma_mch_region1_in
+            </triggers>
+            <tile_config tile_width="192" tile_height="170" />
+            <node_config sched_id="0" >
+                <vdma_id>
+                    5, 5, 8, 9
+                </vdma_id>
+                <vcm_vcf_buffers>
+                    orb_vcm_vcf_input0, orb_vcm_vcf_input1,
+                    orb_vcm_vcf_output0, orb_vcm_vcf_output1,
+                    orb_vcm_vcf_buffer
+                </vcm_vcf_buffers>
+                <orb_config nms_size="5" max_kpt="156" metadata="0x0A" diameter="21" fast_th="24" har_th="0" har_on="0" x_scale="0x80000" y_scale="0x80000" x_offset="0" y_offset="0" />
+            </node_config>
+        </iva_entry>
+
+        <iva_entry id="vcm_start_orb_region2" proc_id="VCM_START" parent="iva_vcm_orb_node_region2" vcm_type="VCM_ORB" full_config="false">
+            <inputs>
+                image_region2
+            </inputs>
+            <outputs>
+                kpt_region2, dsc_region2
+            </outputs>
+            <depends>
+                vcm_start_orb_region1, loop_end_lvl1_2
+            </depends>
+            <triggers>
+                vcm_start_orb_region3, dma_mch_region2_in
+            </triggers>
+            <tile_config tile_width="192" tile_height="170" />
+            <node_config sched_id="0" >
+                <vdma_id>
+                    5, 5, 8, 9
+                </vdma_id>
+                <vcm_vcf_buffers>
+                    orb_vcm_vcf_input0, orb_vcm_vcf_input1,
+                    orb_vcm_vcf_output0, orb_vcm_vcf_output1,
+                    orb_vcm_vcf_buffer
+                </vcm_vcf_buffers>
+                <orb_config nms_size="5" max_kpt="156" metadata="0x0A" diameter="21" fast_th="24" har_th="0" har_on="0" x_scale="0x80000" y_scale="0x80000" x_offset="0" y_offset="0" />
+            </node_config>
+        </iva_entry>
+
+        <iva_entry id="vcm_start_orb_region3" proc_id="VCM_START" parent="iva_vcm_orb_node_region3" vcm_type="VCM_ORB" full_config="false">
+            <inputs>
+                image_region3
+            </inputs>
+            <outputs>
+                kpt_region3, dsc_region3
+            </outputs>
+            <depends>
+                vcm_start_orb_region2
+            </depends>
+            <triggers>
+                vcm_start_orb_region4, dma_mch_region3_in
+            </triggers>
+            <tile_config tile_width="192" tile_height="170" />
+            <node_config sched_id="0" >
+                <vdma_id>
+                    5, 5, 8, 9
+                </vdma_id>
+                <vcm_vcf_buffers>
+                    orb_vcm_vcf_input0, orb_vcm_vcf_input1,
+                    orb_vcm_vcf_output0, orb_vcm_vcf_output1,
+                    orb_vcm_vcf_buffer
+                </vcm_vcf_buffers>
+                <orb_config nms_size="5" max_kpt="156" metadata="0x0A" diameter="21" fast_th="24" har_th="0" har_on="0" x_scale="0x80000" y_scale="0x80000" x_offset="0" y_offset="0" />
+            </node_config>
+        </iva_entry>
+
+        <iva_entry id="vcm_start_orb_region4" proc_id="VCM_START" parent="iva_vcm_orb_node_region4" vcm_type="VCM_ORB" full_config="false">
+            <inputs>
+                image_region4
+            </inputs>
+            <outputs>
+                kpt_region4, dsc_region4
+            </outputs>
+            <depends>
+                vcm_start_orb_region3, loop_end_lvl1_3
+            </depends>
+            <triggers>
+                vcm_start_orb_region5, dma_mch_region4_in
+            </triggers>
+            <tile_config tile_width="192" tile_height="170" />
+            <node_config sched_id="0" >
+                <vdma_id>
+                    5, 5, 8, 9
+                </vdma_id>
+                <vcm_vcf_buffers>
+                    orb_vcm_vcf_input0, orb_vcm_vcf_input1,
+                    orb_vcm_vcf_output0, orb_vcm_vcf_output1,
+                    orb_vcm_vcf_buffer
+                </vcm_vcf_buffers>
+                <orb_config nms_size="5" max_kpt="156" metadata="0x0A" diameter="21" fast_th="24" har_th="0" har_on="0" x_scale="0x80000" y_scale="0x80000" x_offset="0" y_offset="0" />
+            </node_config>
+        </iva_entry>
+
+        <iva_entry id="vcm_start_orb_region5" proc_id="VCM_START" parent="iva_vcm_orb_node_region5" vcm_type="VCM_ORB" full_config="false">
+            <inputs>
+                image_region5
+            </inputs>
+            <outputs>
+                kpt_region5, dsc_region5
+            </outputs>
+            <depends>
+                vcm_start_orb_region4
+            </depends>
+            <triggers>
+                vcm_start_orb_region6, dma_mch_region5_in
+            </triggers>
+            <tile_config tile_width="192" tile_height="170" />
+            <node_config sched_id="0" >
+                <vdma_id>
+                    5, 5, 8, 9
+                </vdma_id>
+                <vcm_vcf_buffers>
+                    orb_vcm_vcf_input0, orb_vcm_vcf_input1,
+                    orb_vcm_vcf_output0, orb_vcm_vcf_output1,
+                    orb_vcm_vcf_buffer
+                </vcm_vcf_buffers>
+                <orb_config nms_size="5" max_kpt="156" metadata="0x0A" diameter="21" fast_th="24" har_th="0" har_on="0" x_scale="0x80000" y_scale="0x80000" x_offset="0" y_offset="0" />
+            </node_config>
+        </iva_entry>
+        <iva_entry id="vcm_start_orb_region6" proc_id="VCM_START" parent="iva_vcm_orb_node_region6" vcm_type="VCM_ORB" full_config="false">
+            <inputs>
+                image_region6
+            </inputs>
+            <outputs>
+                kpt_region6, dsc_region6
+            </outputs>
+            <depends>
+                vcm_start_orb_region5
+            </depends>
+            <triggers>
+                vcm_start_orb_region7, dma_mch_region6_in
+            </triggers>
+            <tile_config tile_width="192" tile_height="170" />
+            <node_config sched_id="0" >
+                <vdma_id>
+                    5, 5, 8, 9
+                </vdma_id>
+                <vcm_vcf_buffers>
+                    orb_vcm_vcf_input0, orb_vcm_vcf_input1,
+                    orb_vcm_vcf_output0, orb_vcm_vcf_output1,
+                    orb_vcm_vcf_buffer
+                </vcm_vcf_buffers>
+                <orb_config nms_size="5" max_kpt="156" metadata="0x0A" diameter="21" fast_th="24" har_th="0" har_on="0" x_scale="0x80000" y_scale="0x80000" x_offset="0" y_offset="0" />
+            </node_config>
+        </iva_entry>
+
+        <iva_entry id="vcm_start_orb_region7" proc_id="VCM_START" parent="iva_vcm_orb_node_region7" vcm_type="VCM_ORB" full_config="false">
+            <inputs>
+                image_region7
+            </inputs>
+            <outputs>
+                kpt_region7, dsc_region7
+            </outputs>
+            <depends>
+                vcm_start_orb_region6
+            </depends>
+            <triggers>
+                vcm_start_orb_region8, dma_mch_region7_in
+            </triggers>
+            <tile_config tile_width="192" tile_height="170" />
+            <node_config sched_id="0" >
+                <vdma_id>
+                    5, 5, 8, 9
+                </vdma_id>
+                <vcm_vcf_buffers>
+                    orb_vcm_vcf_input0, orb_vcm_vcf_input1,
+                    orb_vcm_vcf_output0, orb_vcm_vcf_output1,
+                    orb_vcm_vcf_buffer
+                </vcm_vcf_buffers>
+                <orb_config nms_size="5" max_kpt="156" metadata="0x0A" diameter="21" fast_th="24" har_th="0" har_on="0" x_scale="0x80000" y_scale="0x80000" x_offset="0" y_offset="0" />
+            </node_config>
+        </iva_entry>
+
+        <iva_entry id="vcm_start_orb_region8" proc_id="VCM_START" parent="iva_vcm_orb_node_region8" vcm_type="VCM_ORB" full_config="true">
+            <inputs>
+                image_region8
+            </inputs>
+            <outputs>
+                kpt_region8, dsc_region8
+            </outputs>
+            <depends>
+                vcm_start_orb_region7, loop_end_lvl2
+            </depends>
+            <triggers>
+                dma_mch_region8_in
+            </triggers>
+            <tile_config tile_width="192" tile_height="170" />
+            <node_config sched_id="0" >
+                <vdma_id>
+                    5, 5, 8, 9
+                </vdma_id>
+                <vcm_vcf_buffers>
+                    orb_vcm_vcf_input0, orb_vcm_vcf_input1,
+                    orb_vcm_vcf_output0, orb_vcm_vcf_output1,
+                    orb_vcm_vcf_buffer
+                </vcm_vcf_buffers>
+                <orb_config nms_size="5" max_kpt="156" metadata="0x0A" diameter="21" fast_th="24" har_th="0" har_on="0" x_scale="0x200000" y_scale="0x200000" x_offset="0" y_offset="0" />
+            </node_config>
+        </iva_entry>
+
+        <!-- MCH Entries. -->
+        <!-- Start of Region 0 -->
+        <iva_entry id="dma_mch_region0_in" parent="iva_mch_node_region0" proc_id="IVA_IP_VDMA_CH3_MULTI" flags="IVA_FLAG_NONE" >
+            <inputs>
+                ddr_mch_region0_frame0_query, ddr_mch_region0_frame1_query, ddr_mch_region0_frame2_query, ddr_mch_region0_frame3_query, ddr_mch_region0_db
+            </inputs>
+            <outputs>
+                vcf_mch_query0, vcf_mch_query1, vcf_mch_query2, vcf_mch_query3, vcf_mch_db
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_dram_to_sram" />
+            <depends>
+                vcm_start_orb_region0
+            </depends>
+            <triggers>
+                mch_region0
+            </triggers>
+        </iva_entry>
+        <!-- MCH -->
+        <iva_entry id="mch_region0" parent="iva_mch_node_region0" proc_id="IVA_IP_MCH_MULTI" flags="IVA_FLAG_NONE" >
+            <inputs>
+                vcf_mch_db, vcf_mch_query0, vcf_mch_query1, vcf_mch_query2, vcf_mch_query3
+            </inputs>
+            <outputs>
+                vcf_mch_out0, vcf_mch_out1, vcf_mch_out2, vcf_mch_out3
+            </outputs>
+            <node_config query_size="37" db_size="37" dist_mode="0" vector_size="256" num_nearest="3" output_mode="0" thresh_on="1" thresh="31" />
+            <depends>
+                dma_mch_region0_in
+            </depends>
+            <triggers>
+                dma_mch_region0_out, dma_mch_region1_in
+            </triggers>
+        </iva_entry>
+        <!-- Dma out. -->
+        <iva_entry id="dma_mch_region0_out" parent="iva_mch_node_region0" proc_id="IVA_IP_VDMA_CH10_MULTI" flags="IVA_FLAG_NONE" >
+            <inputs>
+                vcf_mch_out0, vcf_mch_out1, vcf_mch_out2, vcf_mch_out3
+            </inputs>
+            <outputs>
+                ddr_mch_region0_frame0_out, ddr_mch_region0_frame1_out, ddr_mch_region0_frame2_out, ddr_mch_region0_frame3_out
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_sram_to_dram" />
+            <depends>
+                mch_region0
+            </depends>
+            <triggers>
+                mch_region1
+            </triggers>
+        </iva_entry>
+        <!-- End of Region 0 -->
+
+        <!-- Start of Region1 -->
+        <iva_entry id="dma_mch_region1_in" parent="iva_mch_node_region1" proc_id="IVA_IP_VDMA_CH3_MULTI" flags="IVA_FLAG_NONE" >
+            <inputs>
+                ddr_mch_region1_frame0_query, ddr_mch_region1_frame1_query, ddr_mch_region1_frame2_query, ddr_mch_region1_frame3_query, ddr_mch_region1_db
+            </inputs>
+            <outputs>
+                vcf_mch_query0, vcf_mch_query1, vcf_mch_query2, vcf_mch_query3, vcf_mch_db
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_dram_to_sram" />
+            <depends>
+                vcm_start_orb_region1, mch_region0
+            </depends>
+            <triggers>
+                mch_region1
+            </triggers>
+        </iva_entry>
+        <!-- MCH -->
+        <iva_entry id="mch_region1" parent="iva_mch_node_region1" proc_id="IVA_IP_MCH_MULTI" flags="IVA_FLAG_NONE" >
+            <inputs>
+                vcf_mch_db, vcf_mch_query0, vcf_mch_query1, vcf_mch_query2, vcf_mch_query3
+            </inputs>
+            <outputs>
+                vcf_mch_out0, vcf_mch_out1, vcf_mch_out2, vcf_mch_out3
+            </outputs>
+            <node_config query_size="37" db_size="37" dist_mode="0" vector_size="256" num_nearest="3" output_mode="0" thresh_on="1" thresh="31" />
+            <depends>
+                dma_mch_region0_out, dma_mch_region1_in
+            </depends>
+            <triggers>
+                dma_mch_region1_out, dma_mch_region2_in
+            </triggers>
+        </iva_entry>
+        <!-- Dma out. -->
+        <iva_entry id="dma_mch_region1_out" parent="iva_mch_node_region1" proc_id="IVA_IP_VDMA_CH10_MULTI" flags="IVA_FLAG_NONE" >
+            <inputs>
+                vcf_mch_out0, vcf_mch_out1, vcf_mch_out2, vcf_mch_out3
+            </inputs>
+            <outputs>
+                ddr_mch_region1_frame0_out, ddr_mch_region1_frame1_out, ddr_mch_region1_frame2_out, ddr_mch_region1_frame3_out
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_sram_to_dram" />
+            <depends>
+                mch_region1
+            </depends>
+            <triggers>
+                mch_region2
+            </triggers>
+        </iva_entry>
+        <!-- End of Region1 -->
+
+        <!-- Start of Region2 -->
+        <iva_entry id="dma_mch_region2_in" parent="iva_mch_node_region2" proc_id="IVA_IP_VDMA_CH3_MULTI" flags="IVA_FLAG_NONE" >
+            <inputs>
+                ddr_mch_region2_frame0_query, ddr_mch_region2_frame1_query, ddr_mch_region2_frame2_query, ddr_mch_region2_frame3_query, ddr_mch_region2_db
+            </inputs>
+            <outputs>
+                vcf_mch_query0, vcf_mch_query1, vcf_mch_query2, vcf_mch_query3, vcf_mch_db
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_dram_to_sram" />
+            <depends>
+                vcm_start_orb_region2, mch_region1
+            </depends>
+            <triggers>
+                mch_region2
+            </triggers>
+        </iva_entry>
+        <!-- MCH -->
+        <iva_entry id="mch_region2" parent="iva_mch_node_region2" proc_id="IVA_IP_MCH_MULTI" flags="IVA_FLAG_NONE" >
+            <inputs>
+                vcf_mch_db, vcf_mch_query0, vcf_mch_query1, vcf_mch_query2, vcf_mch_query3
+            </inputs>
+            <outputs>
+                vcf_mch_out0, vcf_mch_out1, vcf_mch_out2, vcf_mch_out3
+            </outputs>
+            <node_config query_size="37" db_size="37" dist_mode="0" vector_size="256" num_nearest="3" output_mode="0" thresh_on="1" thresh="31" />
+            <depends>
+                dma_mch_region1_out, dma_mch_region2_in
+            </depends>
+            <triggers>
+                dma_mch_region2_out, dma_mch_region3_in
+            </triggers>
+        </iva_entry>
+        <!-- Dma out. -->
+        <iva_entry id="dma_mch_region2_out" parent="iva_mch_node_region2" proc_id="IVA_IP_VDMA_CH10_MULTI" flags="IVA_FLAG_NONE" >
+            <inputs>
+                vcf_mch_out0, vcf_mch_out1, vcf_mch_out2, vcf_mch_out3
+            </inputs>
+            <outputs>
+                ddr_mch_region2_frame0_out, ddr_mch_region2_frame1_out, ddr_mch_region2_frame2_out, ddr_mch_region2_frame3_out
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_sram_to_dram" />
+            <depends>
+                mch_region2
+            </depends>
+            <triggers>
+                mch_region3
+            </triggers>
+        </iva_entry>
+        <!-- End of Region2 -->
+
+        <!-- Start of Region3 -->
+        <iva_entry id="dma_mch_region3_in" parent="iva_mch_node_region3" proc_id="IVA_IP_VDMA_CH3_MULTI" flags="IVA_FLAG_NONE" >
+            <inputs>
+                ddr_mch_region3_frame0_query, ddr_mch_region3_frame1_query, ddr_mch_region3_frame2_query, ddr_mch_region3_frame3_query, ddr_mch_region3_db
+            </inputs>
+            <outputs>
+                vcf_mch_query0, vcf_mch_query1, vcf_mch_query2, vcf_mch_query3, vcf_mch_db
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_dram_to_sram" />
+            <depends>
+                vcm_start_orb_region3, mch_region2
+            </depends>
+            <triggers>
+                mch_region3
+            </triggers>
+        </iva_entry>
+        <!-- MCH -->
+        <iva_entry id="mch_region3" parent="iva_mch_node_region3" proc_id="IVA_IP_MCH_MULTI" flags="IVA_FLAG_NONE" >
+            <inputs>
+                vcf_mch_db, vcf_mch_query0, vcf_mch_query1, vcf_mch_query2, vcf_mch_query3
+            </inputs>
+            <outputs>
+                vcf_mch_out0, vcf_mch_out1, vcf_mch_out2, vcf_mch_out3
+            </outputs>
+            <node_config query_size="37" db_size="37" dist_mode="0" vector_size="256" num_nearest="3" output_mode="0" thresh_on="1" thresh="31" />
+            <depends>
+                dma_mch_region2_out, dma_mch_region3_in
+            </depends>
+            <triggers>
+                dma_mch_region3_out, dma_mch_region4_in
+            </triggers>
+        </iva_entry>
+        <!-- Dma out. -->
+        <iva_entry id="dma_mch_region3_out" parent="iva_mch_node_region3" proc_id="IVA_IP_VDMA_CH10_MULTI" flags="IVA_FLAG_NONE" >
+            <inputs>
+                vcf_mch_out0, vcf_mch_out1, vcf_mch_out2, vcf_mch_out3
+            </inputs>
+            <outputs>
+                ddr_mch_region3_frame0_out, ddr_mch_region3_frame1_out, ddr_mch_region3_frame2_out, ddr_mch_region3_frame3_out
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_sram_to_dram" />
+            <depends>
+                mch_region3
+            </depends>
+            <triggers>
+                mch_region4
+            </triggers>
+        </iva_entry>
+        <!-- End of Region3 -->
+
+        <!-- Start of Region4 -->
+        <iva_entry id="dma_mch_region4_in" parent="iva_mch_node_region4" proc_id="IVA_IP_VDMA_CH3_MULTI" flags="IVA_FLAG_NONE" >
+            <inputs>
+                ddr_mch_region4_frame0_query, ddr_mch_region4_frame1_query, ddr_mch_region4_frame2_query, ddr_mch_region4_frame3_query, ddr_mch_region4_db
+            </inputs>
+            <outputs>
+                vcf_mch_query0, vcf_mch_query1, vcf_mch_query2, vcf_mch_query3, vcf_mch_db
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_dram_to_sram" />
+            <depends>
+                vcm_start_orb_region4, mch_region3
+            </depends>
+            <triggers>
+                mch_region4
+            </triggers>
+        </iva_entry>
+        <!-- MCH -->
+        <iva_entry id="mch_region4" parent="iva_mch_node_region4" proc_id="IVA_IP_MCH_MULTI" flags="IVA_FLAG_NONE" >
+            <inputs>
+                vcf_mch_db, vcf_mch_query0, vcf_mch_query1, vcf_mch_query2, vcf_mch_query3
+            </inputs>
+            <outputs>
+                vcf_mch_out0, vcf_mch_out1, vcf_mch_out2, vcf_mch_out3
+            </outputs>
+            <node_config query_size="37" db_size="37" dist_mode="0" vector_size="256" num_nearest="3" output_mode="0" thresh_on="1" thresh="31" />
+            <depends>
+                dma_mch_region3_out, dma_mch_region4_in
+            </depends>
+            <triggers>
+                dma_mch_region4_out, dma_mch_region5_in
+            </triggers>
+        </iva_entry>
+        <!-- Dma out. -->
+        <iva_entry id="dma_mch_region4_out" parent="iva_mch_node_region4" proc_id="IVA_IP_VDMA_CH10_MULTI" flags="IVA_FLAG_NONE" >
+            <inputs>
+                vcf_mch_out0, vcf_mch_out1, vcf_mch_out2, vcf_mch_out3
+            </inputs>
+            <outputs>
+                ddr_mch_region4_frame0_out, ddr_mch_region4_frame1_out, ddr_mch_region4_frame2_out, ddr_mch_region4_frame3_out
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_sram_to_dram" />
+            <depends>
+                mch_region4
+            </depends>
+            <triggers>
+                mch_region5
+            </triggers>
+        </iva_entry>
+        <!-- End of Region4 -->
+
+        <!-- Start of Region5 -->
+        <iva_entry id="dma_mch_region5_in" parent="iva_mch_node_region5" proc_id="IVA_IP_VDMA_CH3_MULTI" flags="IVA_FLAG_NONE" >
+            <inputs>
+                ddr_mch_region5_frame0_query, ddr_mch_region5_frame1_query, ddr_mch_region5_frame2_query, ddr_mch_region5_frame3_query, ddr_mch_region5_db
+            </inputs>
+            <outputs>
+                vcf_mch_query0, vcf_mch_query1, vcf_mch_query2, vcf_mch_query3, vcf_mch_db
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_dram_to_sram" />
+            <depends>
+                vcm_start_orb_region5, mch_region4
+            </depends>
+            <triggers>
+                mch_region5
+            </triggers>
+        </iva_entry>
+        <!-- MCH -->
+        <iva_entry id="mch_region5" parent="iva_mch_node_region5" proc_id="IVA_IP_MCH_MULTI" flags="IVA_FLAG_NONE" >
+            <inputs>
+                vcf_mch_db, vcf_mch_query0, vcf_mch_query1, vcf_mch_query2, vcf_mch_query3
+            </inputs>
+            <outputs>
+                vcf_mch_out0, vcf_mch_out1, vcf_mch_out2, vcf_mch_out3
+            </outputs>
+            <node_config query_size="37" db_size="37" dist_mode="0" vector_size="256" num_nearest="3" output_mode="0" thresh_on="1" thresh="31" />
+            <depends>
+                dma_mch_region4_out, dma_mch_region5_in
+            </depends>
+            <triggers>
+                dma_mch_region5_out, dma_mch_region6_in
+            </triggers>
+        </iva_entry>
+        <!-- Dma out. -->
+        <iva_entry id="dma_mch_region5_out" parent="iva_mch_node_region5" proc_id="IVA_IP_VDMA_CH10_MULTI" flags="IVA_FLAG_NONE" >
+            <inputs>
+                vcf_mch_out0, vcf_mch_out1, vcf_mch_out2, vcf_mch_out3
+            </inputs>
+            <outputs>
+                ddr_mch_region5_frame0_out, ddr_mch_region5_frame1_out, ddr_mch_region5_frame2_out, ddr_mch_region5_frame3_out
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_sram_to_dram" />
+            <depends>
+                mch_region5
+            </depends>
+            <triggers>
+                mch_region6
+            </triggers>
+        </iva_entry>
+        <!-- End of Region5 -->
+
+        <!-- Start of Region6 -->
+        <iva_entry id="dma_mch_region6_in" parent="iva_mch_node_region6" proc_id="IVA_IP_VDMA_CH3_MULTI" flags="IVA_FLAG_NONE" >
+            <inputs>
+                ddr_mch_region6_frame0_query, ddr_mch_region6_frame1_query, ddr_mch_region6_frame2_query, ddr_mch_region6_frame3_query, ddr_mch_region6_db
+            </inputs>
+            <outputs>
+                vcf_mch_query0, vcf_mch_query1, vcf_mch_query2, vcf_mch_query3, vcf_mch_db
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_dram_to_sram" />
+            <depends>
+                vcm_start_orb_region6, mch_region5
+            </depends>
+            <triggers>
+                mch_region6
+            </triggers>
+        </iva_entry>
+        <!-- MCH -->
+        <iva_entry id="mch_region6" parent="iva_mch_node_region6" proc_id="IVA_IP_MCH_MULTI" flags="IVA_FLAG_NONE" >
+            <inputs>
+                vcf_mch_db, vcf_mch_query0, vcf_mch_query1, vcf_mch_query2, vcf_mch_query3
+            </inputs>
+            <outputs>
+                vcf_mch_out0, vcf_mch_out1, vcf_mch_out2, vcf_mch_out3
+            </outputs>
+            <node_config query_size="37" db_size="37" dist_mode="0" vector_size="256" num_nearest="3" output_mode="0" thresh_on="1" thresh="31" />
+            <depends>
+                dma_mch_region5_out, dma_mch_region6_in
+            </depends>
+            <triggers>
+                dma_mch_region6_out, dma_mch_region7_in
+            </triggers>
+        </iva_entry>
+        <!-- Dma out. -->
+        <iva_entry id="dma_mch_region6_out" parent="iva_mch_node_region6" proc_id="IVA_IP_VDMA_CH10_MULTI" flags="IVA_FLAG_NONE" >
+            <inputs>
+                vcf_mch_out0, vcf_mch_out1, vcf_mch_out2, vcf_mch_out3
+            </inputs>
+            <outputs>
+                ddr_mch_region6_frame0_out, ddr_mch_region6_frame1_out, ddr_mch_region6_frame2_out, ddr_mch_region6_frame3_out
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_sram_to_dram" />
+            <depends>
+                mch_region6
+            </depends>
+            <triggers>
+                mch_region7
+            </triggers>
+        </iva_entry>
+        <!-- End of Region6 -->
+
+        <!-- Start of Region7 -->
+        <iva_entry id="dma_mch_region7_in" parent="iva_mch_node_region7" proc_id="IVA_IP_VDMA_CH3_MULTI" flags="IVA_FLAG_NONE" >
+            <inputs>
+                ddr_mch_region7_frame0_query, ddr_mch_region7_frame1_query, ddr_mch_region7_frame2_query, ddr_mch_region7_frame3_query, ddr_mch_region7_db
+            </inputs>
+            <outputs>
+                vcf_mch_query0, vcf_mch_query1, vcf_mch_query2, vcf_mch_query3, vcf_mch_db
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_dram_to_sram" />
+            <depends>
+                vcm_start_orb_region7, mch_region6
+            </depends>
+            <triggers>
+                mch_region7
+            </triggers>
+        </iva_entry>
+        <!-- MCH -->
+        <iva_entry id="mch_region7" parent="iva_mch_node_region7" proc_id="IVA_IP_MCH_MULTI" flags="IVA_FLAG_NONE" >
+            <inputs>
+                vcf_mch_db, vcf_mch_query0, vcf_mch_query1, vcf_mch_query2, vcf_mch_query3
+            </inputs>
+            <outputs>
+                vcf_mch_out0, vcf_mch_out1, vcf_mch_out2, vcf_mch_out3
+            </outputs>
+            <node_config query_size="37" db_size="37" dist_mode="0" vector_size="256" num_nearest="3" output_mode="0" thresh_on="1" thresh="31" />
+            <depends>
+                dma_mch_region6_out, dma_mch_region7_in
+            </depends>
+            <triggers>
+                dma_mch_region7_out, dma_mch_region8_in
+            </triggers>
+        </iva_entry>
+        <!-- Dma out. -->
+        <iva_entry id="dma_mch_region7_out" parent="iva_mch_node_region7" proc_id="IVA_IP_VDMA_CH10_MULTI" flags="IVA_FLAG_NONE" >
+            <inputs>
+                vcf_mch_out0, vcf_mch_out1, vcf_mch_out2, vcf_mch_out3
+            </inputs>
+            <outputs>
+                ddr_mch_region7_frame0_out, ddr_mch_region7_frame1_out, ddr_mch_region7_frame2_out, ddr_mch_region7_frame3_out
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_sram_to_dram" />
+            <depends>
+                mch_region7
+            </depends>
+            <triggers>
+                mch_region8
+            </triggers>
+        </iva_entry>
+        <!-- End of Region7 -->
+
+        <!-- Start of Region8 -->
+        <iva_entry id="dma_mch_region8_in" parent="iva_mch_node_region8" proc_id="IVA_IP_VDMA_CH3_MULTI" flags="IVA_FLAG_NONE" >
+            <inputs>
+                ddr_mch_region8_frame0_query, ddr_mch_region8_frame1_query, ddr_mch_region8_frame2_query, ddr_mch_region8_frame3_query, ddr_mch_region8_db
+            </inputs>
+            <outputs>
+                vcf_mch_query0, vcf_mch_query1, vcf_mch_query2, vcf_mch_query3, vcf_mch_db
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_dram_to_sram" />
+            <depends>
+                vcm_start_orb_region8, mch_region7
+            </depends>
+            <triggers>
+                mch_region8
+            </triggers>
+        </iva_entry>
+        <!-- MCH -->
+        <iva_entry id="mch_region8" parent="iva_mch_node_region8" proc_id="IVA_IP_MCH_MULTI" flags="IVA_FLAG_NONE" >
+            <inputs>
+                vcf_mch_db, vcf_mch_query0, vcf_mch_query1, vcf_mch_query2, vcf_mch_query3
+            </inputs>
+            <outputs>
+                vcf_mch_out0, vcf_mch_out1, vcf_mch_out2, vcf_mch_out3
+            </outputs>
+            <node_config query_size="37" db_size="37" dist_mode="0" vector_size="256" num_nearest="3" output_mode="0" thresh_on="1" thresh="31" />
+            <depends>
+                dma_mch_region7_out, dma_mch_region8_in
+            </depends>
+            <triggers>
+                dma_mch_region8_out
+            </triggers>
+        </iva_entry>
+        <!-- Dma out. -->
+        <iva_entry id="dma_mch_region8_out" parent="iva_mch_node_region8" proc_id="IVA_IP_VDMA_CH10_MULTI" flags="IVA_FLAG_NONE" >
+            <inputs>
+                vcf_mch_out0, vcf_mch_out1, vcf_mch_out2, vcf_mch_out3
+            </inputs>
+            <outputs>
+                ddr_mch_region8_frame0_out, ddr_mch_region8_frame1_out, ddr_mch_region8_frame2_out, ddr_mch_region8_frame3_out
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_sram_to_dram" />
+            <depends>
+                mch_region8
+            </depends>
+            <triggers>
+                get_affine_node, vcm_start_enf
+            </triggers>
+        </iva_entry>
+        <!-- End of Region8 -->
+
+        <!-- DMA for Post ENF Config -->
+        <iva_entry id="post_enf_cfg" parent="post_enf_luma_node_slice1" proc_id="IVA_IP_VDMA_CH4" flags="IVA_FLAG_NONE" >
+            <inputs>
+                ddr_post_enf_cfg
+            </inputs>
+            <outputs>
+                vcf_enf_cfg
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_1d_dram_to_sram" />
+            <triggers>
+                post_enf_luma_loop_start_slice1
+            </triggers>
+        </iva_entry>
+
+        <!-- Post ENF Luma Starts. -->
+        <iva_entry id="post_enf_luma_loop_start_slice1" parent="post_enf_luma_node_slice1" proc_id="IVA_LOOP_START" flags="IVA_FLOW_CONTROL" >
+            <tile_config tile_width="64" tile_height="64" />
+            <depends>
+                post_enf_cfg
+            </depends>
+            <triggers>
+                post_enf_luma_dma_in_slice1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="post_enf_luma_dma_in_slice1" parent="post_enf_luma_node_slice1" proc_id="IVA_IP_VDMA_CH4" flags="IVA_FLOW_CONTROL" >
+            <inputs>
+                ddr_post_enf_luma_in_slice1
+            </inputs>
+            <outputs>
+                vcf_enf_in
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram" />
+            <depends>
+                post_enf_luma_loop_start_slice1
+            </depends>
+            <triggers>
+                post_enf_luma_process_slice1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="post_enf_luma_process_slice1" parent="post_enf_luma_node_slice1" proc_id="IVA_IP_ENF" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_enf_in, vcf_enf_cfg
+            </inputs>
+            <outputs>
+                vcf_enf_out
+            </outputs>
+            <node_config mmap="0" dimensions="ddr_post_enf_luma_in_slice1" />
+            <depends>
+                post_enf_luma_dma_in_slice1
+            </depends>
+            <triggers>
+                post_enf_luma_dma_out_slice1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry  id="post_enf_luma_dma_out_slice1" parent="post_enf_luma_node_slice1" proc_id="IVA_IP_VDMA_CH11" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_enf_out
+            </inputs>
+            <outputs>
+                ddr_post_enf_luma_out_slice1
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_sram_to_dram" />
+            <depends>
+                post_enf_luma_process_slice1
+            </depends>
+            <triggers>
+                post_enf_loop_end_slice1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="post_enf_loop_end_slice1" parent="post_enf_luma_node_slice1" proc_id="IVA_LOOP_END" flags="IVA_FLOW_CONTROL" >
+            <depends>
+                post_enf_luma_dma_out_slice1
+            </depends>
+            <triggers>
+                post_enf_luma_loop_start_slice2
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="post_enf_luma_loop_start_slice2" parent="post_enf_luma_node_slice2" proc_id="IVA_LOOP_START" flags="IVA_FLOW_CONTROL" >
+            <tile_config tile_width="64" tile_height="64" />
+            <depends>
+                post_enf_loop_end_slice1
+            </depends>
+            <triggers>
+                post_enf_luma_dma_in_slice2
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="post_enf_luma_dma_in_slice2" parent="post_enf_luma_node_slice2" proc_id="IVA_IP_VDMA_CH4" flags="IVA_FLOW_CONTROL" >
+            <inputs>
+                ddr_post_enf_luma_in_slice2
+            </inputs>
+            <outputs>
+                vcf_enf_in
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram" />
+            <depends>
+                post_enf_luma_loop_start_slice2
+            </depends>
+            <triggers>
+                post_enf_luma_process_slice2
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="post_enf_luma_process_slice2" parent="post_enf_luma_node_slice2" proc_id="IVA_IP_ENF" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_enf_in, vcf_enf_cfg
+            </inputs>
+            <outputs>
+                vcf_enf_out
+            </outputs>
+            <node_config mmap="0" dimensions="ddr_post_enf_luma_in_slice2" />
+            <depends>
+                post_enf_luma_dma_in_slice2
+            </depends>
+            <triggers>
+                post_enf_luma_dma_out_slice2
+            </triggers>
+        </iva_entry>
+
+        <iva_entry  id="post_enf_luma_dma_out_slice2" parent="post_enf_luma_node_slice2" proc_id="IVA_IP_VDMA_CH11" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_enf_out
+            </inputs>
+            <outputs>
+                ddr_post_enf_luma_out_slice2
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_sram_to_dram" />
+            <depends>
+                post_enf_luma_process_slice2
+            </depends>
+            <triggers>
+                post_enf_loop_end_slice2
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="post_enf_loop_end_slice2" parent="post_enf_luma_node_slice2" proc_id="IVA_LOOP_END" flags="IVA_FLOW_CONTROL" >
+            <depends>
+                post_enf_luma_dma_out_slice2
+            </depends>
+            <triggers>
+                post_enf_luma_loop_start_slice3
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="post_enf_luma_loop_start_slice3" parent="post_enf_luma_node_slice3" proc_id="IVA_LOOP_START" flags="IVA_FLOW_CONTROL" >
+            <tile_config tile_width="64" tile_height="64" />
+            <depends>
+                post_enf_loop_end_slice2
+            </depends>
+            <triggers>
+                post_enf_luma_dma_in_slice3
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="post_enf_luma_dma_in_slice3" parent="post_enf_luma_node_slice3" proc_id="IVA_IP_VDMA_CH4" flags="IVA_FLOW_CONTROL" >
+            <inputs>
+                ddr_post_enf_luma_in_slice3
+            </inputs>
+            <outputs>
+                vcf_enf_in
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram" />
+            <depends>
+                post_enf_luma_loop_start_slice3
+            </depends>
+            <triggers>
+                post_enf_luma_process_slice3
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="post_enf_luma_process_slice3" parent="post_enf_luma_node_slice3" proc_id="IVA_IP_ENF" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_enf_in, vcf_enf_cfg
+            </inputs>
+            <outputs>
+                vcf_enf_out
+            </outputs>
+            <node_config mmap="0" dimensions="ddr_post_enf_luma_in_slice3" />
+            <depends>
+                post_enf_luma_dma_in_slice3
+            </depends>
+            <triggers>
+                post_enf_luma_dma_out_slice3
+            </triggers>
+        </iva_entry>
+
+        <iva_entry  id="post_enf_luma_dma_out_slice3" parent="post_enf_luma_node_slice3" proc_id="IVA_IP_VDMA_CH11" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_enf_out
+            </inputs>
+            <outputs>
+                ddr_post_enf_luma_out_slice3
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_sram_to_dram" />
+            <depends>
+                post_enf_luma_process_slice3
+            </depends>
+            <triggers>
+                post_enf_loop_end_slice3
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="post_enf_loop_end_slice3" parent="post_enf_luma_node_slice3" proc_id="IVA_LOOP_END" flags="IVA_FLOW_CONTROL" >
+            <depends>
+                post_enf_luma_dma_out_slice3
+            </depends>
+            <triggers>
+                post_enf_luma_loop_start_slice4
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="post_enf_luma_loop_start_slice4" parent="post_enf_luma_node_slice4" proc_id="IVA_LOOP_START" flags="IVA_FLOW_CONTROL" >
+            <tile_config tile_width="64" tile_height="64" />
+            <depends>
+                post_enf_loop_end_slice3
+            </depends>
+            <triggers>
+                post_enf_luma_dma_in_slice4
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="post_enf_luma_dma_in_slice4" parent="post_enf_luma_node_slice4" proc_id="IVA_IP_VDMA_CH4" flags="IVA_FLOW_CONTROL" >
+            <inputs>
+                ddr_post_enf_luma_in_slice4
+            </inputs>
+            <outputs>
+                vcf_enf_in
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram" />
+            <depends>
+                post_enf_luma_loop_start_slice4
+            </depends>
+            <triggers>
+                post_enf_luma_process_slice4
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="post_enf_luma_process_slice4" parent="post_enf_luma_node_slice4" proc_id="IVA_IP_ENF" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_enf_in, vcf_enf_cfg
+            </inputs>
+            <outputs>
+                vcf_enf_out
+            </outputs>
+            <node_config mmap="0" dimensions="ddr_post_enf_luma_in_slice4" />
+            <depends>
+                post_enf_luma_dma_in_slice4
+            </depends>
+            <triggers>
+                post_enf_luma_dma_out_slice4
+            </triggers>
+        </iva_entry>
+
+        <iva_entry  id="post_enf_luma_dma_out_slice4" parent="post_enf_luma_node_slice4" proc_id="IVA_IP_VDMA_CH11" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_enf_out
+            </inputs>
+            <outputs>
+                ddr_post_enf_luma_out_slice4
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_sram_to_dram" />
+            <depends>
+                post_enf_luma_process_slice4
+            </depends>
+            <triggers>
+                post_enf_loop_end_slice4
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="post_enf_loop_end_slice4" parent="post_enf_luma_node_slice4" proc_id="IVA_LOOP_END" flags="IVA_FLOW_CONTROL" >
+            <depends>
+                post_enf_luma_dma_out_slice4
+            </depends>
+            <triggers>
+                vcm_start_enf, post_scl2_luma_loop_start_0, post_scl2_luma_loop_start_1
+            </triggers>
+        </iva_entry>
+        <!-- Post ENF Luma Ends. -->
+
+        <!-- Copy Luma Starts. -->
+        <iva_entry id="copy_luma_loop_start" parent="copy_luma_node" proc_id="IVA_LOOP_START" flags="IVA_FLOW_CONTROL">
+            <depends>
+                loop_end_lvl2, post_scl2_yout_pre_cache_sync_node
+            </depends>
+            <triggers>
+                copy_luma0
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="copy_luma0" parent="copy_luma_node" proc_id="IVA_IP_VDMA_CH0" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                ddr_copy_luma_input_img
+            </inputs>
+            <outputs>
+                vcf_copy_buf
+            </outputs>
+            <node_config format="e_data_8b" src_dimensions="ddr_copy_luma_input_img" dst_dimensions="ddr_copy_luma_output_img" xfer_dir="iva_vdma_2d_dram_to_sram"/>
+            <depends>
+                copy_luma_loop_start
+            </depends>
+            <triggers>
+                copy_luma1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="copy_luma1" parent="copy_luma_node" proc_id="IVA_IP_VDMA_CH13" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_copy_buf
+            </inputs>
+            <outputs>
+                ddr_copy_luma_output_img
+            </outputs>
+            <node_config format="e_data_8b" src_dimensions="ddr_copy_luma_input_img" dst_dimensions="ddr_copy_luma_output_img" xfer_dir="iva_vdma_2d_sram_to_dram"/>
+            <depends>
+                copy_luma0
+            </depends>
+            <triggers>
+                copy_luma_loop_end
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="copy_luma_loop_end" parent="copy_luma_node" proc_id="IVA_LOOP_END" flags="IVA_FLOW_CONTROL">
+            <depends>
+                copy_luma1
+            </depends>
+            <triggers>
+                post_scl2_luma_loop_start_0, post_scl2_luma_loop_start_1, vcm_start_enf
+            </triggers>
+        </iva_entry>
+        <!-- Copy Luma Ends. -->
+
+        <!-- Post SCL U 0 START -->
+        <iva_entry id="post_scl_uv_0" parent="post_scl_uv_node_0" proc_id="IVA_LOOP_START" flags="IVA_FLOW_CONTROL">
+            <depends>
+                vcm_start_enf
+            </depends>
+            <triggers>
+                iva_scl_dma_u_in_0, iva_scl_dma_v_in_0
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="iva_scl_dma_u_in_0" parent="post_scl_uv_node_0" proc_id="IVA_IP_VDMA_CH0" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                ddr_post_scl_u_in_0
+            </inputs>
+            <outputs>
+                vcf_post_scl_in_scl0
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram"/>
+            <depends>
+                post_scl_uv_0
+            </depends>
+            <triggers>
+                iva_scl_u_0
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="iva_scl_dma_v_in_0" parent="post_scl_uv_node_0" proc_id="IVA_IP_VDMA_CH1" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                ddr_post_scl_v_in_0
+            </inputs>
+            <outputs>
+                vcf_post_scl_in_scl1
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram"/>
+            <depends>
+                post_scl_uv_0
+            </depends>
+            <triggers>
+                iva_scl_v_0
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="iva_scl_u_0" parent="post_scl_uv_node_0" proc_id="IVA_IP_SCL0" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_post_scl_in_scl0
+            </inputs>
+            <outputs>
+                vcf_post_scl_out_scl0
+            </outputs>
+            <node_config format="e_data_8b" src_dimensions="ddr_post_scl_u_in_0" dst_dimensions="ddr_post_scl_uv_out_0" scl_mode="0" inter_mode="SCL_INTER_MODE_BICUBIC" h_offset="0" v_offset="0" vdma_port="0" />
+            <depends>
+                iva_scl_dma_u_in_0
+            </depends>
+            <triggers>
+                iva_scl_dma_out_0
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="iva_scl_v_0" parent="post_scl_uv_node_0" proc_id="IVA_IP_SCL1" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_post_scl_in_scl1
+            </inputs>
+            <outputs>
+                vcf_post_scl_out_scl1
+            </outputs>
+            <node_config format="e_data_8b" src_dimensions="ddr_post_scl_v_in_0" dst_dimensions="ddr_post_scl_uv_out_0" scl_mode="0" inter_mode="SCL_INTER_MODE_BICUBIC" h_offset="0" v_offset="0" vdma_port="1" />
+            <depends>
+                iva_scl_dma_v_in_0
+            </depends>
+            <triggers>
+                iva_scl_dma_out_0
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="iva_scl_dma_out_0" parent="post_scl_uv_node_0" proc_id="IVA_IP_VDMA_CH15" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_post_scl_out_scl0, vcf_post_scl_out_scl1
+            </inputs>
+            <outputs>
+                ddr_post_scl_uv_out_0
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_inter_sram_to_dram"/>
+            <depends>
+                iva_scl_u_0, iva_scl_v_0
+            </depends>
+            <triggers>
+                iva_uv_scl_loop_end_0
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="iva_uv_scl_loop_end_0" parent="post_scl_uv_node_0" proc_id="IVA_LOOP_END" flags="IVA_FLOW_CONTROL">
+            <depends>
+                iva_scl_dma_out_0
+            </depends>
+            <triggers>
+                post_scl_uv_1
+            </triggers>
+        </iva_entry>
+        <!-- Post SCL U 0 END -->
+
+        <!-- Post SCL U 1 START -->
+        <iva_entry id="post_scl_uv_1" parent="post_scl_uv_node_1" proc_id="IVA_LOOP_START" flags="IVA_FLOW_CONTROL">
+            <depends>
+                iva_uv_scl_loop_end_0
+            </depends>
+            <triggers>
+                iva_scl_dma_u_in_1, iva_scl_dma_v_in_1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="iva_scl_dma_u_in_1" parent="post_scl_uv_node_1" proc_id="IVA_IP_VDMA_CH0" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                ddr_post_scl_u_in_1
+            </inputs>
+            <outputs>
+                vcf_post_scl_in_scl0
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram"/>
+            <depends>
+                post_scl_uv_1
+            </depends>
+            <triggers>
+                iva_scl_u_1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="iva_scl_dma_v_in_1" parent="post_scl_uv_node_1" proc_id="IVA_IP_VDMA_CH1" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                ddr_post_scl_v_in_1
+            </inputs>
+            <outputs>
+                vcf_post_scl_in_scl1
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram"/>
+            <depends>
+                post_scl_uv_1
+            </depends>
+            <triggers>
+                iva_scl_v_1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="iva_scl_u_1" parent="post_scl_uv_node_1" proc_id="IVA_IP_SCL0" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_post_scl_in_scl0
+            </inputs>
+            <outputs>
+                vcf_post_scl_out_scl0
+            </outputs>
+            <node_config format="e_data_8b" src_dimensions="ddr_post_scl_u_in_1" dst_dimensions="ddr_post_scl_uv_out_1" scl_mode="0" inter_mode="SCL_INTER_MODE_BICUBIC" h_offset="0" v_offset="0" vdma_port="0" />
+            <depends>
+                iva_scl_dma_u_in_1
+            </depends>
+            <triggers>
+                iva_scl_dma_out_1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="iva_scl_v_1" parent="post_scl_uv_node_1" proc_id="IVA_IP_SCL1" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_post_scl_in_scl1
+            </inputs>
+            <outputs>
+                vcf_post_scl_out_scl1
+            </outputs>
+            <node_config format="e_data_8b" src_dimensions="ddr_post_scl_v_in_1" dst_dimensions="ddr_post_scl_uv_out_1" scl_mode="0" inter_mode="SCL_INTER_MODE_BICUBIC" h_offset="0" v_offset="0" vdma_port="1" />
+            <depends>
+                iva_scl_dma_v_in_1
+            </depends>
+            <triggers>
+                iva_scl_dma_out_1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="iva_scl_dma_out_1" parent="post_scl_uv_node_1" proc_id="IVA_IP_VDMA_CH15" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_post_scl_out_scl0, vcf_post_scl_out_scl1
+            </inputs>
+            <outputs>
+                ddr_post_scl_uv_out_1
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_inter_sram_to_dram"/>
+            <depends>
+                iva_scl_u_1, iva_scl_v_1
+            </depends>
+            <triggers>
+                iva_uv_scl_loop_end_1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="iva_uv_scl_loop_end_1" parent="post_scl_uv_node_1" proc_id="IVA_LOOP_END" flags="IVA_FLOW_CONTROL">
+            <depends>
+                iva_scl_dma_out_1
+            </depends>
+            <triggers>
+                post_scl2_uvout_post_cache_sync_node
+            </triggers>
+        </iva_entry>
+        <!-- Post SCL U 1 END -->
+
+        <!-- Post SCL 2 Luma0 Starts. -->
+        <iva_entry id="post_scl2_luma_loop_start_0" parent="post_scl2_luma_node_0" proc_id="IVA_LOOP_START" flags="IVA_FLOW_CONTROL" >
+            <tile_config tile_width="48" tile_height="48" />
+            <depends>
+                loop_end_lvl2, post_enf_loop_end_slice4, copy_luma_loop_end, post_scl2_yout_pre_cache_sync_node
+            </depends>
+            <triggers>
+                post_scl2_luma_in_dma_0
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="post_scl2_luma_in_dma_0" parent="post_scl2_luma_node_0" proc_id="IVA_IP_VDMA_CH0" flags="IVA_FLOW_CONTROL" >
+            <inputs>
+                ddr_post_scl2_luma_in_0
+            </inputs>
+            <outputs>
+                vcf_post_scl_in_scl0
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram" />
+            <depends>
+                post_scl2_luma_loop_start_0
+            </depends>
+            <triggers>
+                post_scl2_luma_process_0
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="post_scl2_luma_process_0" parent="post_scl2_luma_node_0" proc_id="IVA_IP_SCL0" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_post_scl_in_scl0
+            </inputs>
+            <outputs>
+                vcf_post_scl_out_scl0
+            </outputs>
+            <node_config format="e_data_8b" src_dimensions="ddr_post_scl2_luma_in_0" dst_dimensions="ddr_post_scl2_luma_out_0" scl_mode ="0"
+                         inter_mode="SCL_INTER_MODE_BICUBIC" h_offset="0" v_offset="0"  h_ratio="61850" v_ratio="64080" />
+            <depends>
+                post_scl2_luma_in_dma_0
+            </depends>
+            <triggers>
+                post_scl2_luma_out_dma_0
+            </triggers>
+        </iva_entry>
+
+        <iva_entry  id="post_scl2_luma_out_dma_0" parent="post_scl2_luma_node_0" proc_id="IVA_IP_VDMA_CH13" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_post_scl_out_scl0
+            </inputs>
+            <outputs>
+                ddr_post_scl2_luma_out_0
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_sram_to_dram" />
+            <depends>
+                post_scl2_luma_process_0
+            </depends>
+            <triggers>
+                post_scl2_luma_loop_end_0
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="post_scl2_luma_loop_end_0" parent="post_scl2_luma_node_0" proc_id="IVA_LOOP_END" flags="IVA_FLOW_CONTROL" >
+            <depends>
+                post_scl2_luma_out_dma_0
+            </depends>
+            <triggers>
+                post_scl2_luma_loop_start_2
+            </triggers>
+        </iva_entry>
+        <!-- Post SCL Luma 0 ends. -->
+
+        <!-- Post SCL Luma 1 starts. -->
+        <iva_entry id="post_scl2_luma_loop_start_1" parent="post_scl2_luma_node_1" proc_id="IVA_LOOP_START" flags="IVA_FLOW_CONTROL" >
+            <tile_config tile_width="48" tile_height="48" />
+            <depends>
+                loop_end_lvl2, post_enf_loop_end_slice4, copy_luma_loop_end, post_scl2_yout_pre_cache_sync_node
+            </depends>
+            <triggers>
+                post_scl2_luma_in_dma_1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="post_scl2_luma_in_dma_1" parent="post_scl2_luma_node_1" proc_id="IVA_IP_VDMA_CH1" flags="IVA_FLOW_CONTROL" >
+            <inputs>
+                ddr_post_scl2_luma_in_1
+            </inputs>
+            <outputs>
+                vcf_post_scl_in_scl1
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram" />
+            <depends>
+                post_scl2_luma_loop_start_1
+            </depends>
+            <triggers>
+                post_scl2_luma_process_1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="post_scl2_luma_process_1" parent="post_scl2_luma_node_1" proc_id="IVA_IP_SCL1" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_post_scl_in_scl1
+            </inputs>
+            <outputs>
+                vcf_post_scl_out_scl1
+            </outputs>
+            <node_config format="e_data_8b" src_dimensions="ddr_post_scl2_luma_in_1" dst_dimensions="ddr_post_scl2_luma_out_1" scl_mode ="0"
+                         inter_mode="SCL_INTER_MODE_BICUBIC" h_offset="0" v_offset="0"  h_ratio="61850" v_ratio="64080" />
+            <depends>
+                post_scl2_luma_in_dma_1
+            </depends>
+            <triggers>
+                post_scl2_luma_out_dma_1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry  id="post_scl2_luma_out_dma_1" parent="post_scl2_luma_node_1" proc_id="IVA_IP_VDMA_CH15" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_post_scl_out_scl1
+            </inputs>
+            <outputs>
+                ddr_post_scl2_luma_out_1
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_sram_to_dram" />
+            <depends>
+                post_scl2_luma_process_1
+            </depends>
+            <triggers>
+                post_scl2_luma_loop_end_1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="post_scl2_luma_loop_end_1" parent="post_scl2_luma_node_1" proc_id="IVA_LOOP_END" flags="IVA_FLOW_CONTROL" >
+            <depends>
+                post_scl2_luma_out_dma_1
+            </depends>
+            <triggers>
+                post_scl2_luma_loop_start_3
+            </triggers>
+        </iva_entry>
+        <!-- Post SCL Luma 1 ends. -->
+
+        <!-- Post SCL Luma 2 starts. -->
+        <iva_entry id="post_scl2_luma_loop_start_2" parent="post_scl2_luma_node_2" proc_id="IVA_LOOP_START" flags="IVA_FLOW_CONTROL" >
+            <tile_config tile_width="48" tile_height="48" />
+            <depends>
+                post_scl2_luma_loop_end_0
+            </depends>
+            <triggers>
+                post_scl2_luma_in_dma_2
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="post_scl2_luma_in_dma_2" parent="post_scl2_luma_node_2" proc_id="IVA_IP_VDMA_CH0" flags="IVA_FLOW_CONTROL" >
+            <inputs>
+                ddr_post_scl2_luma_in_2
+            </inputs>
+            <outputs>
+                vcf_post_scl_in_scl0
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram" />
+            <depends>
+                post_scl2_luma_loop_start_2
+            </depends>
+            <triggers>
+                post_scl2_luma_process_2
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="post_scl2_luma_process_2" parent="post_scl2_luma_node_2" proc_id="IVA_IP_SCL0" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_post_scl_in_scl0
+            </inputs>
+            <outputs>
+                vcf_post_scl_out_scl0
+            </outputs>
+            <node_config format="e_data_8b" src_dimensions="ddr_post_scl2_luma_in_2" dst_dimensions="ddr_post_scl2_luma_out_2" scl_mode ="0"
+                         inter_mode="SCL_INTER_MODE_BICUBIC" h_offset="0" v_offset="0"  h_ratio="61850" v_ratio="64080" />
+            <depends>
+                post_scl2_luma_in_dma_2
+            </depends>
+            <triggers>
+                post_scl2_luma_out_dma_2
+            </triggers>
+        </iva_entry>
+
+        <iva_entry  id="post_scl2_luma_out_dma_2" parent="post_scl2_luma_node_2" proc_id="IVA_IP_VDMA_CH13" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_post_scl_out_scl0
+            </inputs>
+            <outputs>
+                ddr_post_scl2_luma_out_2
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_sram_to_dram" />
+            <depends>
+                post_scl2_luma_process_2
+            </depends>
+            <triggers>
+                post_scl2_luma_loop_end_2
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="post_scl2_luma_loop_end_2" parent="post_scl2_luma_node_2" proc_id="IVA_LOOP_END" flags="IVA_FLOW_CONTROL" >
+            <depends>
+                post_scl2_luma_out_dma_2
+            </depends>
+            <triggers>
+                post_scl2_uv_0, post_scl2_yout_cache_post_sync_node
+            </triggers>
+        </iva_entry>
+        <!-- Post SCL Luma 2 ends. -->
+
+        <!-- Post SCL Luma 3 starts. -->
+        <iva_entry id="post_scl2_luma_loop_start_3" parent="post_scl2_luma_node_3" proc_id="IVA_LOOP_START" flags="IVA_FLOW_CONTROL" >
+            <tile_config tile_width="48" tile_height="48" />
+            <depends>
+                post_scl2_luma_loop_end_1
+            </depends>
+            <triggers>
+                post_scl2_luma_in_dma_3
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="post_scl2_luma_in_dma_3" parent="post_scl2_luma_node_3" proc_id="IVA_IP_VDMA_CH1" flags="IVA_FLOW_CONTROL" >
+            <inputs>
+                ddr_post_scl2_luma_in_3
+            </inputs>
+            <outputs>
+                vcf_post_scl_in_scl1
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram" />
+            <depends>
+                post_scl2_luma_loop_start_3
+            </depends>
+            <triggers>
+                post_scl2_luma_process_3
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="post_scl2_luma_process_3" parent="post_scl2_luma_node_3" proc_id="IVA_IP_SCL1" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_post_scl_in_scl1
+            </inputs>
+            <outputs>
+                vcf_post_scl_out_scl1
+            </outputs>
+            <node_config format="e_data_8b" src_dimensions="ddr_post_scl2_luma_in_3" dst_dimensions="ddr_post_scl2_luma_out_3" scl_mode ="0"
+                         inter_mode="SCL_INTER_MODE_BICUBIC" h_offset="0" v_offset="0" h_ratio="61850" v_ratio="64080" />
+            <depends>
+                post_scl2_luma_in_dma_3
+            </depends>
+            <triggers>
+                post_scl2_luma_out_dma_3
+            </triggers>
+        </iva_entry>
+
+        <iva_entry  id="post_scl2_luma_out_dma_3" parent="post_scl2_luma_node_3" proc_id="IVA_IP_VDMA_CH15" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_post_scl_out_scl1
+            </inputs>
+            <outputs>
+                ddr_post_scl2_luma_out_3
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_sram_to_dram" />
+            <depends>
+                post_scl2_luma_process_3
+            </depends>
+            <triggers>
+                post_scl2_luma_loop_end_3
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="post_scl2_luma_loop_end_3" parent="post_scl2_luma_node_3" proc_id="IVA_LOOP_END" flags="IVA_FLOW_CONTROL" >
+            <depends>
+                post_scl2_luma_out_dma_3
+            </depends>
+            <triggers>
+                post_scl2_uv_0, post_scl2_yout_cache_post_sync_node
+            </triggers>
+        </iva_entry>
+        <!-- Post SCL Luma 3 ends. -->
+
+        <!-- Post SCL2 U 0 START -->
+        <iva_entry id="post_scl2_uv_0" parent="post_scl2_uv_node_0" proc_id="IVA_LOOP_START" flags="IVA_FLOW_CONTROL">
+            <depends>
+                post_scl2_luma_loop_end_2, post_scl2_luma_loop_end_3, post_scl2_uvout_pre_cache_sync_node
+            </depends>
+            <triggers>
+                iva_scl2_dma_u_in_0, iva_scl2_dma_v_in_0
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="iva_scl2_dma_u_in_0" parent="post_scl2_uv_node_0" proc_id="IVA_IP_VDMA_CH0" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                ddr_post_scl2_u_in_0
+            </inputs>
+            <outputs>
+                vcf_post_scl_in_scl0
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram"/>
+            <depends>
+                post_scl2_uv_0
+            </depends>
+            <triggers>
+                iva_scl2_u_0
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="iva_scl2_dma_v_in_0" parent="post_scl2_uv_node_0" proc_id="IVA_IP_VDMA_CH1" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                ddr_post_scl2_v_in_0
+            </inputs>
+            <outputs>
+                vcf_post_scl_in_scl1
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram"/>
+            <depends>
+                post_scl2_uv_0
+            </depends>
+            <triggers>
+                iva_scl2_v_0
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="iva_scl2_u_0" parent="post_scl2_uv_node_0" proc_id="IVA_IP_SCL0" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_post_scl_in_scl0
+            </inputs>
+            <outputs>
+                vcf_post_scl_out_scl0
+            </outputs>
+            <node_config format="e_data_8b" src_dimensions="ddr_post_scl2_u_in_0" dst_dimensions="ddr_post_scl2_uv_out_0" scl_mode="0" inter_mode="SCL_INTER_MODE_BICUBIC" h_offset="0" v_offset="0" vdma_port="0" />
+            <depends>
+                iva_scl2_dma_u_in_0
+            </depends>
+            <triggers>
+                iva_scl2_dma_out_0
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="iva_scl2_v_0" parent="post_scl2_uv_node_0" proc_id="IVA_IP_SCL1" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_post_scl_in_scl1
+            </inputs>
+            <outputs>
+                vcf_post_scl_out_scl1
+            </outputs>
+            <node_config format="e_data_8b" src_dimensions="ddr_post_scl2_v_in_0" dst_dimensions="ddr_post_scl2_uv_out_0" scl_mode="0" inter_mode="SCL_INTER_MODE_BICUBIC" h_offset="0" v_offset="0" vdma_port="1" />
+            <depends>
+                iva_scl2_dma_v_in_0
+            </depends>
+            <triggers>
+                iva_scl2_dma_out_0
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="iva_scl2_dma_out_0" parent="post_scl2_uv_node_0" proc_id="IVA_IP_VDMA_CH15" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_post_scl_out_scl0, vcf_post_scl_out_scl1
+            </inputs>
+            <outputs>
+                ddr_post_scl2_uv_out_0
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_inter_sram_to_dram"/>
+            <depends>
+                iva_scl2_u_0, iva_scl2_v_0
+            </depends>
+            <triggers>
+                iva_uv_scl2_loop_end_0
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="iva_uv_scl2_loop_end_0" parent="post_scl2_uv_node_0" proc_id="IVA_LOOP_END" flags="IVA_FLOW_CONTROL">
+            <depends>
+                iva_scl2_dma_out_0
+            </depends>
+            <triggers>
+                post_scl2_uv_1
+            </triggers>
+        </iva_entry>
+        <!-- Post SCL2 U 0 END -->
+
+        <!-- Post SCL2 U 1 START -->
+        <iva_entry id="post_scl2_uv_1" parent="post_scl2_uv_node_1" proc_id="IVA_LOOP_START" flags="IVA_FLOW_CONTROL">
+            <depends>
+                iva_uv_scl2_loop_end_0, post_scl2_uvout_pre_cache_sync_node
+            </depends>
+            <triggers>
+                iva_scl2_dma_u_in_1, iva_scl2_dma_v_in_1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="iva_scl2_dma_u_in_1" parent="post_scl2_uv_node_1" proc_id="IVA_IP_VDMA_CH0" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                ddr_post_scl2_u_in_1
+            </inputs>
+            <outputs>
+                vcf_post_scl_in_scl0
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram"/>
+            <depends>
+                post_scl2_uv_1
+            </depends>
+            <triggers>
+                iva_scl2_u_1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="iva_scl2_dma_v_in_1" parent="post_scl2_uv_node_1" proc_id="IVA_IP_VDMA_CH1" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                ddr_post_scl2_v_in_1
+            </inputs>
+            <outputs>
+                vcf_post_scl_in_scl1
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram"/>
+            <depends>
+                post_scl2_uv_1
+            </depends>
+            <triggers>
+                iva_scl2_v_1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="iva_scl2_u_1" parent="post_scl2_uv_node_1" proc_id="IVA_IP_SCL0" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_post_scl_in_scl0
+            </inputs>
+            <outputs>
+                vcf_post_scl_out_scl0
+            </outputs>
+            <node_config format="e_data_8b" src_dimensions="ddr_post_scl2_u_in_1" dst_dimensions="ddr_post_scl2_uv_out_1" scl_mode="0" inter_mode="SCL_INTER_MODE_BICUBIC" h_offset="0" v_offset="0" vdma_port="0" />
+            <depends>
+                iva_scl2_dma_u_in_1
+            </depends>
+            <triggers>
+                iva_scl2_dma_out_1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="iva_scl2_v_1" parent="post_scl2_uv_node_1" proc_id="IVA_IP_SCL1" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_post_scl_in_scl1
+            </inputs>
+            <outputs>
+                vcf_post_scl_out_scl1
+            </outputs>
+            <node_config format="e_data_8b" src_dimensions="ddr_post_scl2_v_in_1" dst_dimensions="ddr_post_scl2_uv_out_1" scl_mode="0" inter_mode="SCL_INTER_MODE_BICUBIC" h_offset="0" v_offset="0" vdma_port="1" />
+            <depends>
+                iva_scl2_dma_v_in_1
+            </depends>
+            <triggers>
+                iva_scl2_dma_out_1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="iva_scl2_dma_out_1" parent="post_scl2_uv_node_1" proc_id="IVA_IP_VDMA_CH15" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_post_scl_out_scl0, vcf_post_scl_out_scl1
+            </inputs>
+            <outputs>
+                ddr_post_scl2_uv_out_1
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_inter_sram_to_dram"/>
+            <depends>
+                iva_scl2_u_1, iva_scl2_v_1
+            </depends>
+            <triggers>
+                iva_uv_scl2_loop_end_1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="iva_uv_scl2_loop_end_1" parent="post_scl2_uv_node_1" proc_id="IVA_LOOP_END" flags="IVA_FLOW_CONTROL">
+            <depends>
+                iva_scl2_dma_out_1
+            </depends>
+            <triggers>
+                post_scl2_uvout_post_cache_sync_node, dequeue_callback_node
+            </triggers>
+        </iva_entry>
+        <!-- Post SCL2 U 1 END -->
+
+        <!-- Pre ENF UV START -->
+        <iva_entry id="vcm_start_enf" proc_id="VCM_START" parent="enf_uv_node" vcm_type="VCM_UV_ENF" full_config="true">
+            <inputs>
+                ddr_pyramid_enf_uv_input, ddr_enf_uv_mot
+            </inputs>
+            <outputs>
+                ddr_enf_u_out, ddr_enf_v_out
+            </outputs>
+            <depends>
+                post_enf_loop_end_slice4, vcm_wme_start_slice12, dma_mch_region8_out, copy_luma_loop_end
+            </depends>
+            <triggers>
+                post_scl_uv_0
+            </triggers>
+            <tile_config tile_width="402" tile_height="134"/>
+            <node_config sched_id="1">
+                <vdma_id>
+                    6, 6, 12
+                </vdma_id>
+                <vcm_vcf_buffers>
+                        uv_enf_vcm_vcf_input0, uv_enf_vcm_vcf_input1, uv_enf_vcm_vcf_input2, uv_enf_vcm_vcf_input3,
+                        uv_enf_vcm_vcf_output0, uv_enf_vcm_vcf_output1, uv_enf_vcm_vcf_output2, uv_enf_vcm_vcf_output3,
+                        uv_enf_vcm_vcf_buffer, uv_enf_vcm_vcf_mmap, uv_enf_vcm_vcf_mmap, uv_enf_vcm_vcf_mmap
+                </vcm_vcf_buffers>
+                <enf_config enf_params="enf_config_params"/>
+            </node_config>
+        </iva_entry>
+        <!-- Pre ENF UV END -->
+
+    </iva_table>
+
+</graph>

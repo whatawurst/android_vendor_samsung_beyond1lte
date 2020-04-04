@@ -1,0 +1,691 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph id="registration">
+    <!-- setting for Samsung OpenVX Framework -->
+    <skipstages>
+        <skip_stage_list flags="SVX_STAGE_SKIP_UPDATE_GST" />
+        <skip_stage_list flags="SVX_STAGE_SKIP_ROI_TEST" />
+    </skipstages>
+    <nodes>
+        <!-- Nodes: -->
+        <!-- Pyramid Nodes -->
+        <still_pyr_node_l1_slice0 id="0" />
+        <still_pyr_node_l1_slice1 id="1" />
+        <still_pyr_node_l1_slice2 id="2" />
+        <still_pyr_node_l1_slice3 id="3" />
+        <still_pyr_node_l2_slice0 id="4" />
+
+        <!-- ORB LV1 Nodes -->
+        <still_vcm_orb_l1_region_0 id="5" />
+        <still_vcm_orb_l1_region_1 id="6" />
+        <still_vcm_orb_l1_region_2 id="7" />
+        <still_vcm_orb_l1_region_3 id="8" />
+        <still_vcm_orb_l1_region_4 id="9" />
+        <still_vcm_orb_l1_region_5 id="10" />
+        <still_vcm_orb_l1_region_6 id="11" />
+        <still_vcm_orb_l1_region_7 id="12" />
+        <!-- ORB LV2 Node -->
+        <still_vcm_orb_l2_region_0 id="13" />
+    </nodes>
+
+    <buffers>
+        <!-- DDR buffers for Pyramid Nodes -->
+        <ddr_buffer id="ddr_still_pyr_in_l1_slice0" node="still_pyr_node_l1_slice0" param_idx="0"  />
+        <ddr_buffer id="ddr_still_pyr_out_l1_slice0" node="still_pyr_node_l1_slice0" param_idx="7"  />
+        <ddr_buffer id="ddr_still_pyr_in_l1_slice1" node="still_pyr_node_l1_slice1" param_idx="0"  />
+        <ddr_buffer id="ddr_still_pyr_out_l1_slice1" node="still_pyr_node_l1_slice1" param_idx="7"  />
+        <ddr_buffer id="ddr_still_pyr_in_l1_slice2" node="still_pyr_node_l1_slice2" param_idx="0"  />
+        <ddr_buffer id="ddr_still_pyr_out_l1_slice2" node="still_pyr_node_l1_slice2" param_idx="7"  />
+        <ddr_buffer id="ddr_still_pyr_in_l1_slice3" node="still_pyr_node_l1_slice3" param_idx="0"  />
+        <ddr_buffer id="ddr_still_pyr_out_l1_slice3" node="still_pyr_node_l1_slice3" param_idx="7"  />
+        <ddr_buffer id="ddr_still_pyr_coeff_l2" node="still_pyr_node_l2_slice0" param_idx="4"  />
+        <ddr_buffer id="ddr_still_pyr_in_l2_slice0" node="still_pyr_node_l2_slice0" param_idx="0"  />
+        <ddr_buffer id="ddr_still_pyr_out_l2_slice0" node="still_pyr_node_l2_slice0" param_idx="7"  />
+
+        <!-- DDR buffers for ORB Nodes -->
+        <ddr_buffer id="ddr_still_orb_image_l1_region_0" node="still_vcm_orb_l1_region_0" param_idx="0"  />
+        <ddr_buffer id="ddr_still_orb_kpt_l1_region_0" node="still_vcm_orb_l1_region_0" param_idx="8"  />
+        <ddr_buffer id="ddr_still_orb_dsc_l1_region_0" node="still_vcm_orb_l1_region_0" param_idx="9"  />
+        <ddr_buffer id="ddr_still_orb_image_l1_region_1" node="still_vcm_orb_l1_region_1" param_idx="0"  />
+        <ddr_buffer id="ddr_still_orb_kpt_l1_region_1" node="still_vcm_orb_l1_region_1" param_idx="8"  />
+        <ddr_buffer id="ddr_still_orb_dsc_l1_region_1" node="still_vcm_orb_l1_region_1" param_idx="9"  />
+        <ddr_buffer id="ddr_still_orb_image_l1_region_2" node="still_vcm_orb_l1_region_2" param_idx="0"  />
+        <ddr_buffer id="ddr_still_orb_kpt_l1_region_2" node="still_vcm_orb_l1_region_2" param_idx="8"  />
+        <ddr_buffer id="ddr_still_orb_dsc_l1_region_2" node="still_vcm_orb_l1_region_2" param_idx="9"  />
+        <ddr_buffer id="ddr_still_orb_image_l1_region_3" node="still_vcm_orb_l1_region_3" param_idx="0"  />
+        <ddr_buffer id="ddr_still_orb_kpt_l1_region_3" node="still_vcm_orb_l1_region_3" param_idx="8"  />
+        <ddr_buffer id="ddr_still_orb_dsc_l1_region_3" node="still_vcm_orb_l1_region_3" param_idx="9"  />
+        <ddr_buffer id="ddr_still_orb_image_l1_region_4" node="still_vcm_orb_l1_region_4" param_idx="0"  />
+        <ddr_buffer id="ddr_still_orb_kpt_l1_region_4" node="still_vcm_orb_l1_region_4" param_idx="8"  />
+        <ddr_buffer id="ddr_still_orb_dsc_l1_region_4" node="still_vcm_orb_l1_region_4" param_idx="9"  />
+        <ddr_buffer id="ddr_still_orb_image_l1_region_5" node="still_vcm_orb_l1_region_5" param_idx="0"  />
+        <ddr_buffer id="ddr_still_orb_kpt_l1_region_5" node="still_vcm_orb_l1_region_5" param_idx="8"  />
+        <ddr_buffer id="ddr_still_orb_dsc_l1_region_5" node="still_vcm_orb_l1_region_5" param_idx="9"  />
+        <ddr_buffer id="ddr_still_orb_image_l1_region_6" node="still_vcm_orb_l1_region_6" param_idx="0"  />
+        <ddr_buffer id="ddr_still_orb_kpt_l1_region_6" node="still_vcm_orb_l1_region_6" param_idx="8"  />
+        <ddr_buffer id="ddr_still_orb_dsc_l1_region_6" node="still_vcm_orb_l1_region_6" param_idx="9"  />
+        <ddr_buffer id="ddr_still_orb_image_l1_region_7" node="still_vcm_orb_l1_region_7" param_idx="0"  />
+        <ddr_buffer id="ddr_still_orb_kpt_l1_region_7" node="still_vcm_orb_l1_region_7" param_idx="8"  />
+        <ddr_buffer id="ddr_still_orb_dsc_l1_region_7" node="still_vcm_orb_l1_region_7" param_idx="9"  />
+        <ddr_buffer id="ddr_still_orb_image_l2_region_0" node="still_vcm_orb_l2_region_0" param_idx="0"  />
+        <ddr_buffer id="ddr_still_orb_kpt_l2_region_0" node="still_vcm_orb_l2_region_0" param_idx="8"  />
+        <ddr_buffer id="ddr_still_orb_dsc_l2_region_0" node="still_vcm_orb_l2_region_0" param_idx="9"  />
+
+        <!-- VCF buffers for Pyramid Nodes -->
+        <vcf_buffer id="vcf_pyr0_in_still" addr="0x37040" size="0x3600" />
+        <vcf_buffer id="vcf_pyr0_out" addr="0x68640" size="0x1700" />
+        <vcf_buffer id="vcf_pyr0_coeff" addr="0x37040" size="0x200" />
+        <vcf_buffer id="vcf_pyr1_in_still" addr="0x69d40" size="0x3600" />
+        <vcf_buffer id="vcf_pyr1_out" addr="0x3a640" size="0x1700" />
+
+        <!-- VCF buffers for ORB Node Input. -->
+        <vcf_buffer id="orb_vcm_vcf_input0" addr="0x40000" size="0x10000" />
+        <vcf_buffer id="orb_vcm_vcf_input1" addr="0x50000" size="0x10000" />
+
+        <!-- VCF buffers for ORB Node Output. -->
+        <vcf_buffer id="orb_vcm_vcf_output0" addr="0x64440" size="0x1390" />
+        <vcf_buffer id="orb_vcm_vcf_output1" addr="0x30000" size="0x2710" />
+
+        <!-- VCF buffers for ORB VCM Vals. -->
+        <vcf_buffer id="orb_vcm_vcf_buffer" addr="0x6d340" size="0x100" />
+    </buffers>
+
+    <iva_table>
+        <!-- Pyramid LVL 1 Slice 0 START -->
+        <iva_entry id="loop_start_still_lvl1_slice_0" parent="still_pyr_node_l1_slice0" proc_id="IVA_LOOP_START" flags="IVA_FLOW_CONTROL" >
+            <tile_config tile_width="32" tile_height="32" />
+            <triggers>
+                still_pyr_lvl1_in_dma_slice_0
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_pyr_lvl1_in_dma_slice_0" parent="still_pyr_node_l1_slice0" proc_id="IVA_IP_VDMA_CH0" flags="IVA_FLOW_CONTROL" >
+            <inputs>
+                ddr_still_pyr_in_l1_slice0
+            </inputs>
+            <outputs>
+                vcf_pyr1_in_still
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram" />
+            <depends>
+                loop_start_still_lvl1_slice_0
+            </depends>
+            <triggers>
+                still_pyr_lvl1_scl_slice_0
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_pyr_lvl1_scl_slice_0" parent="still_pyr_node_l1_slice0" proc_id="IVA_IP_SCL1" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_pyr1_in_still
+            </inputs>
+            <outputs>
+                vcf_pyr1_out
+            </outputs>
+            <node_config format="e_data_8b" src_dimensions="ddr_still_pyr_in_l1_slice0" dst_dimensions="ddr_still_pyr_out_l1_slice0" scl_mode ="0" inter_mode="SCL_INTER_MODE_BILINEAR" h_offset="0" v_offset="0" />
+            <depends>
+                still_pyr_lvl1_in_dma_slice_0
+            </depends>
+            <triggers>
+                still_pyr_lvl1_out_dma_0
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_pyr_lvl1_out_dma_0" parent="still_pyr_node_l1_slice0" proc_id="IVA_IP_VDMA_CH8" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_pyr1_out
+            </inputs>
+            <outputs>
+                ddr_still_pyr_out_l1_slice0
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_sram_to_dram" />
+            <depends>
+                still_pyr_lvl1_scl_slice_0
+            </depends>
+            <triggers>
+                still_loop_end_lvl1_0
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_loop_end_lvl1_0" parent="still_pyr_node_l1_slice0" proc_id="IVA_LOOP_END" flags="IVA_FLOW_CONTROL" >
+            <depends>
+                still_pyr_lvl1_out_dma_0
+            </depends>
+            <triggers>
+                still_loop_start_lvl1_slice_2, still_vcm_start_orb_region0
+            </triggers>
+        </iva_entry>
+        <!-- Pyramid LVL 1 Slice 0 END -->
+
+        <!-- Pyramid LVL 1 Slice 1 START -->
+        <iva_entry id="still_loop_start_lvl1_slice_1" parent="still_pyr_node_l1_slice1" proc_id="IVA_LOOP_START" flags="IVA_FLOW_CONTROL" >
+            <tile_config tile_width="32" tile_height="32" />
+            <triggers>
+                still_pyr_lvl1_in_dma_slice_1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_pyr_lvl1_in_dma_slice_1" parent="still_pyr_node_l1_slice1" proc_id="IVA_IP_VDMA_CH7" flags="IVA_FLOW_CONTROL" >
+            <inputs>
+                ddr_still_pyr_in_l1_slice1
+            </inputs>
+            <outputs>
+                vcf_pyr0_in_still
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram" />
+            <depends>
+                still_loop_start_lvl1_slice_1
+            </depends>
+            <triggers>
+                still_pyr_lvl1_scl_slice_1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_pyr_lvl1_scl_slice_1" parent="still_pyr_node_l1_slice1" proc_id="IVA_IP_SCL0" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_pyr0_in_still
+            </inputs>
+            <outputs>
+                vcf_pyr0_out
+            </outputs>
+            <node_config format="e_data_8b" src_dimensions="ddr_still_pyr_in_l1_slice1" dst_dimensions="ddr_still_pyr_out_l1_slice1" scl_mode ="0" inter_mode="SCL_INTER_MODE_BILINEAR" h_offset="0" v_offset="0" />
+            <depends>
+                still_pyr_lvl1_in_dma_slice_1
+            </depends>
+            <triggers>
+                still_pyr_lvl1_out_dma_1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_pyr_lvl1_out_dma_1" parent="still_pyr_node_l1_slice1" proc_id="IVA_IP_VDMA_CH14" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_pyr0_out
+            </inputs>
+            <outputs>
+                ddr_still_pyr_out_l1_slice1
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_sram_to_dram" />
+            <depends>
+                still_pyr_lvl1_scl_slice_1
+            </depends>
+            <triggers>
+                still_loop_end_lvl1_1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_loop_end_lvl1_1" parent="still_pyr_node_l1_slice1" proc_id="IVA_LOOP_END" flags="IVA_FLOW_CONTROL" >
+            <depends>
+                still_pyr_lvl1_out_dma_1
+            </depends>
+            <triggers>
+                still_loop_start_lvl1_slice_3, still_vcm_start_orb_region0
+            </triggers>
+        </iva_entry>
+        <!-- Pyramid LVL 1 Slice 1 END -->
+
+        <!-- Pyramid LVL 1 Slice 2 START -->
+        <iva_entry id="still_loop_start_lvl1_slice_2" parent="still_pyr_node_l1_slice2" proc_id="IVA_LOOP_START" flags="IVA_FLOW_CONTROL" >
+            <tile_config tile_width="32" tile_height="32" />
+            <depends>
+                still_loop_end_lvl1_0
+            </depends>
+            <triggers>
+                still_pyr_lvl1_in_dma_slice_2
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_pyr_lvl1_in_dma_slice_2" parent="still_pyr_node_l1_slice2" proc_id="IVA_IP_VDMA_CH0" flags="IVA_FLOW_CONTROL" >
+            <inputs>
+                ddr_still_pyr_in_l1_slice2
+            </inputs>
+            <outputs>
+                vcf_pyr1_in_still
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram" />
+            <depends>
+                still_loop_start_lvl1_slice_2
+            </depends>
+            <triggers>
+                still_pyr_lvl1_scl_slice_2
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_pyr_lvl1_scl_slice_2" parent="still_pyr_node_l1_slice2" proc_id="IVA_IP_SCL1" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_pyr1_in_still
+            </inputs>
+            <outputs>
+                vcf_pyr1_out
+            </outputs>
+            <node_config format="e_data_8b" src_dimensions="ddr_still_pyr_in_l1_slice2" dst_dimensions="ddr_still_pyr_out_l1_slice2" scl_mode ="0" inter_mode="SCL_INTER_MODE_BILINEAR" h_offset="0" v_offset="0" />
+            <depends>
+                still_pyr_lvl1_in_dma_slice_2
+            </depends>
+            <triggers>
+                still_pyr_lvl1_out_dma_2
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_pyr_lvl1_out_dma_2" parent="still_pyr_node_l1_slice2" proc_id="IVA_IP_VDMA_CH8" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_pyr1_out
+            </inputs>
+            <outputs>
+                ddr_still_pyr_out_l1_slice2
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_sram_to_dram" />
+            <depends>
+                still_pyr_lvl1_scl_slice_2
+            </depends>
+            <triggers>
+                still_loop_end_lvl1_2
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_loop_end_lvl1_2" parent="still_pyr_node_l1_slice2" proc_id="IVA_LOOP_END" flags="IVA_FLOW_CONTROL" >
+            <depends>
+                still_pyr_lvl1_out_dma_2
+            </depends>
+            <triggers>
+                still_pyr_lvl2_coeff, still_vcm_start_orb_region1
+            </triggers>
+        </iva_entry>
+        <!-- Pyramid LVL 1 Slice 2 END -->
+
+        <!-- Pyramid LVL 1 Slice 3 START -->
+        <iva_entry id="still_loop_start_lvl1_slice_3" parent="still_pyr_node_l1_slice3" proc_id="IVA_LOOP_START" flags="IVA_FLOW_CONTROL" >
+            <tile_config tile_width="32" tile_height="32" />
+            <depends>
+                still_loop_end_lvl1_1
+            </depends>
+            <triggers>
+                still_pyr_lvl1_in_dma_slice_3
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_pyr_lvl1_in_dma_slice_3" parent="still_pyr_node_l1_slice3" proc_id="IVA_IP_VDMA_CH7" flags="IVA_FLOW_CONTROL" >
+            <inputs>
+                ddr_still_pyr_in_l1_slice3
+            </inputs>
+            <outputs>
+                vcf_pyr0_in_still
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram" />
+            <depends>
+                still_loop_start_lvl1_slice_3
+            </depends>
+            <triggers>
+                still_pyr_lvl1_scl_slice_3
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_pyr_lvl1_scl_slice_3" parent="still_pyr_node_l1_slice3" proc_id="IVA_IP_SCL0" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_pyr0_in_still
+            </inputs>
+            <outputs>
+                vcf_pyr0_out
+            </outputs>
+            <node_config format="e_data_8b" src_dimensions="ddr_still_pyr_in_l1_slice3" dst_dimensions="ddr_still_pyr_out_l1_slice3" scl_mode ="0" inter_mode="SCL_INTER_MODE_BILINEAR" h_offset="0" v_offset="0" />
+            <depends>
+                still_pyr_lvl1_in_dma_slice_3
+            </depends>
+            <triggers>
+                still_pyr_lvl1_out_dma_3
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_pyr_lvl1_out_dma_3" parent="still_pyr_node_l1_slice3" proc_id="IVA_IP_VDMA_CH14" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_pyr0_out
+            </inputs>
+            <outputs>
+                ddr_still_pyr_out_l1_slice3
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_sram_to_dram" />
+            <depends>
+                still_pyr_lvl1_scl_slice_3
+            </depends>
+            <triggers>
+                still_loop_end_lvl1_3
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_loop_end_lvl1_3" parent="still_pyr_node_l1_slice3" proc_id="IVA_LOOP_END" flags="IVA_FLOW_CONTROL" >
+            <depends>
+                still_pyr_lvl1_out_dma_3
+            </depends>
+            <triggers>
+                still_pyr_lvl2_coeff, still_vcm_start_orb_region2
+            </triggers>
+        </iva_entry>
+        <!-- Pyramid LVL 1 Slice 3 END -->
+
+       <!-- DMA for Pyramid LVL 2 filter coefficients -->
+        <iva_entry id="still_pyr_lvl2_coeff" parent="still_pyr_node_l2_slice0" proc_id="IVA_IP_VDMA_CH7" flags="IVA_FLAG_NONE" >
+            <inputs>
+                ddr_still_pyr_coeff_l2
+            </inputs>
+            <outputs>
+                vcf_pyr0_coeff
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_1d_dram_to_sram" />
+            <depends>
+                still_loop_end_lvl1_2, still_loop_end_lvl1_3
+            </depends>
+            <triggers>
+                still_loop_start_lvl2
+             </triggers>
+         </iva_entry>
+
+        <!-- Pyramid LVL 2 START -->
+        <iva_entry id="still_loop_start_lvl2" parent="still_pyr_node_l2_slice0" proc_id="IVA_LOOP_START" flags="IVA_FLOW_CONTROL" >
+            <tile_config tile_width="32" tile_height="32" />
+            <depends>
+                still_pyr_lvl2_coeff
+            </depends>
+            <triggers>
+                still_pyr_lvl2_in_dma
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_pyr_lvl2_in_dma" parent="still_pyr_node_l2_slice0" proc_id="IVA_IP_VDMA_CH7" flags="IVA_FLOW_CONTROL" >
+            <inputs>
+                ddr_still_pyr_in_l2_slice0
+            </inputs>
+            <outputs>
+                vcf_pyr0_in_still
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram" />
+            <depends>
+                still_loop_start_lvl2
+            </depends>
+            <triggers>
+                still_pyr_lvl2_scl
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_pyr_lvl2_scl" parent="still_pyr_node_l2_slice0" proc_id="IVA_IP_SCL0" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_pyr0_in_still
+            </inputs>
+            <outputs>
+                vcf_pyr0_out
+            </outputs>
+            <node_config format="e_data_8b" src_dimensions="ddr_still_pyr_in_l2_slice0" dst_dimensions="ddr_still_pyr_out_l2_slice0" scl_mode ="0"
+                         inter_mode="SCL_INTER_MODE_HIFI_BICUBIC" h_offset="0" v_offset="0" />
+            <depends>
+                still_pyr_lvl2_in_dma
+            </depends>
+            <triggers>
+                still_pyr_lvl2_out_dma
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_pyr_lvl2_out_dma" parent="still_pyr_node_l2_slice0" proc_id="IVA_IP_VDMA_CH14" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_pyr0_out
+            </inputs>
+            <outputs>
+                ddr_still_pyr_out_l2_slice0
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_sram_to_dram" />
+            <depends>
+                still_pyr_lvl2_scl
+            </depends>
+            <triggers>
+                still_loop_end_lvl2
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_loop_end_lvl2" parent="still_pyr_node_l2_slice0" proc_id="IVA_LOOP_END" flags="IVA_FLOW_CONTROL" >
+            <depends>
+                still_pyr_lvl2_out_dma
+            </depends>
+            <triggers>
+                still_vcm_start_orb_l2_region0
+            </triggers>
+        </iva_entry>
+        <!-- Pyramid LVL 2 END -->
+
+        <iva_entry id="still_vcm_start_orb_region0" proc_id="VCM_START" parent="still_vcm_orb_l1_region_0" vcm_type="VCM_ORB" full_config="true" >
+            <inputs>
+                ddr_still_orb_image_l1_region_0
+            </inputs>
+            <outputs>
+                ddr_still_orb_kpt_l1_region_0, ddr_still_orb_dsc_l1_region_0
+            </outputs>
+            <depends>
+                still_loop_end_lvl1_0, still_loop_end_lvl1_1
+            </depends>
+            <triggers>
+                still_vcm_start_orb_region4
+            </triggers>
+            <tile_config tile_width="256" tile_height="256" />
+            <node_config sched_id="0" >
+		<vdma_id>
+		    6, 6, 12, 9
+		</vdma_id>
+                <vcm_vcf_buffers>
+                    orb_vcm_vcf_input0, orb_vcm_vcf_input1,
+                    orb_vcm_vcf_output0, orb_vcm_vcf_output1,
+                    orb_vcm_vcf_buffer
+                </vcm_vcf_buffers>
+                <orb_config max_kpt="312" metadata="0x0A" diameter="21" fast_th="24" har_th="0" har_on="0" x_scale="0x80000" y_scale="0x80000" x_offset="0" y_offset="0"/>
+            </node_config>
+        </iva_entry>
+
+        <iva_entry id="still_vcm_start_orb_region4" proc_id="VCM_START" parent="still_vcm_orb_l1_region_4" vcm_type="VCM_ORB" full_config="false">
+            <inputs>
+                ddr_still_orb_image_l1_region_4
+            </inputs>
+            <outputs>
+                ddr_still_orb_kpt_l1_region_4, ddr_still_orb_dsc_l1_region_4
+            </outputs>
+            <depends>
+                still_vcm_start_orb_region0
+            </depends>
+            <triggers>
+                still_vcm_start_orb_region1
+            </triggers>
+            <tile_config tile_width="256" tile_height="256" />
+            <node_config sched_id="0" >
+		<vdma_id>
+		    6, 6, 12, 9
+		</vdma_id>
+                <vcm_vcf_buffers>
+                    orb_vcm_vcf_input0, orb_vcm_vcf_input1,
+                    orb_vcm_vcf_output0, orb_vcm_vcf_output1,
+                    orb_vcm_vcf_buffer
+                </vcm_vcf_buffers>
+                <orb_config max_kpt="312" metadata="0x0A" diameter="21" fast_th="24" har_th="0" har_on="0" x_scale="0x80000" y_scale="0x80000" x_offset="0" y_offset="235"/>
+            </node_config>
+        </iva_entry>
+
+        <iva_entry id="still_vcm_start_orb_region1" proc_id="VCM_START" parent="still_vcm_orb_l1_region_1" vcm_type="VCM_ORB" full_config="false" >
+            <inputs>
+                ddr_still_orb_image_l1_region_1
+            </inputs>
+            <outputs>
+                ddr_still_orb_kpt_l1_region_1, ddr_still_orb_dsc_l1_region_1
+            </outputs>
+            <depends>
+                still_vcm_start_orb_region4, still_loop_end_lvl1_2
+            </depends>
+            <triggers>
+                still_vcm_start_orb_region5
+            </triggers>
+            <tile_config tile_width="256" tile_height="256" />
+            <node_config sched_id="0" >
+		<vdma_id>
+		    6, 6, 12, 9
+		</vdma_id>
+                <vcm_vcf_buffers>
+                    orb_vcm_vcf_input0, orb_vcm_vcf_input1,
+                    orb_vcm_vcf_output0, orb_vcm_vcf_output1,
+                    orb_vcm_vcf_buffer
+                </vcm_vcf_buffers>
+                <orb_config max_kpt="312" metadata="0x0A" diameter="21" fast_th="24" har_th="0" har_on="0" x_scale="0x80000" y_scale="0x80000" x_offset="118" y_offset="0"/>
+            </node_config>
+        </iva_entry>
+
+        <iva_entry id="still_vcm_start_orb_region5" proc_id="VCM_START" parent="still_vcm_orb_l1_region_5" vcm_type="VCM_ORB" full_config="false">
+            <inputs>
+                ddr_still_orb_image_l1_region_5
+            </inputs>
+            <outputs>
+                ddr_still_orb_kpt_l1_region_5, ddr_still_orb_dsc_l1_region_5
+            </outputs>
+            <depends>
+                still_vcm_start_orb_region1
+            </depends>
+            <triggers>
+                still_vcm_start_orb_region2
+            </triggers>
+            <tile_config tile_width="256" tile_height="256" />
+            <node_config sched_id="0" >
+		<vdma_id>
+		    6, 6, 12, 9
+		</vdma_id>
+                <vcm_vcf_buffers>
+                    orb_vcm_vcf_input0, orb_vcm_vcf_input1,
+                    orb_vcm_vcf_output0, orb_vcm_vcf_output1,
+                    orb_vcm_vcf_buffer
+                </vcm_vcf_buffers>
+                <orb_config max_kpt="312" metadata="0x0A" diameter="21" fast_th="24" har_th="0" har_on="0" x_scale="0x80000" y_scale="0x80000" x_offset="118" y_offset="235"/>
+            </node_config>
+        </iva_entry>
+
+        <iva_entry id="still_vcm_start_orb_region2" proc_id="VCM_START" parent="still_vcm_orb_l1_region_2" vcm_type="VCM_ORB" full_config="false">
+            <inputs>
+                ddr_still_orb_image_l1_region_2
+            </inputs>
+            <outputs>
+                ddr_still_orb_kpt_l1_region_2, ddr_still_orb_dsc_l1_region_2
+            </outputs>
+            <depends>
+                still_vcm_start_orb_region5, still_loop_end_lvl1_3
+            </depends>
+            <triggers>
+                still_vcm_start_orb_region6
+            </triggers>
+            <tile_config tile_width="256" tile_height="256" />
+            <node_config sched_id="0" >
+		<vdma_id>
+		    6, 6, 12, 9
+		</vdma_id>
+                <vcm_vcf_buffers>
+                    orb_vcm_vcf_input0, orb_vcm_vcf_input1,
+                    orb_vcm_vcf_output0, orb_vcm_vcf_output1,
+                    orb_vcm_vcf_buffer
+                </vcm_vcf_buffers>
+                <orb_config max_kpt="312" metadata="0x0A" diameter="21" fast_th="24" har_th="0" har_on="0" x_scale="0x80000" y_scale="0x80000" x_offset="236" y_offset="0"/>
+            </node_config>
+        </iva_entry>
+
+        <iva_entry id="still_vcm_start_orb_region6" proc_id="VCM_START" parent="still_vcm_orb_l1_region_6" vcm_type="VCM_ORB" full_config="false">
+            <inputs>
+                ddr_still_orb_image_l1_region_6
+            </inputs>
+            <outputs>
+                ddr_still_orb_kpt_l1_region_6, ddr_still_orb_dsc_l1_region_6
+            </outputs>
+            <depends>
+                still_vcm_start_orb_region2
+            </depends>
+            <triggers>
+                still_vcm_start_orb_region3
+            </triggers>
+            <tile_config tile_width="256" tile_height="256" />
+            <node_config sched_id="0" >
+		<vdma_id>
+		    6, 6, 12, 9
+		</vdma_id>
+                <vcm_vcf_buffers>
+                    orb_vcm_vcf_input0, orb_vcm_vcf_input1,
+                    orb_vcm_vcf_output0, orb_vcm_vcf_output1,
+                    orb_vcm_vcf_buffer
+                </vcm_vcf_buffers>
+                <orb_config max_kpt="312" metadata="0x0A" diameter="21" fast_th="24" har_th="0" har_on="0" x_scale="0x80000" y_scale="0x80000" x_offset="236" y_offset="235"/>
+            </node_config>
+        </iva_entry>
+
+        <iva_entry id="still_vcm_start_orb_region3" proc_id="VCM_START" parent="still_vcm_orb_l1_region_3" vcm_type="VCM_ORB" full_config="false">
+            <inputs>
+                ddr_still_orb_image_l1_region_3
+            </inputs>
+            <outputs>
+                ddr_still_orb_kpt_l1_region_3, ddr_still_orb_dsc_l1_region_3
+            </outputs>
+            <depends>
+                still_vcm_start_orb_region6
+            </depends>
+            <triggers>
+                still_vcm_start_orb_region7
+            </triggers>
+            <tile_config tile_width="256" tile_height="256" />
+            <node_config sched_id="0" >
+		<vdma_id>
+		    6, 6, 12, 9
+		</vdma_id>
+                <vcm_vcf_buffers>
+                    orb_vcm_vcf_input0, orb_vcm_vcf_input1,
+                    orb_vcm_vcf_output0, orb_vcm_vcf_output1,
+                    orb_vcm_vcf_buffer
+                </vcm_vcf_buffers>
+                <orb_config max_kpt="312" metadata="0x0A" diameter="21" fast_th="24" har_th="0" har_on="0" x_scale="0x80000" y_scale="0x80000" x_offset="354" y_offset="0"/>
+            </node_config>
+        </iva_entry>
+
+        <iva_entry id="still_vcm_start_orb_region7" proc_id="VCM_START" parent="still_vcm_orb_l1_region_7" vcm_type="VCM_ORB" full_config="false">
+            <inputs>
+                ddr_still_orb_image_l1_region_7
+            </inputs>
+            <outputs>
+                ddr_still_orb_kpt_l1_region_7, ddr_still_orb_dsc_l1_region_7
+            </outputs>
+            <depends>
+                still_vcm_start_orb_region3
+            </depends>
+            <triggers>
+                still_vcm_start_orb_l2_region0
+            </triggers>
+            <tile_config tile_width="256" tile_height="256" />
+            <node_config sched_id="0" >
+		<vdma_id>
+		    6, 6, 12, 9
+		</vdma_id>
+                <vcm_vcf_buffers>
+                    orb_vcm_vcf_input0, orb_vcm_vcf_input1,
+                    orb_vcm_vcf_output0, orb_vcm_vcf_output1,
+                    orb_vcm_vcf_buffer
+                </vcm_vcf_buffers>
+                <orb_config max_kpt="312" metadata="0x0A" diameter="21" fast_th="24" har_th="0" har_on="0" x_scale="0x80000" y_scale="0x80000" x_offset="354" y_offset="235"/>
+            </node_config>
+        </iva_entry>
+
+        <iva_entry id="still_vcm_start_orb_l2_region0" proc_id="VCM_START" parent="still_vcm_orb_l2_region_0" vcm_type="VCM_ORB" full_config="true">
+            <inputs>
+                ddr_still_orb_image_l2_region_0
+            </inputs>
+            <outputs>
+                ddr_still_orb_kpt_l2_region_0, ddr_still_orb_dsc_l2_region_0
+            </outputs>
+            <depends>
+                still_vcm_start_orb_region7, still_loop_end_lvl2
+            </depends>
+            <tile_config tile_width="256" tile_height="256" />
+            <node_config sched_id="0" >
+		<vdma_id>
+		    6, 6, 12, 9
+		</vdma_id>
+                <vcm_vcf_buffers>
+                    orb_vcm_vcf_input0, orb_vcm_vcf_input1,
+                    orb_vcm_vcf_output0, orb_vcm_vcf_output1,
+                    orb_vcm_vcf_buffer
+                </vcm_vcf_buffers>
+                <orb_config max_kpt="312" metadata="0x0A" diameter="21" fast_th="24" har_th="0" har_on="0" x_scale="0x200000" y_scale="0x200000" x_offset="0" y_offset="0"/>
+            </node_config>
+        </iva_entry>
+    </iva_table>
+
+</graph>

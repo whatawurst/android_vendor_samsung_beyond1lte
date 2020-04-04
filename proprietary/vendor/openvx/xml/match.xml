@@ -1,0 +1,632 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph id="match9">
+    <!-- setting for Samsung OpenVX Framework -->
+    <skipstages>
+        <skip_stage_list flags="SVX_STAGE_SKIP_UPDATE_GST" />
+        <skip_stage_list flags="SVX_STAGE_SKIP_ROI_TEST" />
+    </skipstages>
+    <nodes>
+        <!-- Nodes: -->
+        <mch0 id="0" />
+        <mch1 id="1" />
+        <mch2 id="2" />
+        <mch3 id="3" />
+        <mch4 id="4" />
+        <mch5 id="5" />
+        <mch6 id="6" />
+        <mch7 id="7" />
+        <mch8 id="8" />
+    </nodes>
+
+    <buffers>
+        <ddr_buffer id="ddr_mch0_db"    node="mch0" param_idx="0" transfer="both" />
+        <ddr_buffer id="ddr_mch0_query" node="mch0" param_idx="1" transfer="both" />
+        <ddr_buffer id="ddr_mch0_out"   node="mch0" param_idx="2" transfer="both" />
+        <ddr_buffer id="ddr_mch1_db"    node="mch1" param_idx="0" transfer="both" />
+        <ddr_buffer id="ddr_mch1_query" node="mch1" param_idx="1" transfer="both" />
+        <ddr_buffer id="ddr_mch1_out"   node="mch1" param_idx="2" transfer="both" />
+        <ddr_buffer id="ddr_mch2_db"    node="mch2" param_idx="0" transfer="both" />
+        <ddr_buffer id="ddr_mch2_query" node="mch2" param_idx="1" transfer="both" />
+        <ddr_buffer id="ddr_mch2_out"   node="mch2" param_idx="2" transfer="both" />
+        <ddr_buffer id="ddr_mch3_db"    node="mch3" param_idx="0" transfer="both" />
+        <ddr_buffer id="ddr_mch3_query" node="mch3" param_idx="1" transfer="both" />
+        <ddr_buffer id="ddr_mch3_out"   node="mch3" param_idx="2" transfer="both" />
+        <ddr_buffer id="ddr_mch4_db"    node="mch4" param_idx="0" transfer="both" />
+        <ddr_buffer id="ddr_mch4_query" node="mch4" param_idx="1" transfer="both" />
+        <ddr_buffer id="ddr_mch4_out"   node="mch4" param_idx="2" transfer="both" />
+        <ddr_buffer id="ddr_mch5_db"    node="mch5" param_idx="0" transfer="both" />
+        <ddr_buffer id="ddr_mch5_query" node="mch5" param_idx="1" transfer="both" />
+        <ddr_buffer id="ddr_mch5_out"   node="mch5" param_idx="2" transfer="both" />
+        <ddr_buffer id="ddr_mch6_db"    node="mch6" param_idx="0" transfer="both" />
+        <ddr_buffer id="ddr_mch6_query" node="mch6" param_idx="1" transfer="both" />
+        <ddr_buffer id="ddr_mch6_out"   node="mch6" param_idx="2" transfer="both" />
+        <ddr_buffer id="ddr_mch7_db"    node="mch7" param_idx="0" transfer="both" />
+        <ddr_buffer id="ddr_mch7_query" node="mch7" param_idx="1" transfer="both" />
+        <ddr_buffer id="ddr_mch7_out"   node="mch7" param_idx="2" transfer="both" />
+        <ddr_buffer id="ddr_mch8_db"    node="mch8" param_idx="0" transfer="both" />
+        <ddr_buffer id="ddr_mch8_query" node="mch8" param_idx="1" transfer="both" />
+        <ddr_buffer id="ddr_mch8_out"   node="mch8" param_idx="2" transfer="both" />
+
+        <vcf_buffer id="vcf_mch_db"    addr="0x50000" size="0x2710" />  <!-- 312 pt -->
+        <vcf_buffer id="vcf_mch_query" addr="0x30000" size="0x2710" />  <!-- 312 pt -->
+        <vcf_buffer id="vcf_mch_out"   addr="0x60000" size="0x760"  />  <!-- 312 * 3 * 2 -->
+    </buffers>
+
+    <iva_table>
+        <!-- MCH0 -->
+        <iva_entry id="mch0_db" parent="mch0" proc_id="IVA_IP_VDMA_CH6" flags="IVA_FLAG_NONE" >
+            <inputs>
+                ddr_mch0_db
+            </inputs>
+            <outputs>
+                vcf_mch_db
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_dram_to_sram" />
+            <triggers>
+                mch0_mch
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="mch0_query" parent="mch0" proc_id="IVA_IP_VDMA_CH7" flags="IVA_FLAG_NONE" >
+            <inputs>
+                ddr_mch0_query
+            </inputs>
+            <outputs>
+                vcf_mch_query
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_dram_to_sram" />
+            <triggers>
+                mch0_mch
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="mch0_mch" parent="mch0" proc_id="IVA_IP_MCH" flags="IVA_FLAG_NONE" >
+            <inputs>
+                vcf_mch_db, vcf_mch_query
+            </inputs>
+            <outputs>
+                vcf_mch_out
+            </outputs>
+            <node_config query_size="312" db_size="312" dist_mode="0" vector_size="256" num_nearest="3" output_mode="0" thresh_on="1" thresh="31" />
+            <depends>
+                mch0_db, mch0_query
+            </depends>
+            <triggers>
+                mch0_out, mch1_db, mch1_query
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="mch0_out" parent="mch0" proc_id="IVA_IP_VDMA_CH15" flags="IVA_FLAG_NONE" >
+            <inputs>
+                vcf_mch_out
+            </inputs>
+            <outputs>
+                ddr_mch0_out
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_sram_to_dram" />
+            <depends>
+                mch0_mch
+            </depends>
+            <triggers>
+                mch1_mch
+            </triggers>
+        </iva_entry>
+
+        <!-- MCH1 -->
+        <iva_entry id="mch1_db" parent="mch1" proc_id="IVA_IP_VDMA_CH6" flags="IVA_FLAG_NONE" >
+            <inputs>
+                ddr_mch1_db
+            </inputs>
+            <outputs>
+                vcf_mch_db
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_dram_to_sram" />
+            <depends>
+                mch0_mch
+            </depends>
+            <triggers>
+                mch1_mch
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="mch1_query" parent="mch1" proc_id="IVA_IP_VDMA_CH7" flags="IVA_FLAG_NONE" >
+            <inputs>
+                ddr_mch1_query
+            </inputs>
+            <outputs>
+                vcf_mch_query
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_dram_to_sram" />
+            <depends>
+                mch0_mch
+            </depends>
+            <triggers>
+                mch1_mch
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="mch1_mch" parent="mch1" proc_id="IVA_IP_MCH" flags="IVA_FLAG_NONE" >
+            <inputs>
+                vcf_mch_db, vcf_mch_query
+            </inputs>
+            <outputs>
+                vcf_mch_out
+            </outputs>
+            <node_config query_size="312" db_size="312" dist_mode="0" vector_size="256" num_nearest="3" output_mode="0" thresh_on="1" thresh="31" />
+            <depends>
+                mch0_out, mch1_db, mch1_query
+            </depends>
+            <triggers>
+                mch1_out, mch2_db, mch2_query
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="mch1_out" parent="mch1" proc_id="IVA_IP_VDMA_CH15" flags="IVA_FLAG_NONE" >
+            <inputs>
+                vcf_mch_out
+            </inputs>
+            <outputs>
+                ddr_mch1_out
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_sram_to_dram" />
+            <depends>
+                mch1_mch
+            </depends>
+            <triggers>
+                mch2_mch
+            </triggers>
+        </iva_entry>
+
+        <!-- MCH2 -->
+        <iva_entry id="mch2_db" parent="mch2" proc_id="IVA_IP_VDMA_CH6" flags="IVA_FLAG_NONE" >
+            <inputs>
+                ddr_mch2_db
+            </inputs>
+            <outputs>
+                vcf_mch_db
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_dram_to_sram" />
+            <depends>
+                mch1_mch
+            </depends>
+            <triggers>
+                mch2_mch
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="mch2_query" parent="mch2" proc_id="IVA_IP_VDMA_CH7" flags="IVA_FLAG_NONE" >
+            <inputs>
+                ddr_mch2_query
+            </inputs>
+            <outputs>
+                vcf_mch_query
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_dram_to_sram" />
+            <depends>
+                mch1_mch
+            </depends>
+            <triggers>
+                mch2_mch
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="mch2_mch" parent="mch2" proc_id="IVA_IP_MCH" flags="IVA_FLAG_NONE" >
+            <inputs>
+                vcf_mch_db, vcf_mch_query
+            </inputs>
+            <outputs>
+                vcf_mch_out
+            </outputs>
+            <node_config query_size="312" db_size="312" dist_mode="0" vector_size="256" num_nearest="3" output_mode="0" thresh_on="1" thresh="31" />
+            <depends>
+                mch1_out, mch2_db, mch2_query
+            </depends>
+            <triggers>
+                mch2_out, mch3_db, mch3_query
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="mch2_out" parent="mch2" proc_id="IVA_IP_VDMA_CH15" flags="IVA_FLAG_NONE" >
+            <inputs>
+                vcf_mch_out
+            </inputs>
+            <outputs>
+                ddr_mch2_out
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_sram_to_dram" />
+            <depends>
+                mch2_mch
+            </depends>
+            <triggers>
+                mch3_mch
+            </triggers>
+        </iva_entry>
+
+        <!-- MCH3 -->
+        <iva_entry id="mch3_db" parent="mch3" proc_id="IVA_IP_VDMA_CH6" flags="IVA_FLAG_NONE" >
+            <inputs>
+                ddr_mch3_db
+            </inputs>
+            <outputs>
+                vcf_mch_db
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_dram_to_sram" />
+            <depends>
+                mch2_mch
+            </depends>
+            <triggers>
+                mch3_mch
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="mch3_query" parent="mch3" proc_id="IVA_IP_VDMA_CH7" flags="IVA_FLAG_NONE" >
+            <inputs>
+                ddr_mch3_query
+            </inputs>
+            <outputs>
+                vcf_mch_query
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_dram_to_sram" />
+            <depends>
+                mch2_mch
+            </depends>
+            <triggers>
+                mch3_mch
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="mch3_mch" parent="mch3" proc_id="IVA_IP_MCH" flags="IVA_FLAG_NONE" >
+            <inputs>
+                vcf_mch_db, vcf_mch_query
+            </inputs>
+            <outputs>
+                vcf_mch_out
+            </outputs>
+            <node_config query_size="312" db_size="312" dist_mode="0" vector_size="256" num_nearest="3" output_mode="0" thresh_on="1" thresh="31" />
+            <depends>
+                mch2_out, mch3_db, mch3_query
+            </depends>
+            <triggers>
+                mch3_out, mch4_db, mch4_query
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="mch3_out" parent="mch3" proc_id="IVA_IP_VDMA_CH15" flags="IVA_FLAG_NONE" >
+            <inputs>
+                vcf_mch_out
+            </inputs>
+            <outputs>
+                ddr_mch3_out
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_sram_to_dram" />
+            <depends>
+                mch3_mch
+            </depends>
+            <triggers>
+                mch4_mch
+            </triggers>
+        </iva_entry>
+
+        <!-- MCH4 -->
+        <iva_entry id="mch4_db" parent="mch4" proc_id="IVA_IP_VDMA_CH6" flags="IVA_FLAG_NONE" >
+            <inputs>
+                ddr_mch4_db
+            </inputs>
+            <outputs>
+                vcf_mch_db
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_dram_to_sram" />
+            <depends>
+                mch3_mch
+            </depends>
+            <triggers>
+                mch4_mch
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="mch4_query" parent="mch4" proc_id="IVA_IP_VDMA_CH7" flags="IVA_FLAG_NONE" >
+            <inputs>
+                ddr_mch4_query
+            </inputs>
+            <outputs>
+                vcf_mch_query
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_dram_to_sram" />
+            <depends>
+                mch3_mch
+            </depends>
+            <triggers>
+                mch4_mch
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="mch4_mch" parent="mch4" proc_id="IVA_IP_MCH" flags="IVA_FLAG_NONE" >
+            <inputs>
+                vcf_mch_db, vcf_mch_query
+            </inputs>
+            <outputs>
+                vcf_mch_out
+            </outputs>
+            <node_config query_size="312" db_size="312" dist_mode="0" vector_size="256" num_nearest="3" output_mode="0" thresh_on="1" thresh="31" />
+            <depends>
+                mch3_out, mch4_db, mch4_query
+            </depends>
+            <triggers>
+                mch4_out, mch5_db, mch5_query
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="mch4_out" parent="mch4" proc_id="IVA_IP_VDMA_CH15" flags="IVA_FLAG_NONE" >
+            <inputs>
+                vcf_mch_out
+            </inputs>
+            <outputs>
+                ddr_mch4_out
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_sram_to_dram" />
+            <depends>
+                mch4_mch
+            </depends>
+            <triggers>
+                mch5_mch
+            </triggers>
+        </iva_entry>
+
+        <!-- MCH5 -->
+        <iva_entry id="mch5_db" parent="mch5" proc_id="IVA_IP_VDMA_CH6" flags="IVA_FLAG_NONE" >
+            <inputs>
+                ddr_mch5_db
+            </inputs>
+            <outputs>
+                vcf_mch_db
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_dram_to_sram" />
+            <depends>
+                mch4_mch
+            </depends>
+            <triggers>
+                mch5_mch
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="mch5_query" parent="mch5" proc_id="IVA_IP_VDMA_CH7" flags="IVA_FLAG_NONE" >
+            <inputs>
+                ddr_mch5_query
+            </inputs>
+            <outputs>
+                vcf_mch_query
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_dram_to_sram" />
+            <depends>
+                mch4_mch
+            </depends>
+            <triggers>
+                mch5_mch
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="mch5_mch" parent="mch5" proc_id="IVA_IP_MCH" flags="IVA_FLAG_NONE" >
+            <inputs>
+                vcf_mch_db, vcf_mch_query
+            </inputs>
+            <outputs>
+                vcf_mch_out
+            </outputs>
+            <node_config query_size="312" db_size="312" dist_mode="0" vector_size="256" num_nearest="3" output_mode="0" thresh_on="1" thresh="31" />
+            <depends>
+                mch4_out, mch5_db, mch5_query
+            </depends>
+            <triggers>
+                mch5_out, mch6_db, mch6_query
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="mch5_out" parent="mch5" proc_id="IVA_IP_VDMA_CH15" flags="IVA_FLAG_NONE" >
+            <inputs>
+                vcf_mch_out
+            </inputs>
+            <outputs>
+                ddr_mch5_out
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_sram_to_dram" />
+            <depends>
+                mch5_mch
+            </depends>
+            <triggers>
+                mch6_mch
+            </triggers>
+        </iva_entry>
+
+        <!-- MCH6 -->
+        <iva_entry id="mch6_db" parent="mch6" proc_id="IVA_IP_VDMA_CH6" flags="IVA_FLAG_NONE" >
+            <inputs>
+                ddr_mch6_db
+            </inputs>
+            <outputs>
+                vcf_mch_db
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_dram_to_sram" />
+            <depends>
+                mch5_mch
+            </depends>
+            <triggers>
+                mch6_mch
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="mch6_query" parent="mch6" proc_id="IVA_IP_VDMA_CH7" flags="IVA_FLAG_NONE" >
+            <inputs>
+                ddr_mch6_query
+            </inputs>
+            <outputs>
+                vcf_mch_query
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_dram_to_sram" />
+            <depends>
+                mch5_mch
+            </depends>
+            <triggers>
+                mch6_mch
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="mch6_mch" parent="mch6" proc_id="IVA_IP_MCH" flags="IVA_FLAG_NONE" >
+            <inputs>
+                vcf_mch_db, vcf_mch_query
+            </inputs>
+            <outputs>
+                vcf_mch_out
+            </outputs>
+            <node_config query_size="312" db_size="312" dist_mode="0" vector_size="256" num_nearest="3" output_mode="0" thresh_on="1" thresh="31" />
+            <depends>
+                mch5_out, mch6_db, mch6_query
+            </depends>
+            <triggers>
+                mch6_out, mch7_db, mch7_query
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="mch6_out" parent="mch6" proc_id="IVA_IP_VDMA_CH15" flags="IVA_FLAG_NONE" >
+            <inputs>
+                vcf_mch_out
+            </inputs>
+            <outputs>
+                ddr_mch6_out
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_sram_to_dram" />
+            <depends>
+                mch6_mch
+            </depends>
+            <triggers>
+                mch7_mch
+            </triggers>
+        </iva_entry>
+
+        <!-- MCH7 -->
+        <iva_entry id="mch7_db" parent="mch7" proc_id="IVA_IP_VDMA_CH6" flags="IVA_FLAG_NONE" >
+            <inputs>
+                ddr_mch7_db
+            </inputs>
+            <outputs>
+                vcf_mch_db
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_dram_to_sram" />
+            <depends>
+                mch6_mch
+            </depends>
+            <triggers>
+                mch7_mch
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="mch7_query" parent="mch7" proc_id="IVA_IP_VDMA_CH7" flags="IVA_FLAG_NONE" >
+            <inputs>
+                ddr_mch7_query
+            </inputs>
+            <outputs>
+                vcf_mch_query
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_dram_to_sram" />
+            <depends>
+                mch6_mch
+            </depends>
+            <triggers>
+                mch7_mch
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="mch7_mch" parent="mch7" proc_id="IVA_IP_MCH" flags="IVA_FLAG_NONE" >
+            <inputs>
+                vcf_mch_db, vcf_mch_query
+            </inputs>
+            <outputs>
+                vcf_mch_out
+            </outputs>
+            <node_config query_size="312" db_size="312" dist_mode="0" vector_size="256" num_nearest="3" output_mode="0" thresh_on="1" thresh="31" />
+            <depends>
+                mch6_out, mch7_db, mch7_query
+            </depends>
+            <triggers>
+                mch7_out, mch8_db, mch8_query
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="mch7_out" parent="mch7" proc_id="IVA_IP_VDMA_CH15" flags="IVA_FLAG_NONE" >
+            <inputs>
+                vcf_mch_out
+            </inputs>
+            <outputs>
+                ddr_mch7_out
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_sram_to_dram" />
+            <depends>
+                mch7_mch
+            </depends>
+            <triggers>
+                mch8_mch
+            </triggers>
+        </iva_entry>
+
+        <!-- MCH8 -->
+        <iva_entry id="mch8_db" parent="mch8" proc_id="IVA_IP_VDMA_CH6" flags="IVA_FLAG_NONE" >
+            <inputs>
+                ddr_mch8_db
+            </inputs>
+            <outputs>
+                vcf_mch_db
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_dram_to_sram" />
+            <depends>
+                mch7_mch
+            </depends>
+            <triggers>
+                mch8_mch
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="mch8_query" parent="mch8" proc_id="IVA_IP_VDMA_CH7" flags="IVA_FLAG_NONE" >
+            <inputs>
+                ddr_mch8_query
+            </inputs>
+            <outputs>
+                vcf_mch_query
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_dram_to_sram" />
+            <depends>
+                mch7_mch
+            </depends>
+            <triggers>
+                mch8_mch
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="mch8_mch" parent="mch8" proc_id="IVA_IP_MCH" flags="IVA_FLAG_NONE" >
+            <inputs>
+                vcf_mch_db, vcf_mch_query
+            </inputs>
+            <outputs>
+                vcf_mch_out
+            </outputs>
+            <node_config query_size="312" db_size="312" dist_mode="0" vector_size="256" num_nearest="3" output_mode="0" thresh_on="1" thresh="31" />
+            <depends>
+                mch7_out, mch8_db, mch8_query
+            </depends>
+            <triggers>
+                mch8_out
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="mch8_out" parent="mch8" proc_id="IVA_IP_VDMA_CH15" flags="IVA_FLAG_NONE" >
+            <inputs>
+                vcf_mch_out
+            </inputs>
+            <outputs>
+                ddr_mch8_out
+            </outputs>
+            <node_config format="e_data_128b" xfer_dir="iva_vdma_1d_sram_to_dram" />
+            <depends>
+                mch8_mch
+            </depends>
+        </iva_entry>
+    </iva_table>
+</graph>

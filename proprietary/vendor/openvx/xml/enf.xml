@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph id="lls_enf">
+    <!-- setting for Samsung OpenVX Framework -->
+    <skipstages>
+        <skip_stage_list flags="SVX_STAGE_SKIP_UPDATE_GST" />
+        <skip_stage_list flags="SVX_STAGE_SKIP_ROI_TEST" />
+    </skipstages>
+    <nodes>
+        <!-- Nodes: -->
+        <!-- Still ENF Nodes. -->
+        <still_enf_node_slice0 id="0" />
+        <still_enf_node_slice1 id="1" />
+        <still_enf_node_slice2 id="2" />
+        <still_enf_node_slice3 id="3" />
+        <still_enf_node_slice4 id="4" />
+        <still_enf_uv_node id="5" />
+    </nodes>
+
+    <buffers>
+        <!-- DDR Buffers: -->
+        <!-- Still ENF Buffers. -->
+        <ddr_buffer id="ddr_still_enf_input_slice_0" node="still_enf_node_slice0" param_idx="0"  />
+        <ddr_buffer id="ddr_still_enf_mot_slice_0" node="still_enf_node_slice0" param_idx="1"  />
+        <ddr_buffer id="ddr_still_enf_out_slice_0" node="still_enf_node_slice0" param_idx="5"  />
+        <ddr_buffer id="ddr_still_enf_cfg" node="still_enf_node_slice0" param_idx="2"  />
+        <ddr_buffer id="ddr_still_enf_input_slice_1" node="still_enf_node_slice1" param_idx="0"  />
+        <ddr_buffer id="ddr_still_enf_mot_slice_1" node="still_enf_node_slice1" param_idx="1"  />
+        <ddr_buffer id="ddr_still_enf_out_slice_1" node="still_enf_node_slice1" param_idx="5"  />
+        <ddr_buffer id="ddr_still_enf_input_slice_2" node="still_enf_node_slice2" param_idx="0"  />
+        <ddr_buffer id="ddr_still_enf_mot_slice_2" node="still_enf_node_slice2" param_idx="1"  />
+        <ddr_buffer id="ddr_still_enf_out_slice_2" node="still_enf_node_slice2" param_idx="5"  />
+        <ddr_buffer id="ddr_still_enf_input_slice_3" node="still_enf_node_slice3" param_idx="0"  />
+        <ddr_buffer id="ddr_still_enf_mot_slice_3" node="still_enf_node_slice3" param_idx="1"  />
+        <ddr_buffer id="ddr_still_enf_out_slice_3" node="still_enf_node_slice3" param_idx="5"  />
+        <ddr_buffer id="ddr_still_enf_input_slice_4" node="still_enf_node_slice4" param_idx="0"  />
+        <ddr_buffer id="ddr_still_enf_mot_slice_4" node="still_enf_node_slice4" param_idx="1"  />
+        <ddr_buffer id="ddr_still_enf_out_slice_4" node="still_enf_node_slice4" param_idx="5"  />
+        <ddr_buffer id="ddr_still_enf_uv_input" node="still_enf_uv_node" param_idx="0"  />
+        <ddr_buffer id="ddr_still_enf_u_out" node="still_enf_uv_node" param_idx="5"  />
+        <ddr_buffer id="ddr_still_enf_v_out" node="still_enf_uv_node" param_idx="6"  />
+        <ddr_buffer id="ddr_still_enf_uv_mot" node="still_enf_uv_node" param_idx="1"  />
+        <ddr_buffer id="ddr_still_enf_uv_cfg" node="still_enf_uv_node" param_idx="2"  />
+
+        <!-- VCF Input buffers for ENF Node. -->
+        <vcf_buffer id="vcf_enf_in" addr="0x00000" size="0x10000" />
+        <vcf_buffer id="uv_enf_vcm_vcf_input0" addr="0x00000" size="0x7ec0" />
+        <vcf_buffer id="uv_enf_vcm_vcf_input1" addr="0x07ec0" size="0x7ec0" />
+        <vcf_buffer id="uv_enf_vcm_vcf_input2" addr="0x10000" size="0x7ec0" />
+        <vcf_buffer id="uv_enf_vcm_vcf_input3" addr="0x17ec0" size="0x7ec0" />
+
+        <!-- VCF Motion Map buffers for ENF Node. -->
+        <vcf_buffer id="vcf_enf_mot_still" addr="0x60000" size="0x1080" />
+        <vcf_buffer id="uv_enf_vcm_vcf_mmap_still0" addr="0x60000" size="0x2220" />
+        <vcf_buffer id="uv_enf_vcm_vcf_mmap_still1" addr="0x62220" size="0x2220" />
+        <vcf_buffer id="uv_enf_vcm_vcf_mmap_still_dummy" addr="0x34e20" size="0x2220" />
+
+        <!-- VCF buffer for ENF Config-->
+        <vcf_buffer id="vcf_enf_cfg" addr="0x2FD80" size="0x0070" />
+
+        <!-- VCF buffers for ENF Node VCM vals. -->
+        <vcf_buffer id="uv_enf_vcm_vcf_buffer_still" addr="0x3bd40" size="0x1b60" />
+
+        <!-- VCF buffers for ENF Node Output. -->
+        <vcf_buffer id="vcf_enf_out_still" addr="0x70000" size="0x10000" />
+        <vcf_buffer id="vcf_enf_out_shift16_still" addr="0x70010" size="0x10000" />
+        <vcf_buffer id="uv_enf_vcm_vcf_output0_still" addr="0x20000" size="0x7ec0" />
+        <vcf_buffer id="uv_enf_vcm_vcf_output1_still" addr="0x27ec0" size="0x7ec0" />
+        <vcf_buffer id="uv_enf_vcm_vcf_output2_still" addr="0x70000" size="0x7ec0" />
+        <vcf_buffer id="uv_enf_vcm_vcf_output3_still" addr="0x77ec0" size="0x7ec0" />
+    </buffers>
+
+    <iva_table>
+        <!-- DMA for PRE ENF Config -->
+        <iva_entry id="still_enf_cfg" parent="still_enf_node_slice0" proc_id="IVA_IP_VDMA_CH4" flags="IVA_FLAG_NONE" >
+            <inputs>
+                ddr_still_enf_cfg
+            </inputs>
+            <outputs>
+                vcf_enf_cfg
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_1d_dram_to_sram" />
+            <triggers>
+                still_loop_start_enf_slice0
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_loop_start_enf_slice0" parent="still_enf_node_slice0" proc_id="IVA_LOOP_START" flags="IVA_FLOW_CONTROL" >
+            <tile_config tile_width="64" tile_height="64" />
+            <depends>
+                still_enf_cfg
+            </depends>
+            <triggers>
+                still_enf_dma_in_slice0, still_enf_dma_mot_slice0
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_enf_dma_in_slice0" parent="still_enf_node_slice0" proc_id="IVA_IP_VDMA_CH4" flags="IVA_FLOW_CONTROL" >
+            <inputs>
+                ddr_still_enf_input_slice_0
+            </inputs>
+            <outputs>
+                vcf_enf_in
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram" />
+            <depends>
+                still_loop_start_enf_slice0
+            </depends>
+            <triggers>
+                still_enf_process_slice0
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_enf_dma_mot_slice0" parent="still_enf_node_slice0" proc_id="IVA_IP_VDMA_CH5" flags="IVA_FLOW_CONTROL" >
+            <inputs>
+                ddr_still_enf_mot_slice_0
+            </inputs>
+            <outputs>
+                vcf_enf_mot_still
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram" />
+            <depends>
+                still_loop_start_enf_slice0
+            </depends>
+            <triggers>
+                still_enf_process_slice0
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_enf_process_slice0" parent="still_enf_node_slice0" proc_id="IVA_IP_ENF" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_enf_in, vcf_enf_mot_still, vcf_enf_cfg
+            </inputs>
+            <outputs>
+                vcf_enf_out_still
+            </outputs>
+            <node_config dimensions="ddr_still_enf_input_slice_0" />
+            <depends>
+                still_enf_dma_in_slice0, still_enf_dma_mot_slice0
+            </depends>
+            <triggers>
+                still_enf_dma_out_slice0
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_enf_dma_out_slice0" parent="still_enf_node_slice0" proc_id="IVA_IP_VDMA_CH13" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_enf_out_still
+            </inputs>
+            <outputs>
+                ddr_still_enf_out_slice_0
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_sram_to_dram" />
+            <depends>
+                still_enf_process_slice0
+            </depends>
+            <triggers>
+                still_loop_end_enf_slice0
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_loop_end_enf_slice0" parent="still_enf_node_slice0" proc_id="IVA_LOOP_END" flags="IVA_FLOW_CONTROL" >
+            <depends>
+                still_enf_dma_out_slice0
+            </depends>
+            <triggers>
+                still_loop_start_enf_slice1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_loop_start_enf_slice1" parent="still_enf_node_slice1" proc_id="IVA_LOOP_START" flags="IVA_FLOW_CONTROL" >
+            <tile_config tile_width="64" tile_height="64" />
+            <depends>
+                still_loop_end_enf_slice0
+            </depends>
+            <triggers>
+                still_enf_dma_in_slice1, still_enf_dma_mot_slice1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_enf_dma_in_slice1" parent="still_enf_node_slice1" proc_id="IVA_IP_VDMA_CH4" flags="IVA_FLOW_CONTROL" >
+            <inputs>
+                ddr_still_enf_input_slice_1
+            </inputs>
+            <outputs>
+                vcf_enf_in
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram" />
+            <depends>
+                still_loop_start_enf_slice1
+            </depends>
+            <triggers>
+                still_enf_process_slice1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_enf_dma_mot_slice1" parent="still_enf_node_slice1" proc_id="IVA_IP_VDMA_CH5" flags="IVA_FLOW_CONTROL" >
+            <inputs>
+                ddr_still_enf_mot_slice_1
+            </inputs>
+            <outputs>
+                vcf_enf_mot_still
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram" />
+            <depends>
+                still_loop_start_enf_slice1
+            </depends>
+            <triggers>
+                still_enf_process_slice1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_enf_process_slice1" parent="still_enf_node_slice1" proc_id="IVA_IP_ENF" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_enf_in, vcf_enf_mot_still, vcf_enf_cfg
+            </inputs>
+            <outputs>
+                vcf_enf_out_still
+            </outputs>
+            <node_config dimensions="ddr_still_enf_input_slice_1" />
+            <depends>
+                still_enf_dma_in_slice1, still_enf_dma_mot_slice1
+            </depends>
+            <triggers>
+                still_enf_dma_out_slice1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_enf_dma_out_slice1" parent="still_enf_node_slice1" proc_id="IVA_IP_VDMA_CH13" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_enf_out_still
+            </inputs>
+            <outputs>
+                ddr_still_enf_out_slice_1
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_sram_to_dram" />
+            <depends>
+                still_enf_process_slice1
+            </depends>
+            <triggers>
+                still_loop_end_enf_slice1
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_loop_end_enf_slice1" parent="still_enf_node_slice1" proc_id="IVA_LOOP_END" flags="IVA_FLOW_CONTROL" >
+            <depends>
+                still_enf_dma_out_slice1
+            </depends>
+            <triggers>
+                still_loop_start_enf_slice2
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_loop_start_enf_slice2" parent="still_enf_node_slice2" proc_id="IVA_LOOP_START" flags="IVA_FLOW_CONTROL" >
+            <tile_config tile_width="64" tile_height="64" />
+            <depends>
+                still_loop_end_enf_slice1
+            </depends>
+            <triggers>
+                still_enf_dma_in_slice2, still_enf_dma_mot_slice2
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_enf_dma_in_slice2" parent="still_enf_node_slice2" proc_id="IVA_IP_VDMA_CH4" flags="IVA_FLOW_CONTROL" >
+            <inputs>
+                ddr_still_enf_input_slice_2
+            </inputs>
+            <outputs>
+                vcf_enf_in
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram" />
+            <depends>
+                still_loop_start_enf_slice2
+            </depends>
+            <triggers>
+                still_enf_process_slice2
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_enf_dma_mot_slice2" parent="still_enf_node_slice2" proc_id="IVA_IP_VDMA_CH5" flags="IVA_FLOW_CONTROL" >
+            <inputs>
+                ddr_still_enf_mot_slice_2
+            </inputs>
+            <outputs>
+                vcf_enf_mot_still
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram" />
+            <depends>
+                still_loop_start_enf_slice2
+            </depends>
+            <triggers>
+                still_enf_process_slice2
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_enf_process_slice2" parent="still_enf_node_slice2" proc_id="IVA_IP_ENF" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_enf_in, vcf_enf_mot_still, vcf_enf_cfg
+            </inputs>
+            <outputs>
+                vcf_enf_out_still
+            </outputs>
+            <node_config dimensions="ddr_still_enf_input_slice_2" />
+            <depends>
+                still_enf_dma_in_slice2, still_enf_dma_mot_slice2
+            </depends>
+            <triggers>
+                still_enf_dma_out_slice2
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_enf_dma_out_slice2" parent="still_enf_node_slice2" proc_id="IVA_IP_VDMA_CH13" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_enf_out_still
+            </inputs>
+            <outputs>
+                ddr_still_enf_out_slice_2
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_sram_to_dram" />
+            <depends>
+                still_enf_process_slice2
+            </depends>
+            <triggers>
+                still_loop_end_enf_slice2
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_loop_end_enf_slice2" parent="still_enf_node_slice2" proc_id="IVA_LOOP_END" flags="IVA_FLOW_CONTROL" >
+            <depends>
+                still_enf_dma_out_slice2
+            </depends>
+            <triggers>
+                still_loop_start_enf_slice3
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_loop_start_enf_slice3" parent="still_enf_node_slice3" proc_id="IVA_LOOP_START" flags="IVA_FLOW_CONTROL" >
+            <tile_config tile_width="64" tile_height="64" />
+            <depends>
+                still_loop_end_enf_slice2
+            </depends>
+            <triggers>
+                still_enf_dma_in_slice3, still_enf_dma_mot_slice3
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_enf_dma_in_slice3" parent="still_enf_node_slice3" proc_id="IVA_IP_VDMA_CH4" flags="IVA_FLOW_CONTROL" >
+            <inputs>
+                ddr_still_enf_input_slice_3
+            </inputs>
+            <outputs>
+                vcf_enf_in
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram" />
+            <depends>
+                still_loop_start_enf_slice3
+            </depends>
+            <triggers>
+                still_enf_process_slice3
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_enf_dma_mot_slice3" parent="still_enf_node_slice3" proc_id="IVA_IP_VDMA_CH5" flags="IVA_FLOW_CONTROL" >
+            <inputs>
+                ddr_still_enf_mot_slice_3
+            </inputs>
+            <outputs>
+                vcf_enf_mot_still
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram" />
+            <depends>
+                still_loop_start_enf_slice3
+            </depends>
+            <triggers>
+                still_enf_process_slice3
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_enf_process_slice3" parent="still_enf_node_slice3" proc_id="IVA_IP_ENF" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_enf_in, vcf_enf_mot_still, vcf_enf_cfg
+            </inputs>
+            <outputs>
+                vcf_enf_out_still
+            </outputs>
+            <node_config dimensions="ddr_still_enf_input_slice_3" />
+            <depends>
+                still_enf_dma_in_slice3, still_enf_dma_mot_slice3
+            </depends>
+            <triggers>
+                still_enf_dma_out_slice3
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_enf_dma_out_slice3" parent="still_enf_node_slice3" proc_id="IVA_IP_VDMA_CH13" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_enf_out_still
+            </inputs>
+            <outputs>
+                ddr_still_enf_out_slice_3
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_sram_to_dram" />
+            <depends>
+                still_enf_process_slice3
+            </depends>
+            <triggers>
+                still_loop_end_enf_slice3
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_loop_end_enf_slice3" parent="still_enf_node_slice3" proc_id="IVA_LOOP_END" flags="IVA_FLOW_CONTROL" >
+            <depends>
+                still_enf_dma_out_slice3
+            </depends>
+            <triggers>
+                still_loop_start_enf_slice4
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_loop_start_enf_slice4" parent="still_enf_node_slice4" proc_id="IVA_LOOP_START" flags="IVA_FLOW_CONTROL" >
+            <tile_config tile_width="64" tile_height="64" />
+            <depends>
+                still_loop_end_enf_slice3
+            </depends>
+            <triggers>
+                still_enf_dma_in_slice4, still_enf_dma_mot_slice4
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_enf_dma_in_slice4" parent="still_enf_node_slice4" proc_id="IVA_IP_VDMA_CH4" flags="IVA_FLOW_CONTROL" >
+            <inputs>
+                ddr_still_enf_input_slice_4
+            </inputs>
+            <outputs>
+                vcf_enf_in
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram" />
+            <depends>
+                still_loop_start_enf_slice4
+            </depends>
+            <triggers>
+                still_enf_process_slice4
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_enf_dma_mot_slice4" parent="still_enf_node_slice4" proc_id="IVA_IP_VDMA_CH5" flags="IVA_FLOW_CONTROL" >
+            <inputs>
+                ddr_still_enf_mot_slice_4
+            </inputs>
+            <outputs>
+                vcf_enf_mot_still
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_dram_to_sram" />
+            <depends>
+                still_loop_start_enf_slice4
+            </depends>
+            <triggers>
+                still_enf_process_slice4
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_enf_process_slice4" parent="still_enf_node_slice4" proc_id="IVA_IP_ENF" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_enf_in, vcf_enf_mot_still, vcf_enf_cfg
+            </inputs>
+            <outputs>
+                vcf_enf_out_still
+            </outputs>
+            <node_config dimensions="ddr_still_enf_input_slice_4" />
+            <depends>
+                still_enf_dma_in_slice4, still_enf_dma_mot_slice4
+            </depends>
+            <triggers>
+                still_enf_dma_out_slice4
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_enf_dma_out_slice4" parent="still_enf_node_slice4" proc_id="IVA_IP_VDMA_CH13" flags="IVA_FLOW_CONTROL">
+            <inputs>
+                vcf_enf_out_still
+            </inputs>
+            <outputs>
+                ddr_still_enf_out_slice_4
+            </outputs>
+            <node_config format="e_data_8b" xfer_dir="iva_vdma_2d_sram_to_dram" />
+            <depends>
+                still_enf_process_slice4
+            </depends>
+            <triggers>
+                still_loop_end_enf_slice4
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_loop_end_enf_slice4" parent="still_enf_node_slice4" proc_id="IVA_LOOP_END" flags="IVA_FLOW_CONTROL" >
+            <depends>
+                still_enf_dma_out_slice4
+            </depends>
+            <triggers>
+                still_vcm_start_enf_uv
+            </triggers>
+        </iva_entry>
+
+        <iva_entry id="still_vcm_start_enf_uv" proc_id="VCM_START" parent="still_enf_uv_node" vcm_type="VCM_UV_ENF" full_config="true">
+            <inputs>
+                ddr_still_enf_uv_input, ddr_still_enf_uv_mot
+            </inputs>
+            <outputs>
+                ddr_still_enf_u_out, ddr_still_enf_v_out
+            </outputs>
+            <depends>
+                still_loop_end_enf_slice4
+            </depends>
+            <tile_config tile_width="188" tile_height="136"/>
+            <node_config sched_id="1">
+                <vdma_id>
+                    4, 5, 13
+                </vdma_id>
+                <vcm_vcf_buffers>
+                    uv_enf_vcm_vcf_input0, uv_enf_vcm_vcf_input1, uv_enf_vcm_vcf_input2, uv_enf_vcm_vcf_input3,
+                    uv_enf_vcm_vcf_output0_still, uv_enf_vcm_vcf_output1_still, uv_enf_vcm_vcf_output2_still,
+                    uv_enf_vcm_vcf_output3_still, uv_enf_vcm_vcf_buffer_still, uv_enf_vcm_vcf_mmap_still0
+                    uv_enf_vcm_vcf_mmap_still1, uv_enf_vcm_vcf_mmap_still_dummy
+                </vcm_vcf_buffers>
+                <enf_config enf_params="ddr_still_enf_uv_cfg"/>
+            </node_config>
+        </iva_entry>
+    </iva_table>
+
+</graph>

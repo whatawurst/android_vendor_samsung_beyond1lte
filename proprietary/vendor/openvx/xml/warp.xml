@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph id="lls_warp">
+    <skipstages>
+        <!-- setting for Samsung OpenVX Framework -->
+        <skip_stage_list flags="SVX_STAGE_SKIP_UPDATE_GST" />
+        <skip_stage_list flags="SVX_STAGE_SKIP_ROI_TEST" />
+    </skipstages>
+    <nodes>
+        <!-- Nodes: -->
+        <!-- Still WIG Nodes. -->
+        <still_wig_node_computation0 id="0" />
+        <still_wig_node0 id="1" />
+        <still_wig_node_computation1 id="2" />
+        <still_wig_node1 id="3" />
+        <still_wig_node_computation2 id="4" />
+        <still_wig_node2 id="5" />
+        <still_wig_node_computation3 id="6" />
+        <still_wig_node3 id="7" />
+    </nodes>
+
+    <buffers>
+        <!-- DDR Buffers: -->
+        <!-- Still WIG Buffers. -->
+        <ddr_buffer id="ddr_still_wig_input_y0" node="still_wig_node0" param_idx="0"  />
+        <ddr_buffer id="ddr_still_wig_input_uv0" node="still_wig_node0" param_idx="1"  />
+        <ddr_buffer id="ddr_still_wig_mesh_y_modified0" node="still_wig_node0" param_idx="3"  />
+        <ddr_buffer id="ddr_still_wig_mesh_uv0" node="still_wig_node0" param_idx="4"  />
+        <ddr_buffer id="ddr_still_wig_delta_config0" node="still_wig_node0" param_idx="5"  />
+        <ddr_buffer id="ddr_still_wig_out_y0" node="still_wig_node0" param_idx="11"  />
+        <ddr_buffer id="ddr_still_wig_out_uv0" node="still_wig_node0" param_idx="12"  />
+
+        <ddr_buffer id="ddr_still_wig_input_y1" node="still_wig_node1" param_idx="0"  />
+        <ddr_buffer id="ddr_still_wig_input_uv1" node="still_wig_node1" param_idx="1"  />
+        <ddr_buffer id="ddr_still_wig_mesh_y_modified1" node="still_wig_node1" param_idx="3"  />
+        <ddr_buffer id="ddr_still_wig_mesh_uv1" node="still_wig_node1" param_idx="4"  />
+        <ddr_buffer id="ddr_still_wig_delta_config1" node="still_wig_node1" param_idx="5"  />
+        <ddr_buffer id="ddr_still_wig_out_y1" node="still_wig_node1" param_idx="11"  />
+        <ddr_buffer id="ddr_still_wig_out_uv1" node="still_wig_node1" param_idx="12"  />
+
+        <ddr_buffer id="ddr_still_wig_input_y2" node="still_wig_node2" param_idx="0"  />
+        <ddr_buffer id="ddr_still_wig_input_uv2" node="still_wig_node2" param_idx="1"  />
+        <ddr_buffer id="ddr_still_wig_mesh_y_modified2" node="still_wig_node2" param_idx="3"  />
+        <ddr_buffer id="ddr_still_wig_mesh_uv2" node="still_wig_node2" param_idx="4"  />
+        <ddr_buffer id="ddr_still_wig_delta_config2" node="still_wig_node2" param_idx="5"  />
+        <ddr_buffer id="ddr_still_wig_out_y2" node="still_wig_node2" param_idx="11"  />
+        <ddr_buffer id="ddr_still_wig_out_uv2" node="still_wig_node2" param_idx="12"  />
+
+        <ddr_buffer id="ddr_still_wig_input_y3" node="still_wig_node3" param_idx="0"  />
+        <ddr_buffer id="ddr_still_wig_input_uv3" node="still_wig_node3" param_idx="1"  />
+        <ddr_buffer id="ddr_still_wig_mesh_y_modified3" node="still_wig_node3" param_idx="3"  />
+        <ddr_buffer id="ddr_still_wig_mesh_uv3" node="still_wig_node3" param_idx="4"  />
+        <ddr_buffer id="ddr_still_wig_delta_config3" node="still_wig_node3" param_idx="5"  />
+        <ddr_buffer id="ddr_still_wig_out_y3" node="still_wig_node3" param_idx="11"  />
+        <ddr_buffer id="ddr_still_wig_out_uv3" node="still_wig_node3" param_idx="12"  />
+
+        <!-- VCM Wig Mesh -->
+        <vcf_buffer id="vcf_vcm_mesh_in_y_ping" addr="0x00000" size="0x10000" />
+        <vcf_buffer id="vcf_vcm_mesh_in_y_pong" addr="0x10000" size="0x10000" />
+        <vcf_buffer id="vcf_vcm_mesh_in_u_ping" addr="0x20000" size="0x8000" />
+        <vcf_buffer id="vcf_vcm_mesh_in_u_pong" addr="0x28000" size="0x8000" />
+        <vcf_buffer id="vcf_vcm_mesh_in_v_ping" addr="0x30000" size="0x8000" />
+        <vcf_buffer id="vcf_vcm_mesh_in_v_pong" addr="0x38000" size="0x8000" />
+        <vcf_buffer id="vcf_vcm_mesh_luma_mesh_left_ping" addr="0x4c500" size="0x1000" />
+        <vcf_buffer id="vcf_vcm_mesh_luma_mesh_left_pong" addr="0x4d500" size="0x1000" />
+        <vcf_buffer id="vcf_vcm_mesh_chroma_mesh_left_ping" addr="0x4dd00" size="0x800" />
+        <vcf_buffer id="vcf_vcm_mesh_chroma_mesh_left_pong" addr="0x4e500" size="0x800" />
+        <vcf_buffer id="vcf_vcm_mesh_out_y_left_ping" addr="0x40000" size="0x6280" />
+        <vcf_buffer id="vcf_vcm_mesh_out_y_left_pong" addr="0x50000" size="0x6280" />
+        <vcf_buffer id="vcf_vcm_mesh_out_u_left_ping" addr="0x60000" size="0x3180" />
+        <vcf_buffer id="vcf_vcm_mesh_out_u_left_pong" addr="0x63180" size="0x3180" />
+        <vcf_buffer id="vcf_vcm_mesh_out_v_left_ping" addr="0x70000" size="0x3180" />
+        <vcf_buffer id="vcf_vcm_mesh_out_v_left_pong" addr="0x73180" size="0x3180" />
+        <vcf_buffer id="vcf_vcm_mesh_luma_mesh_right_ping" addr="0x5c500" size="0x1000" />
+        <vcf_buffer id="vcf_vcm_mesh_luma_mesh_right_pong" addr="0x5d500" size="0x1000" />
+        <vcf_buffer id="vcf_vcm_mesh_chroma_mesh_right_ping" addr="0x5dd00" size="0x800" />
+        <vcf_buffer id="vcf_vcm_mesh_chroma_mesh_right_pong" addr="0x5e500" size="0x800" />
+        <vcf_buffer id="vcf_vcm_mesh_out_y_right_ping" addr="0x46280" size="0x6280" />
+        <vcf_buffer id="vcf_vcm_mesh_out_y_right_pong" addr="0x56280" size="0x6280" />
+        <vcf_buffer id="vcf_vcm_mesh_out_u_right_ping" addr="0x66300" size="0x3180" />
+        <vcf_buffer id="vcf_vcm_mesh_out_u_right_pong" addr="0x69480" size="0x3180" />
+        <vcf_buffer id="vcf_vcm_mesh_out_v_right_ping" addr="0x76300" size="0x3180" />
+        <vcf_buffer id="vcf_vcm_mesh_out_v_right_pong" addr="0x79480" size="0x3180" />
+        <vcf_buffer id="vcf_vcm_mesh_vcm_static_vals" addr="0x7C600" size="256" />
+        <vcf_buffer id="vcf_vcm_mesh_vcm_detla_vals" addr="0x7C700" size="640" />
+    </buffers>
+
+    <iva_table>
+        <iva_entry id="vcm_still_wig_mesh_start0" proc_id="VCM_START" parent="still_wig_node0" vcm_type="VCM_MESH" full_config="true" >
+            <inputs>
+                ddr_still_wig_input_y0, ddr_still_wig_input_uv0, ddr_still_wig_mesh_y_modified0,
+                ddr_still_wig_mesh_uv0, ddr_still_wig_delta_config0
+            </inputs>
+            <outputs>
+                ddr_still_wig_out_y0, ddr_still_wig_out_uv0
+            </outputs>
+            <depends>
+                still_wig_node_computation0
+            </depends>
+            <triggers>
+                vcm_still_wig_mesh_start1
+            </triggers>
+            <tile_config tile_width="128" tile_height="128" />
+            <node_config log_mesh_space="3" inter_mode="1" inter_mode_uv="1">
+                <sched_id>
+                    2, 3, 4
+                </sched_id>
+                <vdma_id>
+                    5, 4, 6, 12, 14
+                </vdma_id>
+                <vcm_vcf_buffers>
+                    vcf_vcm_mesh_in_y_ping, vcf_vcm_mesh_in_y_pong, vcf_vcm_mesh_in_u_ping, vcf_vcm_mesh_in_u_pong, vcf_vcm_mesh_in_v_ping, vcf_vcm_mesh_in_v_pong,
+                    vcf_vcm_mesh_luma_mesh_left_ping, vcf_vcm_mesh_luma_mesh_left_pong, vcf_vcm_mesh_chroma_mesh_left_ping, vcf_vcm_mesh_chroma_mesh_left_pong,
+                    vcf_vcm_mesh_out_y_left_ping, vcf_vcm_mesh_out_y_left_pong, vcf_vcm_mesh_out_u_left_ping, vcf_vcm_mesh_out_u_left_pong, vcf_vcm_mesh_out_v_left_ping, vcf_vcm_mesh_out_v_left_pong,
+                    vcf_vcm_mesh_luma_mesh_right_ping, vcf_vcm_mesh_luma_mesh_right_pong, vcf_vcm_mesh_chroma_mesh_right_ping, vcf_vcm_mesh_chroma_mesh_right_pong,
+                    vcf_vcm_mesh_out_y_right_ping, vcf_vcm_mesh_out_y_right_pong, vcf_vcm_mesh_out_u_right_ping, vcf_vcm_mesh_out_u_right_pong, vcf_vcm_mesh_out_v_right_ping, vcf_vcm_mesh_out_v_right_pong,
+                    vcf_vcm_mesh_vcm_static_vals, vcf_vcm_mesh_vcm_detla_vals
+                </vcm_vcf_buffers>
+            </node_config>
+        </iva_entry>
+
+        <iva_entry id="vcm_still_wig_mesh_start1" proc_id="VCM_START" parent="still_wig_node1" vcm_type="VCM_MESH" full_config="true" >
+            <inputs>
+                ddr_still_wig_input_y1, ddr_still_wig_input_uv1, ddr_still_wig_mesh_y_modified1,
+                ddr_still_wig_mesh_uv1, ddr_still_wig_delta_config1
+            </inputs>
+            <outputs>
+                ddr_still_wig_out_y1, ddr_still_wig_out_uv1
+            </outputs>
+            <depends>
+                still_wig_node_computation1, vcm_still_wig_mesh_start0
+            </depends>
+            <triggers>
+                vcm_still_wig_mesh_start2
+            </triggers>
+            <tile_config tile_width="128" tile_height="128" />
+            <node_config log_mesh_space="3" inter_mode="1" inter_mode_uv="1">
+                <sched_id>
+                    2, 3, 4
+                </sched_id>
+                <vdma_id>
+                    5, 4, 6, 12, 14
+                </vdma_id>
+                <vcm_vcf_buffers>
+                    vcf_vcm_mesh_in_y_ping, vcf_vcm_mesh_in_y_pong, vcf_vcm_mesh_in_u_ping, vcf_vcm_mesh_in_u_pong, vcf_vcm_mesh_in_v_ping, vcf_vcm_mesh_in_v_pong,
+                    vcf_vcm_mesh_luma_mesh_left_ping, vcf_vcm_mesh_luma_mesh_left_pong, vcf_vcm_mesh_chroma_mesh_left_ping, vcf_vcm_mesh_chroma_mesh_left_pong,
+                    vcf_vcm_mesh_out_y_left_ping, vcf_vcm_mesh_out_y_left_pong, vcf_vcm_mesh_out_u_left_ping, vcf_vcm_mesh_out_u_left_pong, vcf_vcm_mesh_out_v_left_ping, vcf_vcm_mesh_out_v_left_pong,
+                    vcf_vcm_mesh_luma_mesh_right_ping, vcf_vcm_mesh_luma_mesh_right_pong, vcf_vcm_mesh_chroma_mesh_right_ping, vcf_vcm_mesh_chroma_mesh_right_pong,
+                    vcf_vcm_mesh_out_y_right_ping, vcf_vcm_mesh_out_y_right_pong, vcf_vcm_mesh_out_u_right_ping, vcf_vcm_mesh_out_u_right_pong, vcf_vcm_mesh_out_v_right_ping, vcf_vcm_mesh_out_v_right_pong,
+                    vcf_vcm_mesh_vcm_static_vals, vcf_vcm_mesh_vcm_detla_vals
+                </vcm_vcf_buffers>
+            </node_config>
+        </iva_entry>
+
+        <iva_entry id="vcm_still_wig_mesh_start2" proc_id="VCM_START" parent="still_wig_node2" vcm_type="VCM_MESH" full_config="true" >
+            <inputs>
+                ddr_still_wig_input_y2, ddr_still_wig_input_uv2, ddr_still_wig_mesh_y_modified2,
+                ddr_still_wig_mesh_uv2, ddr_still_wig_delta_config2
+            </inputs>
+            <outputs>
+                ddr_still_wig_out_y2, ddr_still_wig_out_uv2
+            </outputs>
+            <depends>
+                still_wig_node_computation2, vcm_still_wig_mesh_start1
+            </depends>
+            <triggers>
+                vcm_still_wig_mesh_start3
+            </triggers>
+            <tile_config tile_width="128" tile_height="128" />
+            <node_config log_mesh_space="3" inter_mode="1" inter_mode_uv="1">
+                <sched_id>
+                    2, 3, 4
+                </sched_id>
+                <vdma_id>
+                    5, 4, 6, 12, 14
+                </vdma_id>
+                <vcm_vcf_buffers>
+                    vcf_vcm_mesh_in_y_ping, vcf_vcm_mesh_in_y_pong, vcf_vcm_mesh_in_u_ping, vcf_vcm_mesh_in_u_pong, vcf_vcm_mesh_in_v_ping, vcf_vcm_mesh_in_v_pong,
+                    vcf_vcm_mesh_luma_mesh_left_ping, vcf_vcm_mesh_luma_mesh_left_pong, vcf_vcm_mesh_chroma_mesh_left_ping, vcf_vcm_mesh_chroma_mesh_left_pong,
+                    vcf_vcm_mesh_out_y_left_ping, vcf_vcm_mesh_out_y_left_pong, vcf_vcm_mesh_out_u_left_ping, vcf_vcm_mesh_out_u_left_pong, vcf_vcm_mesh_out_v_left_ping, vcf_vcm_mesh_out_v_left_pong,
+                    vcf_vcm_mesh_luma_mesh_right_ping, vcf_vcm_mesh_luma_mesh_right_pong, vcf_vcm_mesh_chroma_mesh_right_ping, vcf_vcm_mesh_chroma_mesh_right_pong,
+                    vcf_vcm_mesh_out_y_right_ping, vcf_vcm_mesh_out_y_right_pong, vcf_vcm_mesh_out_u_right_ping, vcf_vcm_mesh_out_u_right_pong, vcf_vcm_mesh_out_v_right_ping, vcf_vcm_mesh_out_v_right_pong,
+                    vcf_vcm_mesh_vcm_static_vals, vcf_vcm_mesh_vcm_detla_vals
+                </vcm_vcf_buffers>
+            </node_config>
+        </iva_entry>
+
+        <iva_entry id="vcm_still_wig_mesh_start3" proc_id="VCM_START" parent="still_wig_node3" vcm_type="VCM_MESH" full_config="true" >
+            <inputs>
+                ddr_still_wig_input_y3, ddr_still_wig_input_uv3, ddr_still_wig_mesh_y_modified3,
+                ddr_still_wig_mesh_uv3, ddr_still_wig_delta_config3
+            </inputs>
+            <outputs>
+                ddr_still_wig_out_y3, ddr_still_wig_out_uv3
+            </outputs>
+            <depends>
+                still_wig_node_computation3, vcm_still_wig_mesh_start2
+            </depends>
+            <tile_config tile_width="128" tile_height="128" />
+            <node_config log_mesh_space="3" inter_mode="1" inter_mode_uv="1">
+                <sched_id>
+                    2, 3, 4
+                </sched_id>
+                <vdma_id>
+                    5, 4, 6, 12, 14
+                </vdma_id>
+                <vcm_vcf_buffers>
+                    vcf_vcm_mesh_in_y_ping, vcf_vcm_mesh_in_y_pong, vcf_vcm_mesh_in_u_ping, vcf_vcm_mesh_in_u_pong, vcf_vcm_mesh_in_v_ping, vcf_vcm_mesh_in_v_pong,
+                    vcf_vcm_mesh_luma_mesh_left_ping, vcf_vcm_mesh_luma_mesh_left_pong, vcf_vcm_mesh_chroma_mesh_left_ping, vcf_vcm_mesh_chroma_mesh_left_pong,
+                    vcf_vcm_mesh_out_y_left_ping, vcf_vcm_mesh_out_y_left_pong, vcf_vcm_mesh_out_u_left_ping, vcf_vcm_mesh_out_u_left_pong, vcf_vcm_mesh_out_v_left_ping, vcf_vcm_mesh_out_v_left_pong,
+                    vcf_vcm_mesh_luma_mesh_right_ping, vcf_vcm_mesh_luma_mesh_right_pong, vcf_vcm_mesh_chroma_mesh_right_ping, vcf_vcm_mesh_chroma_mesh_right_pong,
+                    vcf_vcm_mesh_out_y_right_ping, vcf_vcm_mesh_out_y_right_pong, vcf_vcm_mesh_out_u_right_ping, vcf_vcm_mesh_out_u_right_pong, vcf_vcm_mesh_out_v_right_ping, vcf_vcm_mesh_out_v_right_pong,
+                    vcf_vcm_mesh_vcm_static_vals, vcf_vcm_mesh_vcm_detla_vals
+                </vcm_vcf_buffers>
+            </node_config>
+        </iva_entry>
+    </iva_table>
+</graph>

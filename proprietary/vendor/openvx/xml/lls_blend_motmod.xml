@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<graph id="lls_blend">
+    <skipstages>
+        <!-- setting for Samsung OpenVX Framework -->
+        <skip_stage_list flags="SVX_STAGE_SKIP_UPDATE_GST" />
+        <skip_stage_list flags="SVX_STAGE_SKIP_ROI_TEST" />
+    </skipstages>
+    <nodes>
+        <!-- Still MFB Nodes. -->
+        <still_mfb_node id="0" />
+    </nodes>
+
+    <buffers>
+        <!-- DDR Buffers: -->
+        <ddr_buffer id="input_y0_image" node="still_mfb_node" param_idx="0" />
+        <ddr_buffer id="input_uv0_image" node="still_mfb_node" param_idx="1" />
+        <ddr_buffer id="input_y1_image" node="still_mfb_node" param_idx="3" />
+        <ddr_buffer id="input_uv1_image" node="still_mfb_node" param_idx="4" />
+        <ddr_buffer id="input_y2_image" node="still_mfb_node" param_idx="6" />
+        <ddr_buffer id="input_uv2_image" node="still_mfb_node" param_idx="7" />
+        <ddr_buffer id="input_y3_image" node="still_mfb_node" param_idx="9" />
+        <ddr_buffer id="input_uv3_image" node="still_mfb_node" param_idx="10" />
+        <ddr_buffer id="input_y4_image" node="still_mfb_node" param_idx="12" />
+        <ddr_buffer id="input_uv4_image" node="still_mfb_node" param_idx="13" />
+        <ddr_buffer id="input_motmod_image" node="still_mfb_node" param_idx="17" />
+        <ddr_buffer id="wmult_buff_image" node="still_mfb_node" param_idx="20" />
+        <ddr_buffer id="refweight_buff_image" node="still_mfb_node" param_idx="21" />
+        <ddr_buffer id="pgain_buff_image" node="still_mfb_node" param_idx="23" />
+        <ddr_buffer id="poffset_buff_image" node="still_mfb_node" param_idx="24" />
+        <ddr_buffer id="output_y_image_iva" node="still_mfb_node" param_idx="30" />
+        <ddr_buffer id="output_uv_image_iva" node="still_mfb_node" param_idx="31" />
+        <ddr_buffer id="output_mmap_image_iva" node="still_mfb_node" param_idx="33" />
+
+        <!-- Vcf buffers for MFB -->
+        <vcf_buffer id="MFB_VCF_VCM_VALS" addr="0x0" size="69000" />
+        <vcf_buffer id="MFB_VCF_BLD_IN_MOT_MOD_PING" addr="0x10d90" size="1860" />
+        <vcf_buffer id="MFB_VCF_BLD_IN_MOT_MOD_PONG" addr="0x114e0" size="1860" />
+        <vcf_buffer id="MFB_VCF_BLD_IN_Y0_PING" addr="0x11c30" size="24320" />
+        <vcf_buffer id="MFB_VCF_BLD_IN_Y1_PING" addr="0x17b30" size="24320" />
+        <vcf_buffer id="MFB_VCF_BLD_IN_Y2_PING" addr="0x1da30" size="24320" />
+        <vcf_buffer id="MFB_VCF_BLD_IN_Y3_PING" addr="0x23930" size="24320" />
+        <vcf_buffer id="MFB_VCF_BLD_IN_Y4_PING" addr="0x29830" size="24320" />
+        <vcf_buffer id="MFB_VCF_BLD_IN_Y0_PONG" addr="0x2f730" size="24320" />
+        <vcf_buffer id="MFB_VCF_BLD_IN_Y1_PONG" addr="0x35630" size="24320" />
+        <vcf_buffer id="MFB_VCF_BLD_IN_Y2_PONG" addr="0x3b530" size="24320" />
+        <vcf_buffer id="MFB_VCF_BLD_IN_Y3_PONG" addr="0x41430" size="24320" />
+        <vcf_buffer id="MFB_VCF_BLD_IN_Y4_PONG" addr="0x47330" size="24320" />
+        <vcf_buffer id="MFB_VCF_BLD_IN_U0_PING" addr="0x4d230" size="6080" />
+        <vcf_buffer id="MFB_VCF_BLD_IN_U1_PING" addr="0x4e9f0" size="6080" />
+        <vcf_buffer id="MFB_VCF_BLD_IN_U2_PING" addr="0x501b0" size="6080" />
+        <vcf_buffer id="MFB_VCF_BLD_IN_U3_PING" addr="0x51970" size="6080" />
+        <vcf_buffer id="MFB_VCF_BLD_IN_U4_PING" addr="0x53130" size="6080" />
+        <vcf_buffer id="MFB_VCF_BLD_IN_U0_PONG" addr="0x548f0" size="6080" />
+        <vcf_buffer id="MFB_VCF_BLD_IN_U1_PONG" addr="0x560b0" size="6080" />
+        <vcf_buffer id="MFB_VCF_BLD_IN_U2_PONG" addr="0x57870" size="6080" />
+        <vcf_buffer id="MFB_VCF_BLD_IN_U3_PONG" addr="0x59030" size="6080" />
+        <vcf_buffer id="MFB_VCF_BLD_IN_U4_PONG" addr="0x5a7f0" size="6080" />
+        <vcf_buffer id="MFB_VCF_BLD_IN_V0_PING" addr="0x5bfb0" size="6080" />
+        <vcf_buffer id="MFB_VCF_BLD_IN_V1_PING" addr="0x5d770" size="6080" />
+        <vcf_buffer id="MFB_VCF_BLD_IN_V2_PING" addr="0x5ef30" size="6080" />
+        <vcf_buffer id="MFB_VCF_BLD_IN_V3_PING" addr="0x606f0" size="6080" />
+        <vcf_buffer id="MFB_VCF_BLD_IN_V4_PING" addr="0x61eb0" size="6080" />
+        <vcf_buffer id="MFB_VCF_BLD_IN_V0_PONG" addr="0x63670" size="6080" />
+        <vcf_buffer id="MFB_VCF_BLD_IN_V1_PONG" addr="0x64e30" size="6080" />
+        <vcf_buffer id="MFB_VCF_BLD_IN_V2_PONG" addr="0x665f0" size="6080" />
+        <vcf_buffer id="MFB_VCF_BLD_IN_V3_PONG" addr="0x67db0" size="6080" />
+        <vcf_buffer id="MFB_VCF_BLD_IN_V4_PONG" addr="0x69570" size="6080" />
+        <vcf_buffer id="MFB_VCF_BLD_OUT_Y_PING" addr="0x6ad30" size="19584" />
+        <vcf_buffer id="MFB_VCF_BLD_OUT_Y_PONG" addr="0x6f9b0" size="19584" />
+        <vcf_buffer id="MFB_VCF_BLD_OUT_U_PING" addr="0x74630" size="5440" />
+        <vcf_buffer id="MFB_VCF_BLD_OUT_U_PONG" addr="0x75b70" size="5440" />
+        <vcf_buffer id="MFB_VCF_BLD_OUT_V_PING" addr="0x770b0" size="5440" />
+        <vcf_buffer id="MFB_VCF_BLD_OUT_V_PONG" addr="0x785f0" size="5440" />
+        <vcf_buffer id="MFB_VCF_BLD_OUT_MMAP_PING" addr="0x79b30" size="5440" />
+        <vcf_buffer id="MFB_VCF_BLD_OUT_MMAP_PONG" addr="0x7b070" size="5440" />
+    </buffers>
+
+    <iva_table>
+        <iva_entry id="vcm_start_mfb" proc_id="VCM_START" parent="still_mfb_node" vcm_type="VCM_MFB" full_config="true">
+            <inputs>
+                input_y0_image, input_uv0_image, input_y1_image, input_uv1_image, input_y2_image, input_uv2_image,
+                input_y3_image, input_uv3_image, input_y4_image, input_uv4_image, input_motmod_image,
+                wmult_buff_image, refweight_buff_image, pgain_buff_image, poffset_buff_image
+            </inputs>
+            <outputs>
+                output_y_image_iva, output_uv_image_iva, output_mmap_image_iva
+            </outputs>
+            <depends> </depends>
+            <triggers> </triggers>
+            <tile_config tile_width="136" tile_height="136" />
+            <node_config sched_id="5, 6, 7">
+                <vdma_id>
+                    5, 0, 13, 1, 2, 6
+                </vdma_id>
+                <vcm_vcf_buffers>
+                    MFB_VCF_VCM_VALS,
+                    MFB_VCF_BLD_IN_MOT_MOD_PING,
+                    MFB_VCF_BLD_IN_MOT_MOD_PONG,
+                    MFB_VCF_BLD_IN_Y0_PING,
+                    MFB_VCF_BLD_IN_Y1_PING,
+                    MFB_VCF_BLD_IN_Y2_PING,
+                    MFB_VCF_BLD_IN_Y3_PING,
+                    MFB_VCF_BLD_IN_Y4_PING,
+                    MFB_VCF_BLD_IN_Y0_PONG,
+                    MFB_VCF_BLD_IN_Y1_PONG,
+                    MFB_VCF_BLD_IN_Y2_PONG,
+                    MFB_VCF_BLD_IN_Y3_PONG,
+                    MFB_VCF_BLD_IN_Y4_PONG,
+                    MFB_VCF_BLD_IN_U0_PING,
+                    MFB_VCF_BLD_IN_U1_PING,
+                    MFB_VCF_BLD_IN_U2_PING,
+                    MFB_VCF_BLD_IN_U3_PING,
+                    MFB_VCF_BLD_IN_U4_PING,
+                    MFB_VCF_BLD_IN_U0_PONG,
+                    MFB_VCF_BLD_IN_U1_PONG,
+                    MFB_VCF_BLD_IN_U2_PONG,
+                    MFB_VCF_BLD_IN_U3_PONG,
+                    MFB_VCF_BLD_IN_U4_PONG,
+                    MFB_VCF_BLD_IN_V0_PING,
+                    MFB_VCF_BLD_IN_V1_PING,
+                    MFB_VCF_BLD_IN_V2_PING,
+                    MFB_VCF_BLD_IN_V3_PING,
+                    MFB_VCF_BLD_IN_V4_PING,
+                    MFB_VCF_BLD_IN_V0_PONG,
+                    MFB_VCF_BLD_IN_V1_PONG,
+                    MFB_VCF_BLD_IN_V2_PONG,
+                    MFB_VCF_BLD_IN_V3_PONG,
+                    MFB_VCF_BLD_IN_V4_PONG,
+                    MFB_VCF_BLD_OUT_Y_PING,
+                    MFB_VCF_BLD_OUT_Y_PONG,
+                    MFB_VCF_BLD_OUT_U_PING,
+                    MFB_VCF_BLD_OUT_U_PONG,
+                    MFB_VCF_BLD_OUT_V_PING,
+                    MFB_VCF_BLD_OUT_V_PONG,
+                    MFB_VCF_BLD_OUT_MMAP_PING,
+                    MFB_VCF_BLD_OUT_MMAP_PONG,
+                </vcm_vcf_buffers>
+            </node_config>
+        </iva_entry>
+    </iva_table>
+
+</graph>

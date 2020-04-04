@@ -1,0 +1,8 @@
+service slsi-iva-1-0 /vendor/bin/hw/vendor.samsung_slsi.hardware.iva@1.0-service
+    class hal
+    user cameraserver
+    group media shell system
+    ioprio rt 4
+
+    # TODO: add SCore cpuset to android/vendor/samsung/system/bootcpuset/init.bootcpuset.rc?
+    writepid /dev/cpuset/cameraserver/tasks /dev/stune/top-app/tasks
